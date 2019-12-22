@@ -13,12 +13,11 @@ import http.client
 
 
 def welcome(request):
-    logout(request)
+    #logout(request)
     return render(request, 'welcome.html')
 
 
 def register(request):
-    logout(request)
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
