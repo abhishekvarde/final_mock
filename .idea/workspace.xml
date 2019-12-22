@@ -12,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stes_test/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10080">
-              <caret line="480" column="43" selection-start-line="480" selection-start-column="43" selection-end-line="480" selection-end-column="43" />
+            <state relative-caret-position="462">
+              <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
               </folding>
@@ -33,7 +33,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/bestofluck.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
@@ -69,8 +69,8 @@
       <list>
         <option value="$PROJECT_DIR$/template/otp.html" />
         <option value="$PROJECT_DIR$/stes_test/urls.py" />
-        <option value="$PROJECT_DIR$/stes_test/views.py" />
         <option value="$PROJECT_DIR$/template/bestofluck.html" />
+        <option value="$PROJECT_DIR$/stes_test/views.py" />
       </list>
     </option>
   </component>
@@ -211,20 +211,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stes_test/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10080">
-          <caret line="480" column="43" selection-start-line="480" selection-start-column="43" selection-end-line="480" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/bestofluck.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="51" column="55" lean-forward="true" selection-start-line="51" selection-start-column="55" selection-end-line="51" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stes_test/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

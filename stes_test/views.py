@@ -13,11 +13,12 @@ import http.client
 
 
 def welcome(request):
-    #logout(request)
+    logout(request)
     return render(request, 'welcome.html')
 
 
 def register(request):
+    logout(request)
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -60,7 +61,7 @@ def register(request):
             student_details = student(first_name=first_name, last_name=last_name, address=address, email=email,
                                       phone_no=phone_no, random_no=int(random_str))
             student_details.save()
-            sendOtp(phone_no, random_str)
+            # sendOtp(phone_no, random_str)
 
             return render(request, 'otp.html')
     else:
