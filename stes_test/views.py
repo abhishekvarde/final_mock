@@ -478,7 +478,7 @@ def calculate_result(request):
 
     # print(str(physics_marks) + str(chemistry_marks) + str(math_marks))
 
-    return welcome(request)
+    return render(request, 'bestofluck.html')
 
 
 # view for messaging API
