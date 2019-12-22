@@ -98,7 +98,7 @@ def otp(request):
                 if user is not None:
                     # print("User is authenticated.")
                     login(request, user)
-                    messages.success(request, 'Login Successfull')
+                    # messages.success(request, 'Login Successfull')
                 # else:
                     # print("fgdsjkhgsdkjhfgkdsjfhgksdjfghsdlkjfghsdlkfjghdskfjghdslkjghdlkjgfhdkjhgkjdhgkjsdhgkjshd")
                 return rules(request)
