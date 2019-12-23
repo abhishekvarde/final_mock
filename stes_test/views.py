@@ -22,9 +22,13 @@ def register(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        address = request.POST.get('address')
+        address_line_1 = request.POST.get('address_line_1')
+        city = request.POST.get('city')
+        district = request.POST.get('district')
+        state = request.POST.get('state')
         email = request.POST.get('email')
         phone_no = request.POST.get('phone_no')
+        alt_phone_no = request.POST.get('alt_phone_no')
 
         random_str = ""
 
@@ -36,15 +40,31 @@ def register(request):
             random_str += str(rand)
 
         flag = 0
-        if len(first_name) == 0 or len(last_name) == 0 or len(address) == 0 or len(email) == 0 or len(phone_no) == 0:
+        if len(first_name) == 0 or len(last_name) == 0 or len(address_line_1) == 0 or len(email) == 0 or len(phone_no) == 0:
             messages.warning(request, 'All fields are mandatory')
             flag = 1
         if len(phone_no) != 10:
             messages.warning(request, 'Phone no should have 10 digits')
             flag = 1
 
-        if len(address) < 10:
-            messages.warning(request, 'Address is too short')
+        for no in phone_no:
+            if no not in('1','2','3','4','5','6','7','8','9','0'):
+                messages.warning(request, 'Mobile Number should have only have numeric character')
+                flag = 1
+                break
+
+        if len(alt_phone_no) != 10:
+            messages.warning(request, 'Alternate Mobile Number should have 10 digits')
+            flag = 1
+
+        for no in alt_phone_no:
+            if no not in('1','2','3','4','5','6','7','8','9','0'):
+                messages.warning(request, 'Alternate Mobile Number should have only have numeric character')
+                flag = 1
+                break
+
+        if len(address_line_1) < 5:
+            messages.warning(request, 'Address_line_1 is too short')
             flag = 1
 
         if student.objects.filter(email=email).first():
@@ -52,14 +72,19 @@ def register(request):
             flag = 1
 
         if student.objects.filter(phone_no=phone_no).first():
+
             messages.warning(request, 'Phone number already used')
             flag = 1
 
-        if (flag == 1):
-            return redirect('register')
+        if flag == 1:
+            return render(request,'register.html',{"first_name":first_name,"last_name":last_name,
+                        "address_line_1":address_line_1,"city":city,"district":district,"state":state,
+                        "email":email,"phone_no":phone_no,"alt_phone_no":alt_phone_no})
         else:
-            student_details = student(first_name=first_name, last_name=last_name, address=address, email=email,
-                                      phone_no=phone_no, random_no=int(random_str))
+            student_details = student(first_name=first_name, last_name=last_name,
+                                      address_line_1=address_line_1,city=city,district=district,
+                                      state=state, email=email,phone_no=phone_no,
+                                      alt_phone_no=alt_phone_no, random_no=int(random_str))
             student_details.save()
             # sendOtp(phone_no, random_str)
 

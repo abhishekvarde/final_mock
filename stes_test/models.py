@@ -51,11 +51,14 @@ class math(models.Model):
 class student(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    address = models.CharField(max_length=100)
+    address_line_1 = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    district = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
     email = models.EmailField()
     phone_no = models.CharField(max_length=10)
+    alt_phone_no = models.CharField(max_length=10)
     random_no = models.IntegerField()
-
 
 defaultValues = []
 for i in range(150):
