@@ -32,9 +32,9 @@ SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 # SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['128.199.147.103', 'sinhgadonline.com']
+ALLOWED_HOSTS = ['128.199.147.103', 'sinhgadonline.com', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -87,14 +87,29 @@ WSGI_APPLICATION = 'cet.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'read_default_file': '/etc/mysql/my.cnf',
+#         },
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cet',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'POST': '3306',
         'OPTIONS': {
-            'read_default_file': '/etc/mysql/my.cnf',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

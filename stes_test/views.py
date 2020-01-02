@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, HttpResponse, redirect
 from .models import student, question_answers, results
 from django.db import connection
@@ -22,6 +23,7 @@ def register(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
+        college = request.POST.get('college')
         address_line_1 = request.POST.get('address_line_1')
         city = request.POST.get('city')
         district = request.POST.get('district')
@@ -40,7 +42,9 @@ def register(request):
             random_str += str(rand)
 
         flag = 0
-        if len(first_name) == 0 or len(last_name) == 0 or len(address_line_1) == 0 or len(email) == 0 or len(phone_no) == 0:
+        if len(first_name) == 0 or len(last_name) == 0 or len(college) == 0 or len(address_line_1) == 0 or len(
+                email) == 0 or len(
+                phone_no) == 0:
             messages.warning(request, 'All fields are mandatory')
             flag = 1
         if len(phone_no) != 10:
@@ -48,7 +52,7 @@ def register(request):
             flag = 1
 
         for no in phone_no:
-            if no not in('1','2','3','4','5','6','7','8','9','0'):
+            if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
                 messages.warning(request, 'Mobile Number should have only have numeric character')
                 flag = 1
                 break
@@ -58,7 +62,7 @@ def register(request):
             flag = 1
 
         for no in alt_phone_no:
-            if no not in('1','2','3','4','5','6','7','8','9','0'):
+            if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
                 messages.warning(request, 'Alternate Mobile Number should have only have numeric character')
                 flag = 1
                 break
@@ -72,21 +76,23 @@ def register(request):
             flag = 1
 
         if student.objects.filter(phone_no=phone_no).first():
-
             messages.warning(request, 'Phone number already used')
             flag = 1
 
         if flag == 1:
-            return render(request,'register.html',{"first_name":first_name,"last_name":last_name,
-                        "address_line_1":address_line_1,"city":city,"district":district,"state":state,
-                        "email":email,"phone_no":phone_no,"alt_phone_no":alt_phone_no})
+            return render(request, 'register.html',
+                          {"first_name": first_name, "last_name": last_name, "college": college,
+                           "address_line_1": address_line_1, "city": city,
+                           "district": district, "state": state,
+                           "email": email, "phone_no": phone_no,
+                           "alt_phone_no": alt_phone_no})
         else:
-            student_details = student(first_name=first_name, last_name=last_name,
-                                      address_line_1=address_line_1,city=city,district=district,
-                                      state=state, email=email,phone_no=phone_no,
+            student_details = student(first_name=first_name, last_name=last_name, college=college,
+                                      address_line_1=address_line_1, city=city, district=district,
+                                      state=state, email=email, phone_no=phone_no,
                                       alt_phone_no=alt_phone_no, random_no=int(random_str))
             student_details.save()
-            # sendOtp(phone_no, random_str)
+            sendOtp(phone_no, random_str)
 
             return render(request, 'otp.html')
     else:
@@ -515,13 +521,13 @@ def sendOtp(phone_no,random_str):
     payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP is : "+random_str+"\", \"to\": [ \""+phone_no+"\" ] } ] } "
 
     headers = {
-        'authkey': "223621A3KsTS8W5b38fc69",
+        'authkey': "310833AOMMEBIF85e0b08c1P1",
         'content-type': "application/json"
     }
 
-    conn.request("POST", "/api/v2/sendsms?country=91", payload, headers)
+    conn.request("POST", "/api/v2/sendsms", payload, headers)
 
     res = conn.getresponse()
     data = res.read()
 
-    # print(data.decode("utf-8"))
+    print(data.decode("utf-8"))

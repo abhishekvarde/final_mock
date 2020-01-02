@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.welcome, name='welcome'),
     path('stes_test/', include('stes_test.urls')),
+    path('display_results/', views.display_results, name='display_results'),
+    path('admin_login/', views.admin_login, name='admin_login')
 ]

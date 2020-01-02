@@ -71,6 +71,20 @@
                             </div>
                         </div>
 
+
+                         <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">College</label>
+                            <div class="col-lg-9">
+                                {%if last_name %}
+                                <input class="form-control" name="college" type="text" value={{college}}>
+                                {%else%}
+                                <input class="form-control" name="college" type="text" placeholder="Current College">
+                                {%endif%}
+                            </div>
+                        </div>
+
+
+
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address Line 1</label>
                             <div class="col-lg-9">
