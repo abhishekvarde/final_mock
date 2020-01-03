@@ -9,4 +9,5 @@ urlpatterns = [
     path('rules/', views.rules, name='rules'),
     path('main_test/', views.main_test, name='main_test'),
     path('calculate_result/', views.calculate_result, name='calculate_result'),
+    path('scroller/', views.scroller, name='scroller')
 ]

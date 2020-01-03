@@ -44,7 +44,7 @@ def register(request):
         flag = 0
         if len(first_name) == 0 or len(last_name) == 0 or len(college) == 0 or len(address_line_1) == 0 or len(
                 email) == 0 or len(
-                phone_no) == 0:
+            phone_no) == 0:
             messages.warning(request, 'All fields are mandatory')
             flag = 1
         if len(phone_no) != 10:
@@ -110,8 +110,9 @@ def otp(request):
         if student.objects.filter(email=entered_email).exists():
             student1 = student.objects.get(email=entered_email)
             # print(student1.random_no)
-            if entered_otp == str(student1.random_no) or entered_otp == "123456":
-                if entered_otp == "123456":
+            master_otp = '440032'
+            if entered_otp == str(student1.random_no) or entered_otp == master_otp:
+                if entered_otp == master_otp:
                     temp_obj = student.objects.get(email=entered_email)
                     temp_obj.random_no = int(entered_otp)
                     temp_obj.save()
@@ -119,20 +120,25 @@ def otp(request):
                 if not User.objects.filter(username=entered_email).exists():
                     # print("User doesn't exists.")
                     student_details = User.objects.create_user(entered_email, entered_email, entered_otp)
-                                           # first_name=student1.first_name, last_name=student1.last_name,
-                                           # email=entered_email)
+                    # first_name=student1.first_name, last_name=student1.last_name,
+                    # email=entered_email)
                     student_details.first_name = student1.first_name
                     student_details.last_name = student1.last_name
                     student_details.save()
+
                 # user = authenticate(request, username=username, password=password)
                 user = authenticate(request, username=entered_email, password=entered_otp)
                 if user is not None:
                     # print("User is authenticated.")
                     login(request, user)
+
                     # messages.success(request, 'Login Successfull')
                 # else:
-                    # print("fgdsjkhgsdkjhfgkdsjfhgksdjfghsdlkjfghsdlkfjghdskfjghdslkjghdlkjgfhdkjhgkjdhgkjsdhgkjshd")
-                return rules(request)
+                # print("fgdsjkhgsdkjhfgkdsjfhgksdjfghsdlkjfghsdlkfjghdskfjghdslkjghdlkjgfhdkjhgkjdhgkjsdhgkjshd")
+                # return rules(request)
+                return scroller(request)
+                # return redirect('/stes_test/scroller/')
+
             else:
                 messages.warning(request, 'Invalid username or password.')
                 return render(request, 'otp.html')
@@ -155,7 +161,6 @@ def otp(request):
 
 
 def main_test(request):
-
     # print(request.user.is_authenticated)
     # print(request.user.username)
 
@@ -257,7 +262,7 @@ def main_test(request):
         # print("current question number is : " + str(question_number))
 
         question_id_in_subject_table = new_question_number[question_number - 1]
-        next_question_marked_answer = marked_answer_list[int(next_question_no)-1]
+        next_question_marked_answer = marked_answer_list[int(next_question_no) - 1]
 
         # print("question id to be featched : -" + str(question_id_in_subject_table) + "-")
 
@@ -269,9 +274,9 @@ def main_test(request):
             if marked_answer != "0":
                 # print("Marked answer : " + marked_answer)
                 # print("Attempted changed for question : " + previous_question_no)
-                attempted[int(previous_question_no)-1] = "1"
+                attempted[int(previous_question_no) - 1] = "1"
             else:
-                attempted[int(previous_question_no)-1] = "0"
+                attempted[int(previous_question_no) - 1] = "0"
 
             bookmark_list1 = ",".join(bookmark_list)
             invalid_list1 = ",".join(invalid_list)
@@ -378,7 +383,8 @@ def main_test(request):
 
         cursor = connection.cursor()
         user = username  # request.user
-        cursor.execute("select physics_questions, marked_answers from stes_test_question_answers where username = \"" + user + "\"")
+        cursor.execute(
+            "select physics_questions, marked_answers from stes_test_question_answers where username = \"" + user + "\"")
         new_set = cursor.fetchall()
         question_id = (new_set[0][0].split(","))[0]
         next_question_marked_answer = (new_set[0][1].split(",")[0])
@@ -404,28 +410,22 @@ def main_test(request):
         question_no_next = 2
 
         return render(request, 'ok.html', {"new_question_data": new_question_data, "question_number": 1,
-                                             "question_no_prev": question_no_prev, "question_no_next": question_no_next,
-                                             "physics": physics, "chemistry": chemistry, "math": math, "bookmark": 0,
-                                             "invalid": 0, "username": username, "backend_time": 10800000,
-                       "next_question_marked_answer": next_question_marked_answer})
+                                           "question_no_prev": question_no_prev, "question_no_next": question_no_next,
+                                           "physics": physics, "chemistry": chemistry, "math": math, "bookmark": 0,
+                                           "invalid": 0, "username": username, "backend_time": 10800000,
+                                           "next_question_marked_answer": next_question_marked_answer})
 
 
 def rules(request):
-
-        if request.method == 'POST':
-            if request.POST.get("username") and "box1" in request.POST:
-                # print("Iam here")
-                return main_test(request)
-            else:
-                return render(request, 'rules.html',{"username":request.POST.get("username")})
-
-
-
-
+    if request.method == 'POST':
+        if request.POST.get("username") and "box1" in request.POST:
+            # print("Iam here")
+            return main_test(request)
+        else:
+            return render(request, 'rules.html', {"username": request.POST.get("username")})
 
 
 def calculate_result(request):
-
     if not request.user.is_authenticated:
         return welcome(request)
 
@@ -452,7 +452,6 @@ def calculate_result(request):
         "username = \""
         + username + "\"")
 
-
     cursor.execute(
         "select physics_answers, chemistry_answers, math_answers, marked_answers from stes_test_question_answers "
         "where username = \"" + username + "\"")
@@ -473,7 +472,7 @@ def calculate_result(request):
     chemistry_answers = chemistry_answers.split(",")
     math_answers = math_answers.split(",")
     marked_answers = marked_answers.split(",")
-    marked_answers[int(previous_question_no)-1] = marked_answer
+    marked_answers[int(previous_question_no) - 1] = marked_answer
 
     # print(len(physics_answers))
     # print(len(chemistry_answers))
@@ -497,12 +496,13 @@ def calculate_result(request):
         i += 1
 
     marked_answers = ",".join(marked_answers)
-    total_marks = physics_marks+chemistry_marks+math_marks
+    total_marks = physics_marks + chemistry_marks + math_marks
 
     cursor.execute("update stes_test_question_answers set marked_answers = \"" + marked_answers +
-                           "\" where username = \"" + username + "\"")
+                   "\" where username = \"" + username + "\"")
 
-    set = results(username=username, physics_marks=physics_marks, chemistry_marks=chemistry_marks, math_marks=math_marks,
+    set = results(username=username, physics_marks=physics_marks, chemistry_marks=chemistry_marks,
+                  math_marks=math_marks,
                   total_marks=total_marks)
     set.save()
 
@@ -514,11 +514,10 @@ def calculate_result(request):
 
 
 # view for messaging API
-def sendOtp(phone_no,random_str):
-
+def sendOtp(phone_no, random_str):
     conn = http.client.HTTPSConnection("api.msg91.com")
 
-    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP is : "+random_str+"\", \"to\": [ \""+phone_no+"\" ] } ] } "
+    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP is : " + random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
 
     headers = {
         'authkey': "310833AOMMEBIF85e0b08c1P1",
@@ -531,3 +530,8 @@ def sendOtp(phone_no,random_str):
     data = res.read()
 
     print(data.decode("utf-8"))
+
+
+def scroller(request):
+    if request.method == 'POST':
+        return render(request, "scroller.html", {"username": request.POST.get("username")})
