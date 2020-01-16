@@ -517,10 +517,10 @@ def calculate_result(request):
 def sendOtp(phone_no, random_str):
     conn = http.client.HTTPSConnection("api.msg91.com")
 
-    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP is : " + random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
+    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP for STES online exam is : " + random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
 
     headers = {
-        'authkey': "310833AOMMEBIF85e0b08c1P1",
+        'authkey': "310833AqdXKu1ZYhO5e1f3f0cP1",
         'content-type': "application/json"
     }
 

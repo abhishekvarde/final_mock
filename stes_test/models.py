@@ -61,6 +61,10 @@ class student(models.Model):
     alt_phone_no = models.CharField(max_length=10)
     random_no = models.IntegerField()
 
+    def __str__(self):
+        return self.email
+
+
 defaultValues = []
 for i in range(150):
     defaultValues.append(str(0))
