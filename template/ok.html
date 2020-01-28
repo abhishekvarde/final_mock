@@ -50,7 +50,8 @@
           var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
           // Display the result in the element with id="demo"
-          document.getElementById("demo").innerHTML = "Time Remaining : " + hours + "h " + minutes + "m " + seconds + "s ";
+          {#document.getElementById("demo").innerHTML = "Time Remaining : " + hours + "h " + minutes + "m " + seconds + "s ";#}
+          document.getElementById("demo").innerHTML = "Time Remaining : " + minutes + "m " + seconds + "s ";
           document.getElementById("id_time").value = distance;
 
           // If the count down is finished, write some text
@@ -239,7 +240,7 @@ float: left;
 
 
 
-        <h3>Sinhgad Technical Education Society</h3>
+        <h3>TSinhgad Karandak 2020</h3>
 
     </nav>
     <div class="profile">
@@ -262,7 +263,7 @@ float: left;
 <!--            <div class="force-overflow">-->
                 <div class="container3">
                     <div class="phy">
-                        <h5>Questions lao jaldi se</h5>
+                        <h5>Questions lao jaldi set</h5>
                     </div>
                     <hr>
 

@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from cet import views
+from stes_test import views as v
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.welcome, name='welcome'),
+    path('', v.otp, name='otp'),
     path('stes_test/', include('stes_test.urls')),
     path('display_results/', views.display_results, name='display_results'),
     path('admin_login/', views.admin_login, name='admin_login')
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
