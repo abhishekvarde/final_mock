@@ -136,7 +136,8 @@ def otp(request):
                 # else:
                 # print("fgdsjkhgsdkjhfgkdsjfhgksdjfghsdlkjfghsdlkfjghdskfjghdslkjghdlkjgfhdkjhgkjdhgkjsdhgkjshd")
                 # return rules(request)
-                return scroller(request)
+                return redirect("/stes_test/main_test/")
+                # return scroller(request)
                 # return redirect('/stes_test/scroller/')
 
             else:
@@ -167,17 +168,18 @@ def main_test(request):
     if not request.user.is_authenticated:
         return welcome(request)
 
-    if request.method == 'GET':
-        messages.warning(request, 'Missuse of question paper')
-        return otp(request)
+    # if request.method == 'GET':
+    #     messages.warning(request, 'Missuse of question paper')
+    #     return otp(request)
 
-    username = request.POST.get('username')
+    username = request.user.username
+    # username = request.POST.get('username')
 
     if question_answers.objects.filter(username=username).first():
 
         cursor = connection.cursor()
-
-        username = request.POST.get('username')
+        username=request.user.username
+        # username = request.POST.get('username')
         bookmark = request.POST.get('bookmark2')
         invalid = request.POST.get('invalid2')
         previous_question_no = request.POST.get('previous_question_no')

@@ -86,7 +86,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cet',
+        'NAME': 'cetmock',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
