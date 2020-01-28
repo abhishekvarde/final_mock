@@ -278,56 +278,6 @@
 
                     </div>
                     <br>
-                    <div class="chem">
-                        <h5>Chemistry</h5>
-                    </div>
-                    <hr>
-
-                    <div class="btn1">
-                        {% for n in chemistry %}
-                        <a class="button1" >
-                            {% if n.1 == "1" %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-warning btn-circle btn-sm">{{ n.0 }}</button>
-                            {% elif n.2 == "1" %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-danger btn-circle btn-sm">{{ n.0 }}</button>
-                            {% elif n.3 == "1" %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-success btn-circle btn-sm">{{ n.0 }}</button>
-                            {% else %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
-                            {% endif %}
-                            {% if n.0|divisibleby:10 %}
-
-<!--                            <br>-->
-                            {% endif %}
-                        </a>
-                        {% endfor %}
-
-                    </div>
-                    <br>
-                    <div class="math">
-                        <h5>Mathematics</h5>
-                    </div>
-                    <hr>
-
-                    <div class="btn1">
-                        {% for n in math %}
-                        <a class="button1" >
-                            {% if n.1 == "1" %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-warning btn-circle btn-sm">{{ n.0 }}</button>
-                            {% elif n.2 == "1" %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-danger btn-circle btn-sm">{{ n.0 }}</button>
-                            {% elif n.3 == "1" %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-success btn-circle btn-sm">{{ n.0 }}</button>
-                            {% else %}
-                            <button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}" class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
-                            {% endif %}
-                            {% if n.0|divisibleby:10 %}
-<!--                            <br>-->
-                            {% endif %}
-                        </a>
-                        {% endfor %}
-
-                    </div>
 
                 </div>
             </div>
@@ -398,7 +348,7 @@
                     <button onclick="assign({{ question_no_prev }})" type="submit" id="previous" class="btn btn-primary previous">Previous</button>
                 </a>
                 {% endif %}
-                {% if question_number != "150" %}
+                {% if question_number != "30" %}
                 <a class="button2" href="?page={{ question_no_next }}">
                     <button onclick="assign({{ question_no_next }})" type="submit" id="next" class="btn btn-primary save">Save & Next</button>
                 </a>

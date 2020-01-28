@@ -145,39 +145,39 @@ background-color: #F5F5F5; }
 
                 </div>
                 <br>
-                <div class="chem">
-                    <h5>Chemistry</h5>
-                </div>
-                <hr>
-
-                <div class="btn1">
-                    {% for n in chemistry %}
-                    <a class="button1" href="?page={{ n }}">
-                        <button onclick="assign({{ n }})" type="button" class="btn btn-secondary btn-circle btn-sm">{{ n }}</button>
-                        {% if n|divisibleby:10 %}
-                        <br>
-                        {% endif %}
-                    </a>
-                    {% endfor %}
-
-                </div>
-                <br>
-                <div class="math">
-                    <h5>Mathematics</h5>
-                </div>
-                <hr>
-
-                <div class="btn1">
-                    {% for n in math %}
-                    <a class="button1" href="?page={{ n }}">
-                        <button onclick="assign({{ n }})" type="button" class="btn btn-secondary btn-circle btn-sm">{{ n }}</button>
-                        {% if n|divisibleby:10 %}
-                        <br>
-                        {% endif %}
-                    </a>
-                    {% endfor %}
-
-                </div>
+{#                <div class="chem">#}
+{#                    <h5>Chemistry</h5>#}
+{#                </div>#}
+{#                <hr>#}
+{##}
+{#                <div class="btn1">#}
+{#                    {% for n in chemistry %}#}
+{#                    <a class="button1" href="?page={{ n }}">#}
+{#                        <button onclick="assign({{ n }})" type="button" class="btn btn-secondary btn-circle btn-sm">{{ n }}</button>#}
+{#                        {% if n|divisibleby:10 %}#}
+{#                        <br>#}
+{#                        {% endif %}#}
+{#                    </a>#}
+{#                    {% endfor %}#}
+{##}
+{#                </div>#}
+{#                <br>#}
+{#                <div class="math">#}
+{#                    <h5>Mathematics</h5>#}
+{#                </div>#}
+{#                <hr>#}
+{##}
+{#                <div class="btn1">#}
+{#                    {% for n in math %}#}
+{#                    <a class="button1" href="?page={{ n }}">#}
+{#                        <button onclick="assign({{ n }})" type="button" class="btn btn-secondary btn-circle btn-sm">{{ n }}</button>#}
+{#                        {% if n|divisibleby:10 %}#}
+{#                        <br>#}
+{#                        {% endif %}#}
+{#                    </a>#}
+{#                    {% endfor %}#}
+{##}
+{#                </div>#}
 
             </div>
         </div>

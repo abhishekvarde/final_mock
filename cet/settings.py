@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
+# import pymysql
+#
+# pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -32,9 +34,9 @@ SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 # SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['157.245.139.161','206.189.40.232', 'sinhgadonline.com', '127.0.0.1','www.sinhgadonline.com']
+ALLOWED_HOSTS = ['*']  # ['157.245.139.161','206.189.40.232', 'sinhgadonline.com', '127.0.0.1','www.sinhgadonline.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -75,10 +77,23 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cet.wsgi.application'
+# WSGI_APPLICATION = 'cet.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cet',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+
 
 # DATABASES = {
 #     'default': {
@@ -87,14 +102,14 @@ WSGI_APPLICATION = 'cet.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/etc/mysql/my.cnf',
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'OPTIONS': {
+#             'read_default_file': '/etc/mysql/my.cnf',
+#         },
+#     }
+# }
 
 # DATABASES = {
 #     'default': {
@@ -109,7 +124,6 @@ DATABASES = {
 #         },
 #     }
 # }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -150,8 +164,8 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [
+# STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, "static"),
-#]
+# ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")

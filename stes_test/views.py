@@ -185,15 +185,6 @@ def main_test(request):
         marked_answer = request.POST.get('marked_answer')
         backend_time = request.POST.get('time_left')
 
-        # print("username is " + username)
-        # print("username is " + backend_time)
-        #
-        # print("bookmark " + str(bookmark))
-        # print("invalid " + str(invalid))
-        # print("previous_question_no " + str(previous_question_no))
-        # print("next_question_no " + str(next_question_no))
-        # print("marked_answer " + str(marked_answer))
-
         if marked_answer is None or marked_answer == "":
             marked_answer = "0"
         if bookmark is None or bookmark == "":
@@ -225,29 +216,29 @@ def main_test(request):
 
         user = username  # request.user
         subject_id = 0
-        if int(next_question_no) <= 50:
+        if int(next_question_no) <= 30:
             cursor.execute(
                 "select bookmark, invalid, marked_answers, physics_questions, attempted from "
                 "stes_test_question_answers where "
                 "username = \""
                 + user + "\"")
             subject_id = 1
-        elif 51 <= int(next_question_no) <= 100:
-            cursor.execute(
-                "select bookmark, invalid, marked_answers, chemistry_questions, attempted from "
-                "stes_test_question_answers where "
-                "username = \""
-                + user + "\"")
-            subject_id = 2
-        else:
-            cursor.execute(
-                "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
-                "where "
-                "username = \""
-                + user + "\"")
-            subject_id = 3
+        # elif 51 <= int(next_question_no) <= 100:
+        #     cursor.execute(
+        #         "select bookmark, invalid, marked_answers, chemistry_questions, attempted from "
+        #         "stes_test_question_answers where "
+        #         "username = \""
+        #         + user + "\"")
+        #     subject_id = 2
+        # else:
+        #     cursor.execute(
+        #         "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
+        #         "where "
+        #         "username = \""
+        #         + user + "\"")
+        #     subject_id = 3
 
-        question_number = int(next_question_no) - 50 * (subject_id - 1)
+        question_number = int(next_question_no) # - 50 * (subject_id - 1)
 
         qset = cursor.fetchall()
 
@@ -287,15 +278,15 @@ def main_test(request):
                            "\" , invalid = \"" + invalid_list1 + "\" , marked_answers = \"" + marked_answer_list1 +
                            "\" , attempted = \"" + attempted1 + "\" where username = \"" + user + "\"")
 
-        if int(next_question_no) <= 50:
+        if int(next_question_no) <= 30:
             cursor.execute("select question, option1, option2, option3, option4, image from stes_test_physics where "
                            "question_id = " + question_id_in_subject_table)
-        elif 51 <= int(next_question_no) <= 100:
-            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_chemistry where "
-                           "question_id = " + question_id_in_subject_table)
-        else:
-            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
-                           "question_id = " + question_id_in_subject_table)
+        # elif 51 <= int(next_question_no) <= 100:
+        #     cursor.execute("select question, option1, option2, option3, option4, image from stes_test_chemistry where "
+        #                    "question_id = " + question_id_in_subject_table)
+        # else:
+        #     cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
+        #                    "question_id = " + question_id_in_subject_table)
 
         new_question_data = cursor.fetchall()
 
@@ -305,13 +296,13 @@ def main_test(request):
         chemistry = []
         math = []
 
-        for i in range(1, 151):
-            if i <= 50:
+        for i in range(1, 31):
+            if i <= 30:
                 physics.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
-            elif 51 <= i <= 100:
-                chemistry.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
-            else:
-                math.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            # elif 51 <= i <= 100:
+            #     chemistry.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            # else:
+            #     math.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
 
         # print(physics)
 
@@ -341,15 +332,15 @@ def main_test(request):
             "update stes_test_math set rand = rand() where question_id > 0;")
 
         cursor.execute(
-            "select question_id, answer answer from stes_test_physics order by rand limit 50;")
+            "select question_id, answer answer from stes_test_physics order by rand limit 15;")
         qset1 = cursor.fetchall()
 
         cursor.execute(
-            "select question_id, answer from stes_test_chemistry order by rand limit 50;")
+            "select question_id, answer from stes_test_chemistry order by rand limit 10;")
         qset2 = cursor.fetchall()
 
         cursor.execute(
-            "select question_id, answer from stes_test_math order by rand limit 50;")
+            "select question_id, answer from stes_test_math order by rand limit 5;")
         qset3 = cursor.fetchall()
 
         physicsQ = []
@@ -364,12 +355,12 @@ def main_test(request):
             physicsA.append(str(q[1]))
 
         for q in qset2:
-            chemistryQ.append(str(q[0]))
-            chemistryA.append(str(q[1]))
+            physicsQ.append(str(q[0]))
+            physicsA.append(str(q[1]))
 
         for q in qset3:
-            mathQ.append(str(q[0]))
-            mathA.append(str(q[1]))
+            physicsQ.append(str(q[0]))
+            physicsA.append(str(q[1]))
 
         ins = question_answers(username=username,
                                physics_questions=",".join(physicsQ),
@@ -398,13 +389,13 @@ def main_test(request):
         chemistry = []
         math = []
 
-        for i in range(1, 151):
-            if i <= 50:
+        for i in range(1, 31):
+            if i <= 30:
                 physics.append((i, 0, 0))
-            elif 51 <= i <= 100:
-                chemistry.append((i, 0, 0))
-            else:
-                math.append((i, 0, 0))
+            # elif 51 <= i <= 100:
+            #     chemistry.append((i, 0, 0))
+            # else:
+            #     math.append((i, 0, 0))
 
         question_no_prev = 0
         question_no_next = 2
@@ -412,7 +403,7 @@ def main_test(request):
         return render(request, 'ok.html', {"new_question_data": new_question_data, "question_number": 1,
                                            "question_no_prev": question_no_prev, "question_no_next": question_no_next,
                                            "physics": physics, "chemistry": chemistry, "math": math, "bookmark": 0,
-                                           "invalid": 0, "username": username, "backend_time": 10800000,
+                                           "invalid": 0, "username": username, "backend_time": 1800000,
                                            "next_question_marked_answer": next_question_marked_answer})
 
 
@@ -517,7 +508,8 @@ def calculate_result(request):
 def sendOtp(phone_no, random_str):
     conn = http.client.HTTPSConnection("api.msg91.com")
 
-    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP for STES online exam is : " + random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
+    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP " \
+              "for STES online exam is : " + random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
 
     headers = {
         'authkey': "310833AqdXKu1ZYhO5e1f3f0cP1",
