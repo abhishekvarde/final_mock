@@ -21,13 +21,18 @@
             color: #fff
         }
 
+        body.background {
+          background: url('{% static 'sinhgad.png' %}') repeat;
+          border: 2px solid black;
+        }
+
     </style>
 </head>
 <body>
+{# style="background-image: url('{% static 'sinhgad.png' %}');"#}
 <nav class="navbar navbar-light bg-dark">
 
-    <img src="{% static 'sinhgad.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>
-    
+    <img style="padding: 7px;" src="{% static 'sinhgad.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>
     <h3>Sinhgad Karandak 2020</h3>
     
 </nav>

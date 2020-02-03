@@ -237,7 +237,7 @@ def main_test(request):
             "update stes_test_math set rand = rand() where question_id > 0;")
 
         cursor.execute(
-            "select question_id, answer answer from stes_test_physics order by rand limit 15;")
+            "select question_id, answer from stes_test_physics order by rand limit 15;")
         qset1 = cursor.fetchall()
 
         cursor.execute(

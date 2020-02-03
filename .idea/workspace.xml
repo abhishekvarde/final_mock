@@ -2,28 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8123955e-fa7c-4f90-b55e-7232cca31527" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/sinhgad.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/elon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/sinhgad1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cet/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cet/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cet/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cet/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stes_test/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/stes_test/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stes_test/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/stes_test/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/sinhgad.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/sinhgad.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stes_test/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/stes_test/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/admin_login.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/template/bestofluck.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/bestofluck.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/exam.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/exam1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/examCopy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/fireworks.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/manage.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/template/ok.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/ok.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/otp.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/otp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/register.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/rules.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/scroller.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/welcome.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/sinhgad.png" beforeDir="false" afterPath="$PROJECT_DIR$/template/sinhgad.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,12 +36,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/template" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -111,7 +99,8 @@
       <workItem from="1578051634069" duration="4254000" />
       <workItem from="1580130664952" duration="4639000" />
       <workItem from="1580202488497" duration="2444000" />
-      <workItem from="1580205878310" duration="7048000" />
+      <workItem from="1580205878310" duration="8197000" />
+      <workItem from="1580285929906" duration="1058000" />
     </task>
     <servers />
   </component>
