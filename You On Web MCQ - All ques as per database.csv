@@ -1,0 +1,237 @@
+1,"HTML stands for?
+",Hyper Text Markup Language,High Text Markup Language,Hyper Tabular Markup Language,None of these,A
+1,which of the following tag is used to mark a begining of paragraph ?,<td>,<br>,<p>,<tr>,C
+1,In which year internet is founded?,1969,1990,1972,1995,A
+1,Which of the following tag is used to link the URL.,<hyperlink>,<link>,<style>,<a>,D
+1,URL in HTML stands for ____________.,Uni Resource Locator,Universal Resource Locator,Uniform Resource Locator,None of these,C
+1,From which tag descriptive list starts ?,<ll>,<dd>,<dl>,<ds>,C
+1,The attribute of <form> tag,Method,Action,Both(a) &(b),None of these,C
+1,Correct HTML tag for the largest heading is,<head>,<h6>,<heading>,<h1>,D
+1,Who was the primary author of HTML (Hyper Text Markup Language). ?,Google LLC,Sabeer Bhatiya,Brendan Eich,Tim Berners-Lee,D
+1,HTML was firstly proposed in year _______.,1980,1995,1990,2000,C
+1,Which of the following is considered as first web browser ?,Nexus,Internet Explorer,Netscape Navigator,Mosaic,A
+1,WWW is based on which model?,Local-server,Client-server,3-tier,None of these,B
+1,Which of the following tag is used to make text italic,<italic> ,<i>,None,Both a and b,B
+1,Which of the following tag is used to make text bold,<bold>,<b>,None,Both a and b,B
+1,Which of the following attributes of text box control allow to limit the maximum character?,size,len,maxlength,all of these,C
+1,Who is making the Web standards?,W3C,WWW,Google,ICANN,A
+1,What is the correct HTML element for inserting a line break?,<break>,<br>,<tr>,<lb>,B
+1,What is the minimum number of HTML5 tags that are required to create a Web page?,3,5,0,8,A
+1,How can you open a link in a new browser window?,"< a href = ""url"" target = ""new"">","<a href = ""url"" target= ""_blank"">","<a href = ""url"".new>","<a href = ""url"" target =""open"">",B
+1,Can the element <First> be replaced with <first>,"No, they represent different elements altogether",Both are same,First is correct only,first is only correct ,B
+1,HTML markup language is a set of Markup ___________.,Sets,Tags,Groups,Attributes,B
+1,How can we resize the image?,Using resize attribute,Using height and width,Using size attribute,Using size attribute,B
+1,bgcolor is an attribute of body tag,TRUE,FALSE,,,A
+1,Wha is the correct HTML for making checkbox?,"<input type=""check""/>",<check>,<checkbox>,"<input type=""checkbox"" />",D
+1,"In <img src=""image.gif"">, ""image.gif"" is an _____.",element,attribute,value,operator,A
+,,,,,,
+2,JPEG images can use _____ colors.,16.5 million,16.6 million,16.7 million,16.8 million,C
+2,What is the correct HTML element for inserting a background image?,"<body background=""background.gif"">","<img src=""background.gif"" background>","<background img=""background.gif"">",,A
+2,"One of the following method is used to send the email with default subject ""Hello"".","<a href=""mailto:sam@gmail.com?subject=Hello"">Email</a>","<a href=""mailto:sam@gmail.com"" subject=""Hello"">Email</a>","<a href=""mailto:sam@gmail.com&subject:""Hello"">Email</a>",None of these,A
+2,"What is the new form elements introduced in HTML5?
+1) <button>
+2) <optgroup>
+3) <datalist>
+4) <keygen>
+5) <output>","1, 2 and 3","2, 3 and 4"," 3, 4 and 5","4, 5 and 1",C
+2,What is correct HTML for making a drop-down list?,<list>,<select>,"<input type=""dropdown""/>","<input type=""list"" />",B
+2,"Every machine on the internet is assigned a unique ip address, which is",16-bit numeric address,32-bit numeric address,64-bit numeric address,8-bit numeric address,B
+2,"The HTML global attribute, ""contenteditable"" is used to:", Specifies a context menu for an element. The menu appears when a user right-clicks on the element, Return the position of the first found occurrence of content inside a string, Update content from the server, Specify whether the content of an element should be editable or not,D
+2,Character encoding is,method used to represent numbers in a character,method used to represent character in a number,"a system that consists of a code which pairs each character with a pattern,sequence of natural numbers or electrical pulse in order to transmit the data",none of these,"C
+"
+2,The map definition file is generally stored in,CGI-BIN,BIN,MAP-BIN,All of these,A
+2,From the following which methods are provided by geolocation?,getCurrentPosition(),watchPosition(),clearWatch(),All the mentioned above,D
+2,Which of the following is type of Doctype?,Strict Doctype,Frameset Doctype,Transitional Doctype,"all of these
+",D
+2,How can you make an e-mail link?,"<mail href +""xxx@y.com"">","<a href =""mail to: xxx@y.com"">","<a href = ""xxx@y.com"">",Both (b) and (c),B
+2,"The following elements <header>, <footer>, <article>, <section> are the new elements in HTML5. These elements are called",Control attributes,Semantic elements,Graphic elements,Multimedia elements,B
+2,How to add scrolling text to a page?,<scroll>,<marquee>,<circular>,All the mentioned above,B
+2,Which HTML element is used to display a scalar measurement within a range?,<measure>,<meter>,<range>,<gauge>,B
+2,Not a way to composite HTML Colors?,HEX,RGB,CNYK,HSL,C
+2,We get list of sites  after typing a word in search bar called _________.,Single Word,Key phrase,,,B
+2,"The HTML global attribute, ""contenteditable"" is used to:",Specifies a context menu for an element. The menu appears when a user right-clicks on the element,Return the position of the first found occurrence of content inside a string,Update content from the server,Specify whether the content of an element should be editable or not,D
+2,What is the correct HTML for making a text area?,"<input type=""textbox"">",<textarea>,"<input type=""textarea"">",,B
+2,Which of the following attributes comes in handy when borders have to be put between groups of columns instead of every column?,col,colgroup,rowspan,row,B
+2,What is meant by cellpadding?,It makes the cell span more than one column,It specifies the space between the cell wall and the contents of the cell.,It specifies the space between two cells,It makes the cell span more than one row.,B
+2,What is the REFRESH meta tag used for ?,Refresh your content,Redirect to a new domain,rewrite url,None of the above,B
+2,"Which of the following is incorrect value provided to ""rel"" attribute of Anchor Tag ?",help,bookmark,previous,license,C
+2,________ attribute is used to specify MIME type of linked document ?,Rev Attribute,MIME Attribute,Type Attribute,Media Attribute,C
+2,Which of the following HTML tag is used to define clickable area in an image map ?,<area>,<map>,<click>,<img>,A
+2,Which video format is not best for embedding on web page?,MPEG4,Ogg,WebM,3gp,D
+2,"The attribute, which define the relationship between current document and HREF'ed URL is",REL,URL,REV,all of these,A
+2,Which of the following attribute is supported in HTML5 ?,align,longdesc,border,None of these,D
+2,Which tag is used for enclosing personal information?,<address>,<info>,<datalist>,all of these,A
+2,<Base> tag is designed to appear only between,<head>,<title>,<body>,<form>,"A
+"
+,,,,,,
+,,,,,,
+1,Internal CSS defines style for,Single element,Whole Document,Multiple pages,Single HTML page,D
+1,Are CSS property names case-sensitive?,Yes,No ,Doesn't matter,None of the above,B
+1,Does setting margin-top and margin-bottom have an affect on an inline element?,Yes,No ,Doesn't matter,None of the above,B
+1,Which one is Universal selector in CSS?,.(dot),div,*,None of the above,C
+1,"How will you give colors to given texts? 
+<div data-color=""red"">This will be red</div> 
+<div data-color=""green"">This will be green</div> 
+<div data-color=""orange"">This will NOT be red</div>",".data-color1{
+  color: red;
+}
+
+.data-color2{
+  color: green;
+}
+
+.data-color3{
+  color: orange;
+}","data-color1{
+  color: red;
+}
+
+data-color2{
+  color: green;
+}
+
+data-color3{
+  color: orange;
+}","div[data-color1]{
+  color: red;
+}
+
+div[data-color2]{
+  color: green;
+}
+
+div[data-color3]{
+  color: orange;
+}",None of these,C
+1,"What this Selector will select?
+[class*=""foo""] {
+ color: red;
+}",All class name with foo,All class name having foo in substring,All classes having with foo in first occurance,None of these,C
+1,"what this selector will select?
+[attribute~=""value""]","
+Selects elements with the given attribute and value where the given value appears in a whitespace-separated list.",Selects elements with the given value which appears in a whitespace-separated list.,"
+Selects all elements with the given value","
+Selects elements with the given attribute and value where the given value appears in a whitespace-separated list.",D
+1,"What ""div .big"" will select?",All big that are decendent of div,All div with big class,All div with .big as there direct child,will not select anything,A
+1,"Which kind of selector syntax it is?
+""selector selector""",Decendant,Child,General Sibing,Adjacent sibling,A
+1,"Which kind of selector syntax it is?
+""selector >  selector""",Decendant,Child,General Sibing,Adjacent sibling,B
+1,"Which kind of selector syntax it is?
+""selector + selector""",Decendant,Child,General Sibing,Adjacent sibling,D
+1,"Which kind of selector syntax it is?
+""selector ~ selector""",Decendant,Child,General Sibing,Adjacent sibling,C
+1,Which of the following are pseudo selector? ,actived,any,hover,Both b and c,D
+1,HSL stands for? ,High Saturation Lightness,Hue Saturation Lightness,Hue Saturation length,None of these,B
+1,CSS property to center Background Image,Center,Justify,Backgound-position,align,C
+1,Single line comments in CSS ?,/* */,//,#,<!-- -->,A
+1,"In Descendant Selector , style is applied to element based on",whether element have sub element or not,whether element have only 2 sub elements or not,whether element is of particular type or not,None of these,A
+1,"Following style is applied to?
+div.wrapper h2 {
+    font-size: 18px;
+    margin-top: 0;
+}",Type 2 Heading inside Element div of class wrapper.,Type 2 Heading inside Element div with id wrapper.,Type 2 Heading inside Element div of any class,None of these,A
+1,"Following style is applied to?
+.wrapper #sub h2 {
+    font-size: 18px;
+    margin-top: 0;
+}",Div Element with class wrapper and Type 2 Heading inside it with ID sub.,Type 2 Heading with ID sub inside Element P with class wrapper,Type 2 Heading inside wrapper with ID sub,All of the above,B
+1,Which property is used to specify typefaces?,font-family,font-name,font-face,font-style,A
+1,"How many type faces inside property ""font-family"" ?",1,4,No limit,Maximum 3,C
+1,Pseudo-classes are used to represent,Static Events,Dynamic Events,Related Events,casual Events,B
+1,Which of the following is used to represent unvisited hyperlink,:link,:nonvisited,:unvisited,:fresh,A
+1,Which of the following is used to represent Visited hyperlink,:visited,:clicked,:focus,:link,A
+1,CSS property to Style list items?,list-style,list-style-type,list-style-variant,list-type,B
+1,which property can be used to give text element a shadow?,text-shadow,text-decoration,text-background,text-style,A
+1,which property is used to overlap items in CSS? ,Z-index,overlap,overlay,position,A
+1,How will you select a class selector in CSS?,dot(.),hash(#),class name,None of these,A
+1,How will you select a ID selector in CSS?,dot(.),hash(#),class name,None of these,B
+1,"<ul class=""shopping-list"" id=""awesome"">
+<li><span>Milk</span></li>
+<li class=""favorite"" id=""must-buy""><span class=""highlight"">Sausage</span></li>
+</ul>
+CSS:
+ul {
+color: red;
+}
+li {
+color: blue;
+}",Red,Blue,Neither,Brown,B
+,,,,,,
+2,Which CSS  Property can be used to show specific part of the image?,backgroun-size,background-part,clip-path,background-region,C
+2,CSS Box model consists of ?,Content,Padding,Border,All of These,D
+2,Which of the following statement is correct for the two values shorthand property in CSS box model?,"The first one applies to the top and bottom, and the second one to the left and right.","The first one applies to the left and right, and the second one to the top and bottom.","The first one applies to the top and right, and the second one to the bottom and left.","The first one applies to the left and top, and the second one to the right and bottom.",A
+2,Which of the CSS property is used to add scroll bars to the overflowed content?,Hide,Overflow,Display,None,B
+2,Which of the following value is not correct for the overflow CSS property?,Visible,Hidden,Scroll,Hide,D
+3,"Inside which HTML element do we put the JavaScript?
+",<js>,<javascript>,<scripting>,<script>,D
+3,"var foo = function foo() {
+    console.log(foo === foo);  
+};
+foo();",TRUE,FALSE,ReferenceError,,A
+3,"function aaa() {
+    return
+    {
+        test: 1
+    };
+}
+alert(typeof aaa());",function,number,object,undefined,D
+3,How do you create a function in JavaScript?,function myFunction(),function = myFunction(),function:myFunction(),,A
+3,"Choose the correct JavaScript syntax to change the content of the following HTML code.
+<p id=""programmer"">CodingHub</p> ",document.getElement(“programmer”).innerHTML=”I am a programmer”;,document.getElementById(“programmer”).innerHTML=”I am a programmer”;,document.getId(“programmer”)=”I am a programmer”;, document.getElementById(“programmer”).innerHTML=I am a programmer;,B
+3,Which of the following is the correct syntax to display “CodingHub” in an alert box using JavaScript?,alertbox(“CodingHub”);,msg(“CodingHub”);,msgbox(“CodingHub”);,alert(“CodingHub”);,D
+3, What is the correct syntax for referring to an external script called “programmer.js”?, <script src=”programmer.js”>,<script href=”programmer.js”>,<script ref=”programmer.js”>,<script name=”programmer.js”>,A
+3,The external JavaScript file must contain <script> tag. True or False? ,TRUE,FALSE,,,B
+3,"
+<script type=""text/javascript""> 
+a = 8 + ""8""; 
+document.write(a); 
+</script> 
+",16,Compilation Error,88,Run Time Error,C
+3,Javascript is _________ language.,Programming,Scripting,Application,Markup,B
+3,JavaScript is invented by ________.,Brendan Eich,James Gosling," Helsinki, Linus",W3 Group,A
+3,JavaScript was originally developed under the name _______.,Mocha,Sencha,ActionScript,Oak,A
+3,Executable single line of Script is called as _________________.,Line in JS,Statement in JavaScript,BreakPoint in JS,None of these,B
+3,,Executable Statement,Assignment Statement,"Declaration
+Statement",Conditional Statement,B
+,,,,,,
+1,What does HTML stand for?,Hyper Text Markup Language,Hyperlinks and Text Markup Language,Hoem Tool Markup Language,None of the above,A
+1,Who is making the Web Standards?,Google,Mozilla,Microsoft,The World Web Consortium,D
+1,HTML for correct HTML element for largest heading :,<h6>,<h1>,<heading>,<head>,B
+1,Correct HTML element for inserting line break,<lb>,<br>,<break>,None of the above,B
+1,HTML tag for adding backgroud colour :,<body bg = “yellow”>,<body style = “background-colour:yellow;”>,<backgroud>yellow</backgroud>,None of the above,B
+1,HTML element to define imporant text :,<i>,<important>,<b>,<strong>,D
+1,HTML element to define emphasized text :,<em>,<italic>,<i>,All of the above,A
+1,HTML element for creating a hyperlink :,<a>http://www.codinghub.org.in”</a>,<a name=”http://www.codinghub.org.in”>CodingHub</a>,<a url=”http://www.codinghub.org.in”>CodingHub</a>,<a href=”http://www.codinghub.org.in”>CodingHub</a>,D
+1,Which character used to indicate an end tag?,*,<,^,/,D
+1,How can you open a link in new tab/browser window?,<a href=”url” target=”_blank”>,<a href=”url” target=”new”>,<a href=”url” new>,All of the above,A
+1,Which of these elements are all <table> elements?,<table><tr><tt>,<table><tr><td>,<thead><body><tr>,<table><head><tfoot>,B
+1,Inline elements are normally without starting new line.,TRUE,FALSE,,,A
+1,How can you make a numbered list?,<ol>,<ul>,<list>,<dl>,A
+1,How can you make a bulleted list?,<list>,<dl>,<ol>,<ul>,D
+1,HTML code for making a checkbox :,<input type=”checkbox”>,<input type=”check”>,<check>,<checkbox>,A
+1,HTML code for making a text input field :,<input type=”text”>,<textinput type=”text”>,<input type=”textfield”>,<textfield>,A
+1,HTML code for making a dropdown list :,<list>,<select>,<input type=”dropdown”>,<input type=”list”>,B
+1,HTML code for making a text area :,<input type=”textbox”>,<input type=”textarea”>,<textarea>,None of the above,C
+1,HTML code for inserting an image :,<img href=”image.gif” alt=”MyImage”>,<img src=”image.gif” alt=”MyImage”>,<img alt=”MyImage”>image.gif</img>,<image src=”image.gif” alt=”MyImage”>,B
+1,HTML code for inserting a background image :,<body bg=”background.gif”>,<background img=”background.gif”>,<body style=”background-image:url(background.gif)”>,None of the above,C
+1,An <iframe> is used to display page within page.,There is no such thing,FALSE,TRUE,,C
+1,HTML comments starts with <!--and end with-->,TRUE,FALSE,,,A
+1,Block elements are noramally displayed without starting a new line,TRUE,FALSE,,,B
+1,Which HTML element defines the title of document?,<head>,<meta>,<title>,,C
+1,HTML attribute to specify alternate text for an image in case missing,title,src,alt,longdesc,C
+1,Which doctype is correct for HTML5,<!DOCTYPE html>,<!DOCTYPE HTML5>,,,A
+1,HTML element to specify the footer for a document or section?,<bottom>,<footer>,<section>,,B
+1,"In HTML, you can embed SVG elements directly into HTML page.",FALSE,TRUE,,,B
+1,HTML element for playing video files :,<video>,<movie>,<media>,All of the above,A
+1,HTML element for playing audio files :,<mp3>,<sound>,<audio>,None of the above,C
+1,"HTML global attribute, “contentedible” is ued to :",Specify whether the content of an element should be editable or not.,Update content from the server,"Specifies a context menu for an element, that appears when a user right clicks on the element",Returns the position of teh first occurance of content inside a string,A
+1,"In HTML, onblur and onfocus are :",HTML elements,Style attributes,Event attributes,,C
+1,Graphics defined by SVG is in which format?,CSS,HTML,XML,None of the above,C
+1,HTML <canvas> element is used to :,Manipulate data in MySQL,Draw Graphics,Display Database records,Create draggable elements,B
+1,HTML attribure used to specify input field must be filled out :,required,placeholder,formvalidate,validate,A
+1,Which input type defines a slider control?,range,search,slider,controls,A
+1,HTML element used to display a scaler measurement within range,<measure>,<meter>,<gauge>,<range>,B
+1,HTML element defining navigation links,<navigation>,<nav>,<navigate>,None of the above,B
+1,"In HTML, what does the <aside> element define?",Content aside from the page,A navigation list to be shown at the left side of page,The ASCII char-set; to send information between computers on the network,None of the above,A
+1,HTML element used to specify a header for a document or section :,<head>,<top>,<section>,<header>,D
