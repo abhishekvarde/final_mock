@@ -1,14 +1,11 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
 <head>
-
-  {% load static %}
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#48c774">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   <style>
     :root {
 
@@ -20,14 +17,6 @@
       --white: rgb(255, 250, 245);
       --border-color: rgb(219, 229, 238);
 
-    }
-
-    .logo {
-      border-radius: 50%;
-      position: relative;
-      width: 80px;
-      height: 80px;
-      padding: 7px;
     }
 
     @font-face {
@@ -50,16 +39,17 @@
 
     #grid__container .login__container {
       background-image: linear-gradient(-18deg, rgb(251, 226, 65), rgb(23, 185, 188));
+      padding-top: 7em;
       padding-left: 4em;
     }
 
     #grid__container .form__heading {
       font-weight: 300;
       font-size: 49px;
-      margin-bottom: 27px;
-      margin-top: 1.3em;
+      margin-bottom: 1.5em;
       text-shadow: -2px -1px 1px #716f6f80;
       color: rgb(255, 255, 255);
+      display: inline;
     }
 
     .txt:focus {
@@ -124,7 +114,7 @@
     #image__container {
       background-color: rgb(255, 235, 223);
       display: grid;
-      background-image: url(static/exam_portal.png);
+      background-image: url(static/images/farm.jpg);
       background-position: center;
       background-size: cover;
     }
@@ -164,10 +154,6 @@
       transition: .2s ease-in;
     }
 
-    .heading {
-      margin-right: 10px;
-    }
-
     @font-face {
       src: url("static/fonts/sans.woff2");
       font-family: sans;
@@ -203,28 +189,27 @@
       background-color: rgb(19, 214, 12) !important;
     }
 
-    .navbar {
-      padding: 0;
+    .navbar-menu.is-active {
+      text-align: center;
     }
 
     .buttons:last-child {
       justify-content: center;
     }
 
-    .has-shadow {
+    .navbar.has-shadow {
       box-shadow: 0px 1px 0 0 #7b62624d;
     }
 
-    .title {
-      font-size: xx-large;
-      text-shadow: 1px 3px #00000024;
+    .hero-title {
+      text-align: center;
+      font-size: 5em;
+      text-shadow: 2px 3px #00000075;
     }
 
-    .tagline {
-      color: white;
-      position: relative;
-      top: -9px;
-      right: -25px;
+    .hero-subtitle {
+      text-align: center;
+      font-size: 2em;
     }
 
     .gradient {
@@ -275,101 +260,110 @@
         width: 90%;
       }
     }
-
-    .navbar h3 {
-
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-
-    }
-
-    .container h3 {
-      color: #fff
-    }
   </style>
 </head>
 
 <body>
-  {# style="background-image: url('{% static 'sinhgad.png' %}');"#}
-  <nav class="navbar navbar-light gradient has-shadow">
 
-    <img src="{% static 'hub.jpg' %}" class="d-inline-block align-top logo" alt="Logo" />
-    <span class="heading">
-      <h3 class="title">Techtonic 2020</h3>
-      <span class="tagline">Powered By Coding Hub</span>
-    </span>
+  <!--using bulma nav bar-->
+  <nav class="navbar is-fixed-top is-success has-shadow" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="static/logo/logo.png" width="" height="100%">
+        <h1 class="navbar-brand-name">FarmFresh</h1>
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+        data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item">
+          Home
+        </a>
+      </div>
+    </div>
+    </div>
   </nav>
-
-  <div class="profile">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-      {{message}}
-    </div>
-    {% endfor %}
-    {% endif %}
-  </div>
-  <!--
-<div class="container py-5 ">
-    <div class="row">
-        <div class="col-md-10">
-
-            <div class="card card-outline-secondary">
-                <div class="card-header bg-secondary">
-                    <h3 class="mb-0">Enter and Entertain Yourself</h3>
-                </div>
-                <div class="card-body">
-                    <form action="/stes_test/otp/" class="form" role="form" autocomplete="off" method="POST">
-                        <input type="hidden" name="assign_questions_to_user" value="1">
-                        {% csrf_token %}
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                            <div class="col-lg-9">
-                                <input required class="form-control" type="email" placeholder="Enter Email Here" name="username">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Phone No:</label>
-                            <div class="col-lg-9">
-                                <input required class="form-control" type="tel" placeholder="Enter Mobile Number" name="phone_no">
-                            </div>
-                        </div>
-
-                            <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Enter OTP</label>
-                            <div class="col-lg-9">
-                                <input required class="form-control" type="text" placeholder="Enter OTP here" name="otp_field">
-                                <br>
-                                <br>
-                                <input type="submit" class="btn btn-primary btn-success " value="Confirm OTP">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
 
   <div id="grid__container">
     <section class="login__container">
       <h2 class="form__heading">Login</h2>
-      <form enctype="multipart/form-data" accept="utf-8" action="/stes_test/otp/" method="post" role="form">
-        <input type="hidden" name="assign_questions_to_user" value="1">
-        {% csrf_token %}
-        <input type="email" name="username" class="txt" placeholder="Email" autocomplete required>
-        <input type="tel" name="phone_no" class="txt" placeholder="Phone Number" required>
-        <input type="text" name="otp_field" class="txt" placeholder="OTP" autocomplete required>
+      <form enctype="multipart/form-data" accept="utf-8" action="{{url_for('login')}}" method="post">
+        {% for message in get_flashed_messages() %}
+        <div class="flash">{{message}}</div>
+        {%endfor%} {% if error %}
+        <p class="error">
+          <img src="static/images/icon_error.png" class="error-icon">
+          <span class="err__text">Error: {{ error }}</span>
+          {% endif %}
+        </p>
+
+        <input type="tel" name="phone_num" class="txt" placeholder="Phone Number" autocomplete required>
+        <div class="radio">
+          <label class="radio-lable">
+            <input type="radio" name="account_type" value="seller" required>
+            Seller
+          </label>
+          <label class="radio-lable">
+            <input type="radio" name="account_type" value="buyer" required>
+            Buyer
+          </label>
+        </div>
+        <input type="password" name="password" class="txt" placeholder="PASSWORD" autocomplete required>
+        <a href="/forgot_password">
+          <li>FORGOT PASSWORD?</li>
+        </a>
+
         <button class="btn" value="LOGIN">LOGIN</button>
+
+        <p>Don't have an account?</p>
+        <a href="/signup">
+          <li>&nb&nb&nbsp;CREATE ONE</li>
+        </a>
+
       </form>
     </section>
 
     <section id="image__container">
-
+      <img src="static/images/login-char.png" alt="Hello User" class="image">
     </section>
 
+
   </div>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+      // Check if there are any navbar burgers
+      if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach(el => {
+          el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+          });
+        });
+      }
+
+    });
+  </script>
 </body>
+
 </html>

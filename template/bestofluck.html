@@ -9,27 +9,210 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>otp</title>
     <style type="text/css">
+        @font-face {
+            src: url("../../static/fonts/sans.woff2");
+            font-family: sans;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans;
+            background-color: #eee;
+        }
+        .navbar {
+            padding: 0;
+        }
+
+        .buttons:last-child {
+            justify-content: center;
+        }
+
+        .has-shadow {
+            box-shadow: 0px 1px 0 0 #7b62624d;
+        }
+
+        .title {
+            font-size: xx-large;
+            text-shadow: 1px 3px #00000024;
+        }
+
+        .tagline {
+            color: white;
+            position: relative;
+            top: -9px;
+            right: -25px;
+        }
+
+        .gradient {
+            background-image: linear-gradient(193deg, rgb(91, 134, 229), rgb(54, 209, 220)) !important;
+        }
+
+        .heading {
+            margin-right: 10px;
+        }
     .navbar h3{
 
             color: #fff;
             font-family: Arial, Helvetica, sans-serif;
 
         }
+        .logo {
+            border-radius: 50%;
+            position: relative;
+            width: 80px;
+            height: 80px;
+            padding: 7px;
+        }
 
         .container h3{
 
             color: #fff
         }
+        .result{
+    width:525px;
+    height:180px;
+    border:10px solid red;
+    background:white;
+    font-size:2em;
+    text-align: center;
+}
 
-    </style>
+#score{
+    font-size:2.5em;
+    color:blue;
+}
+
+#outof{
+    color:green;
+    font-size:2em;
+}
+
+#mintime{
+    font-size:32px;
+}
+
+.final{
+    position:absolute;
+    z-index:15;
+}
+.container{
+    position:fixed;
+    display: flex;
+    width:100%;
+    height:100%;
+    background:rgba(255, 255, 255, 0.9);
+    padding-left:50px;
+    align-items: center;
+    z-index:10;
+}
+.congrats{
+    padding-bottom: 100px;
+    z-index:10;
+}
+h1{
+    background: -webkit-linear-gradient(#fdd536, #a65800);
+    background-clip: text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    transform-origin: bottom center;
+    padding-top:240px;
+    font-size:75px;
+    animation: congratulation 1s linear 1;
+    position: absolute;
+    z-index: 10;
+}
+
+.img-trophy{
+    animation:trophy 2s ease-in-out 1;
+    margin-left: 50px;
+    z-index:10;
+}
+
+.img-clock{
+    animation:trophy 2s ease-in-out 1;
+    z-index:10;
+    height:300px;
+    width: 375px;
+    padding-left: 72px;
+}
+
+.balloon {
+  display:inline-block;
+  width:120px;
+  height:145px;
+  background-size: cover;
+  border-radius:80%;
+  position:relative;
+  box-shadow:inset -10px -10px 0 rgba(0,0,0,0.07);
+  margin:20px 30px;
+  transition:transform 0.5s ease;
+  animation:balloons 4s ease-in-out infinite;
+  transform-origin:bottom center;
+  z-index:10;
+}
+
+@keyframes trophy {
+    0%,100%{ transform:translateY(-100px);}
+    100%{ transform:translateY(0px);}
+}
+@keyframes balloons {
+  0%,100%{ transform:translateY(500px) rotate(-4deg); }
+  100%{ transform:translateY(-400px) rotate(4deg); }
+}
+
+@keyframes congratulation {
+    0%,100%{ transform:translateY(100px)}
+    100%{ transform:translateY(0px)}
+}
+
+.balloon:before {
+  content:"▲";
+  font-size:20px;
+  color:hsl(215,30%,50%);
+  display:block;
+  text-align:center;
+  width:100%;
+  position:absolute;
+  bottom:-12px;
+  z-index:0;
+}
+
+.balloon:after {
+  display:block;
+  top:152px;
+  position:inherit;
+  height:250px;
+  width:1px;
+  margin:0 auto;
+  content:"";
+  background:rgba(0,0,0,0.2);
+}
+
+#one{background-image:linear-gradient(rgba(253, 4, 4, 0.8),rgba(235, 131, 12, 0.8)),url(static/logo.png);animation-duration:3.5s;}
+#one:before{color: hs1(245,40%,65%);}
+
+#two{ background-image:linear-gradient(rgba(7, 63, 248, 0.8),rgba(235, 131, 12, 0.8)),url(static/logo.png); animation-duration:5s; }
+#two:before { color:hsl(245,40%,65%);  }
+
+#three{ background-image:linear-gradient(rgba(7, 63, 248, 0.8),rgba(235, 131, 12, 0.8)),url(static/logo.png); animation-duration:4.5s; }
+#three:before { color:hsl(139,30%,50%);}
+
+#four{ background-image:linear-gradient(rgba(253, 4, 4, 0.8),rgba(235, 131, 12, 0.8)),url(sattic/logo.png); animation-duration:4s; }
+#four:before { color:hsl(59,30%,52%);}
+
+
+</style>
 </head>
 <body style="background-image: url('{% static 'sinhgad.png' %}')">
-<nav class="navbar navbar-light bg-dark">
+<nav class="navbar navbar-light gradient">
 
-    <img src="{% static 'sinhgad.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>
-{#    <img style="padding: 7px;" src="{% static 'elon.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>#}
-
-    <h3>Sinhgad Karandak 2020</h3>
+    <img src="{% static 'hub.jpg' %}" class="d-inline-block align-top logo" alt="My image"/>
+    {#<img style="padding: 7px;" src="{% static 'elon.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>#}
+    <span class="heading">
+    <h3>Techtonic 2020</h3>
+    <span class="tagline">Powered By Coding Hub</span>
+    </span>
 
 </nav>
 
@@ -43,51 +226,16 @@
             {% endif %}
     </div>
 
-<div class="container py-5 ">
-    <div class="row">
-        <div class="col-md-10">
-
-            <div class="card card-outline-secondary">
-{#                <center>#}
-                    <div class="card-header bg-secondary">
-                        <h3 style="text-align: center; padding:20px;" class="mb-0">
-                            Congratulations, test submitted successfully. <br>
-                                    Result will be conveyed soon.<br>
-                                    Thankyou!
-                        </h3>
-                    </div>
-{#                </center>#}
-<!--                <div class="card-body">-->
-<!--                    <form action="/stes_test/otp/" class="form" role="form" autocomplete="off" method="POST">-->
-<!--                        <input type="hidden" name="assign_questions_to_user" value="1">-->
-<!--                        {% csrf_token %}-->
-<!--                        <div class="form-group row">-->
-<!--                            <label class="col-lg-3 col-form-label form-control-label">Email</label>-->
-<!--                            <div class="col-lg-9">-->
-<!--                                <input class="form-control" type="email" placeholder="Enter Email Here" name="username">-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                            <div class="form-group row">-->
-<!--                            <label class="col-lg-3 col-form-label form-control-label">Enter OTP</label>-->
-<!--                            <div class="col-lg-9">-->
-<!--                                <input class="form-control" type="text" placeholder="Enter OTP here" name="otp_field">-->
-<!--                                <br>-->
-<!--                                <br>-->
-<!--                                <input type="submit" class="btn btn-primary btn-success " value="Confirm OTP">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </form>-->
-<!--                </div>-->
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    $(".result").append("<br><span id='mintime'>Time required: 10 minutes.</span>");
+
+function timeup() {
+    $(".final").append("<div class='container'></div>");
+    $(".container").append("<div class='balloon' id='one'></div><div class='balloon' id='two'></div><div class='congrats'><img src='static/images/clock.gif' class='img-clock'></div><div class='balloon' id='three'></div><div class='balloon' id='four'></div>");
+    $(".container").append("<h1 style='margin-left:315px'>Time UP! Nice Try</h1>");
+    //$(".balloon").append("<img src='static/images/logo.png' class='logo'>");
+}
+
 
   </script>
 </body>

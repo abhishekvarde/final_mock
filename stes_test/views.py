@@ -85,6 +85,7 @@ def otp(request):
         entered_email = request.POST.get('username')
         phone_no = request.POST.get('phone_no')
         entered_otp = request.POST.get('otp_field')
+        #print(entered_email,phone_no,entered_otp)
 
         if student.objects.filter(email=entered_email).exists():
             student1 = student.objects.get(email=entered_email)
