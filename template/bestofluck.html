@@ -5,12 +5,12 @@
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>otp</title>
+    <script type="text/javascript" src="../static/confetti.js"></script>
+    <title>All The Best</title>
     <style type="text/css">
         @font-face {
-            src: url("../../static/fonts/sans.woff2");
+            src: url("../static/fonts/sans.woff2");
             font-family: sans;
         }
 
@@ -51,11 +51,9 @@
         .heading {
             margin-right: 10px;
         }
-    .navbar h3{
-
-            color: #fff;
-            font-family: Arial, Helvetica, sans-serif;
-
+        .navbar h3{
+          color: #fff;
+          font-family: Arial, Helvetica, sans-serif;
         }
         .logo {
             border-radius: 50%;
@@ -64,179 +62,65 @@
             height: 80px;
             padding: 7px;
         }
+          .trophy{
+              animation:trophy 2s ease-in-out 1;
+              margin-left: 50px;
+              z-index:10;
+          }
 
-        .container h3{
+          .img-clock{
+              animation:trophy 2s ease-in-out 1;
+              z-index:10;
+              height:300px;
+              width: 375px;
+              padding-left: 72px;
+          }
+          .result{
+            display: grid;
+            justify-content: center;
 
-            color: #fff
+          }
+          #confetti{
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
         }
-        .result{
-    width:525px;
-    height:180px;
-    border:10px solid red;
-    background:white;
-    font-size:2em;
-    text-align: center;
-}
-
-#score{
-    font-size:2.5em;
-    color:blue;
-}
-
-#outof{
-    color:green;
-    font-size:2em;
-}
-
-#mintime{
-    font-size:32px;
-}
-
-.final{
-    position:absolute;
-    z-index:15;
-}
-.container{
-    position:fixed;
-    display: flex;
-    width:100%;
-    height:100%;
-    background:rgba(255, 255, 255, 0.9);
-    padding-left:50px;
-    align-items: center;
-    z-index:10;
-}
-.congrats{
-    padding-bottom: 100px;
-    z-index:10;
-}
-h1{
-    background: -webkit-linear-gradient(#fdd536, #a65800);
-    background-clip: text;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    transform-origin: bottom center;
-    padding-top:240px;
-    font-size:75px;
-    animation: congratulation 1s linear 1;
-    position: absolute;
-    z-index: 10;
-}
-
-.img-trophy{
-    animation:trophy 2s ease-in-out 1;
-    margin-left: 50px;
-    z-index:10;
-}
-
-.img-clock{
-    animation:trophy 2s ease-in-out 1;
-    z-index:10;
-    height:300px;
-    width: 375px;
-    padding-left: 72px;
-}
-
-.balloon {
-  display:inline-block;
-  width:120px;
-  height:145px;
-  background-size: cover;
-  border-radius:80%;
-  position:relative;
-  box-shadow:inset -10px -10px 0 rgba(0,0,0,0.07);
-  margin:20px 30px;
-  transition:transform 0.5s ease;
-  animation:balloons 4s ease-in-out infinite;
-  transform-origin:bottom center;
-  z-index:10;
-}
-
-@keyframes trophy {
-    0%,100%{ transform:translateY(-100px);}
-    100%{ transform:translateY(0px);}
-}
-@keyframes balloons {
-  0%,100%{ transform:translateY(500px) rotate(-4deg); }
-  100%{ transform:translateY(-400px) rotate(4deg); }
-}
-
-@keyframes congratulation {
-    0%,100%{ transform:translateY(100px)}
-    100%{ transform:translateY(0px)}
-}
-
-.balloon:before {
-  content:"▲";
-  font-size:20px;
-  color:hsl(215,30%,50%);
-  display:block;
-  text-align:center;
-  width:100%;
-  position:absolute;
-  bottom:-12px;
-  z-index:0;
-}
-
-.balloon:after {
-  display:block;
-  top:152px;
-  position:inherit;
-  height:250px;
-  width:1px;
-  margin:0 auto;
-  content:"";
-  background:rgba(0,0,0,0.2);
-}
-
-#one{background-image:linear-gradient(rgba(253, 4, 4, 0.8),rgba(235, 131, 12, 0.8)),url(static/logo.png);animation-duration:3.5s;}
-#one:before{color: hs1(245,40%,65%);}
-
-#two{ background-image:linear-gradient(rgba(7, 63, 248, 0.8),rgba(235, 131, 12, 0.8)),url(static/logo.png); animation-duration:5s; }
-#two:before { color:hsl(245,40%,65%);  }
-
-#three{ background-image:linear-gradient(rgba(7, 63, 248, 0.8),rgba(235, 131, 12, 0.8)),url(static/logo.png); animation-duration:4.5s; }
-#three:before { color:hsl(139,30%,50%);}
-
-#four{ background-image:linear-gradient(rgba(253, 4, 4, 0.8),rgba(235, 131, 12, 0.8)),url(sattic/logo.png); animation-duration:4s; }
-#four:before { color:hsl(59,30%,52%);}
-
-
+        @keyframes trophy {
+            0%,100%{ transform:translateY(-100px);}
+            100%{ transform:translateY(0px);}
+        }
+        .text{
+          text-align: center;
+          font-size: 2em;
+          background-image: linear-gradient(2px, 2px black);
+          position: relative;
+          top: -36px;
+        }
+          
 </style>
 </head>
-<body style="background-image: url('{% static 'sinhgad.png' %}')">
+<body>
 <nav class="navbar navbar-light gradient">
 
-    <img src="{% static 'hub.jpg' %}" class="d-inline-block align-top logo" alt="My image"/>
-    {#<img style="padding: 7px;" src="{% static 'elon.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>#}
+    <img src="../static/hub.jpg" class="d-inline-block align-top logo" alt="My image"/>
     <span class="heading">
     <h3>Techtonic 2020</h3>
     <span class="tagline">Powered By Coding Hub</span>
     </span>
 
 </nav>
-
-    <div class="profile">
-         {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                    {{message}}
-                    </div>
-                {% endfor %}
-            {% endif %}
-    </div>
-
-<script>
-    $(".result").append("<br><span id='mintime'>Time required: 10 minutes.</span>");
-
-function timeup() {
-    $(".final").append("<div class='container'></div>");
-    $(".container").append("<div class='balloon' id='one'></div><div class='balloon' id='two'></div><div class='congrats'><img src='static/images/clock.gif' class='img-clock'></div><div class='balloon' id='three'></div><div class='balloon' id='four'></div>");
-    $(".container").append("<h1 style='margin-left:315px'>Time UP! Nice Try</h1>");
-    //$(".balloon").append("<img src='static/images/logo.png' class='logo'>");
-}
-
-
-  </script>
+<canvas id="confetti" width="1" height="1"></canvas>
+<div class="result">
+  <div class="trophy">
+    <img src="../static/trophy.png">
+  </div>
+</div>
+<div class="text">
+  Congratulations, test submitted successfully. <br>
+  Result will be conveyed soon.<br>
+  Thankyou!
+</div>
 </body>
 </html>
