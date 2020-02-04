@@ -1,0 +1,268 @@
+1,Constant variables can be created in CPP by using,,,A. enum,B.const,C.#define,D.All of these,D
+1,Object oriented programming employs_________ programming approach.,,,A. top-down,B.procedural,C.bottom-up,D.All of these,C
+1,"In CPP, cin and cout are the predefined stream __________ .",,,A.operator,B.Functions,C.Objects,D.Objects,C
+1,_________________are used for generic programming.,,,A.inheritance,B.virtual Functions,C.Templates,D.None of these,C
+1,Can a class be declared/defined inside another class ?,,,A.Yes,B. No,C. Sometimes,D. None of these,A
+1,Classes in CPP are________ .,,,A. derived data types,B. User defined data types,C.built-in data types,D. All of these,B
+1,Which of the followings is/are not keyword/s in CPP?,,,A.virtual,B. show,C. friend,D. case,B
+1,"In CPP, it is mandatory and must to initialize const variables.",,,A. true,B. false,C. sometimes,D. none of these,A
+1,Logical expressions produce ____________ type results.,,,A. explicit,B. garbage,C. bool,D. static,C
+1,Static variable declared in a class are also called_________ .,,,A. instance variable,B. named constant,C. global variable,D. class variable,D
+1,Static variable must be declared in public section of the class.,,,A. True,B. false,C. sometimes,D. depends on compiler,B
+1,"In CPP, the size of the character array should be one larger than the number of characters in the string.",,,A. True,B. False,C. sometimes,D. depends on compiler,A
+1,"If a program uses Inline Function, then the function is expanded inline at ___________.",,,A. compile time,B. Run time,C. Both a and b,D. depends on compiler,B
+1,Which of the following is CPP style type-casting?,,,A. per = total/(float)m,B. per = total/float(m),C. per = (float)total/m,D. none of these,B
+1,"By default, members of the class are ____________ in nature.",,,A. protected,B. private,C. public,D. static,B
+1,Default value of static variable is_____,,,A. 0,B. 1,C Garbage value,D. compiler dependent,A
+1,Default values for a function are specified when ____,,,A. function is defined,B. function is declared,C. Both a and b,D. none of these,B
+1,Default return type of functions in CPP is ____ .,,,A. void,B. long,C. char,D. int,D
+1,"By default, all the files are opened in ___________mode .",,,A. Binary,B. Text,C. Can't Say,D. depends on compiler,B
+2,Is there any difference in below two statements?,,,A. Yes,B. No,C. sometimes,D. depends on compiler,B
+2,Can we create object of Abstract class?,,,A. No,B. Yes,C. sometimes,D. depends on compiler,A
+2,Is const better than #define?,,,A. Depends on version of C++ language,B. Yes,C. No,D. depends on compiler,B
+2,Exceptions are Caught at ?,,,A. Compilation Time,B. No,C. Linking Time,D. Run Time,D
+2,How many object can be created of a Class in C++?,,,A. 1,B. 5,C. There is no limit,D. 256,C
+2,What is size of void in C++?,,,A. 2 Bytes,B. 4 Bytes,C. Undefined,D. 0,D
+2,Can any function call itself?,,,A. yes,B. No,C. Yes if it is declared in class,D. Depends on declaration type,A
+2,Can a Structure contain pointer to itself?,,,A. Yes,B. No,C. Compilation Error,D. Runtime Error,A
+2,Which operator has highest precedence?,,,A. (),B. =,C. *,D. ++,A
+2,How to access and edit data in data file handling using structures,,,A. read(),B. write(),C. both A and B,D. without read(),C
+2,What is currect syntax of for loop?,,,A. for(initialization;condition; increment/decrement),B. for(increment/decrement; initialization; condition),"C. for(initialization, condition, increment/decrement",D. None of These,A
+2,Can we typecast void * into int *?,,,A. Yes,B. No,C Undefined,D. depends on compiler,A
+2,What is size of int data type in cpp?,,,A. 2 Bytes,B. 4 Bytes,C. 1 Bytes,D. depends on compiler,D
+2,What following operator is called ?:,,,A. Scope Resolution Operator,B. Conditional Operator,C ternary Operator,D. If else O/P,C
+2,Which keyword is used to write Assembly code within a C++ program?,,,A. ASM,B. asm,C. Not Possible,D. Compiler specific,B
+2,Which of the following is Right Shift operator?,,,A. <,B. <<,C. ->,D. >>,B
+2,What is the latest version of C++?,,,A. C++ 19,B. C++ 13,C. C++ 17,D. C++ 14,C
+2,Which part of memory is used for the allocation of local variables declared inside any function.,,,A. heap,B. Stack,C. Address Space,D. Depends on Compiler,B
+2,"What is the extention of the executable file produced
+after compiling C/C++ code using g++ on Linux?",,,A. .exe,B. .out,C. .lib,D. .a,B
+2,What is Singleton class?,,,A. We can create n number of object,B. We can create max 256 objects,C. We can create 1 object,D. We cant create object,C
+3,Which feature of the OOPS gives the concept of reusability?,,,A. Abstraction,B. Encapsulation,C. Inheritance,D. None of the above,C
+3,What is the full form of STL?,,,A. Standard template library,B. Standard topics library,C. System template library,D. None of the above,A
+3,What is output of the following program? :-    main() { },,,A. No Output,B. Garbage,C. Compile error,D. Runtime error,A
+3,Which is the Parent class for all exceptions?,,,A. std::bad_exception,B. std::logic_error,C. std::exception,D. std::runtime_error,C
+3,"Comma(,) is the operator which has least precdence among all operator.",,,A. Yes,B. No,C. depends on compiler,D. None of the above,A
+3,What is Self Referencial Structure?,,,A. Structure which contains pointers,B. Structure which has pointer to itself,C. Structure which contains another structure,D. None of these,B
+3,Which data structure is used by Map?,,,A. AVL Tree,B. Binary Tree,C. balance Binary tree,D. All of the above,C
+3,Can we have pure Virtual Destructor?,,,A. yes,B. No,C. depends on compiler,D. None of the above,B
+3,The constants are also called as,,,A. const,B. preprocessor,c. Literals,D. None of the above,C
+3,What are the parts of the literal constants?,,,A. Integer numerals,B. floating-point numerals,C. string and boolean values,D. All of the above,D
+3,The operator used for dereferencing or indirection is ____,,,A. *,B. &,C. ->,D. ->>,A
+3,Which one of the following is not a possible state for a pointer?,,,A. hold the address of the specific object ,B. Point one past the end of an object,C. Zero,D. point to a type,D
+3,Which of the following is illegal?,,,A.  int *ip;,"B. string s, *sp = 0;",C. int i; double* dp = &i;,D. int *pi = 0;,C
+3,Which is used to define the member of a class externally?,,,A. :,B. ::,C. #,D. None of the above,B
+3,Which other keywords are also used to declare the class other than class?,,,A. Struct ,B. union,C. object,D. Bota A and B,D
+3,What are mandatory parts in function declaration?,,,"A. return type,function name","B. return type,function name,parameters",C. both a and b,D. none of the mentioned,A
+3,Which is more effective while calling the functions?,,,A. call by value,B. call by referance,C. call by pointer,D. None of the above,B
+3,Which operator is having the highest precedence?,,,A. postfix,B. unary,C. shift,D. equality,A
+3,How many sequence of statements are present in c++?,,,A.  4,B. 3,C. 5,D. 6,C
+3,The destination statement for the goto label is identified by what label?,,,A. $,B. @,C. *,D. :,D
+1,Is Python case sensitive when dealing with identifiers?,,,A. Yes,B. No,C. machine dependent,D. None of the above,A
+1,What is the maximum possible length of an identifier?,,,A. 31 characters,B. 63 characters,C. 79 characters,D. None of the above,D
+1,Which of the following is invalid?,,,A. _a = 1,B. __a = 1,C. __str__ = 1,D. None of the above,D
+1,Which of the following is an invalid variable?,,,A. my_string_1,B. 1st_string,C. foo,D. __,B
+1,Which of the following is not a keyword?,,,A. eval,B. assert,C. nonlocal,D. pass,A
+1,All keywords in Python are in _________,,,A. lower case,B. UPPER CASE,C. Capitilized,D. none of the mentioned,D
+1,Which of the following is true for variable names in Python?,,,A. unlimited length,B.  all private members must have leading and trailing underscores,C. underscore and ampersand are the only two special characters allowed,D. none of the mentioned,A
+1,Which of the following is an invalid statement?,,,"A. abc = 1,000,000",B. a b c = 1000 2000 3000,"C. a,b,c = 1000, 2000, 3000","D.  a_b_c = 1,000,000",B
+1,Which of the following cannot be a variable?,,,A. __int__,B. in,C. it,D. on,B
+1,Which one of these is floor division?,,,A. /,B. //,C. %,D. none of the above,B
+1,"What is the answer to this expression, 22 % 3 is?",,,A. 7,B. 1 ,C. 0,D. 5,B
+1,Mathematical operations can be performed on a string.,,,A. True,B. False,C. Sometimes,D. none of the above,B
+1,Operators with the same precedence are evaluated in which manner?,,,A. Left to right,B. Right to left,C. Can't Say,D. none of the above,A
+1,"What is the output of this expression, 3*1**3?",,,A. 27,B. 9,C. 3,D. 1,C
+1,Which one of the following has the same precedence level?,,,A. Addition and Subtraction,"B. Multiplication, Division and Addition","C. Multiplication, Division, Addition and Subtraction",D.  Addition and Multiplication,A
+1,The expression Int(x) implies that the variable x is converted to integer.,,,A. True,B. False,C. Sometimes,D. none of the above,A
+1,Which one of the following has the highest precedence in the expression?,,,A. Exponentional,B. Addition,C. Multiplication,D. Parentheses,D
+1,Which of these in not a core data type?,,,A. Lists,B. Dictionary,C. Tuples,D. Class,D
+1,"Given a function that does not return any value, What value is thrown by default when executed in shell.",,,A. int,B. bool,C. void,D. None,D
+1,Which of the following will run without errors?,,,A. round(45.8),"B. round(6352.898,2,5)",C. round(),"D. round(7463.123,2,1)",A
+1,What is the return type of function id?,,,A. int ,B. float,C. bool,D. dict,A
+1,"In python we do not specify types, it is directly interpreted by the compiler, so consider the following operation to be performed.       (  >>>x = 13 ? 2  )       objective is to make sure x has a integer value, select all that apply (python 3.xx)",,,A. x = 13 // 2,B. x = int(13/2),C. x = 13%2,D. All of the above,D
+1,What error occurs when you execute the following Python code snippet?      apple = mango,,,A. Syntax Error,B. Name Error,C. Value Error,D. Type Error,B
+1,"What data type is the object below?       L = [1, 23, 'hello', 1]",,,A. lists,B. Dictionary,C. array,D. tuple,A
+1,In order to store values in terms of key and value we use what core data type.,,,A. lists,B. tuple,C. class,D. dictionary,D
+1,Which of the following results in a SyntaxError?,,,"A. ‘”Once upon a time…”, she said.’","B. “He said, ‘Yes!'”",C. ‘3\’,D.  ”’That’s okay”’,C
+1,What is the return value of trunc()?,,,A.int,B. bool,C. float,D. None,A
+1,Which of the following is not a complex number?,,,A. k = 2 + 3j,"B.  k = complex(2, 3)",C. k = 2 + 3l,D. k = 2 + 3J,C
+1,What is the type of inf?,,,A. Boolean,B. Integer ,C. Float,D. Complex,C
+2,What arithmetic operators cannot be used with strings?,,,A. +,B. *,C. -,D.  All of the above,C
+2,What will be the output of the following Python statement?    1.      >>>print('new' 'line'),,,A. Error,B. Output equivalent to print ‘new\nline’,C.  newline,D. new line,C
+2,What will be the output of the following Python code snippet if x=1?    x<<2,,,A. 8,B. 1,C. 2,D. 4,D
+2,What will be the output of the following Python expression?     bin(29),,,A. ‘0b10111’,B. ‘0b11101’,C. ‘0b11111’,D.  ‘0b11011’,B
+2,What will be the value of x in the following Python expression?   x>>2=2,,,A. 8,B. 4,C. 2,D. 1,A
+2,What will be the output of the following Python expression?        int(1011)?,,,A. 1011,B. 11,C. 13,D. 1101,A
+2,"To find the decimal value of 1111, that is 15, we can use the function:",,,"A. int(1111,10)","B. int(‘1111’,10)","C. int(1111,2)","D. int(‘1111’,2)",D
+2, What will be the output of the following Python expression if x=15 and y=12?       x & y,,,A. b1101,B. 0b1101,C. 12,D. 1101,C
+2,Which of the following expressions results in an error?,,,A. int(1011),"B.  int(‘1011’,23)","C.  int(1011,2)",D. int(‘1011’),C
+2,Which of the following represents the bitwise XOR operator?,,,A. &,B. ^,C. |,D. !,B
+2,What is the value of the following Python expression?     bin(0x8),,,A. ‘0bx1000’,B. 8,C. 1000,D. '0b1000',D
+2,What will be the output of the following Python expression?    0x35 | 0x75,,,A. 115,B. 116,C. 117,D. 118,C
+2,What will be the output of the following Python expression?       print(4.00/(2.0+2.0)),,,A. Error,B. 1.0,C. 1.00,D. 1,B
+2,What will be the value of X in the following Python expression?       X = 2+9*((3*12)-8)/10,,,A. 30.0,B.  30.8,C. 28.4,D. 27.2,D
+2,Which of the following expressions involves coercion when evaluated in Python?,,,A. 4.7 - 1.5,B. 7.9*6.3,C. 1.7%2,D. 3.4 + 4.6,C
+2,"What will be the output of the following Python expression?                  24//6%3, 24//4//2",,,"A. (1,3)","B. (0,3)","C. (1,0)","D.  (3,1)",A
+2,Which among the following list of operators has the highest precedence?,,,"A.  <<, >>",B.  **,C. |,D. %,B
+2,What will be the value of the following Python expression?                     float(4+int(2.39)%2),,,A. 5.0,B. 5,C. 4.0,D. 4,C
+2,Which of the following expressions is an example of type conversion?,,,A. 4.0 + float(3),B. 5.3 + 6.3,C. 5.0 + 3,D. 3 + 7,A
+2,Which of the following expressions results in an error?,,,A. float(‘10’),B. int(‘10’),C.  float(’10.8’),D. int(’10.8’),D
+2,What will be the value of the following Python expression?                          4+2**5//10,,,A. 3 ,B. 7 ,C. 77,D. 0,B
+2,The expression 2**2**3 is evaluates as: (2**2)**3.,,,A.  True,B.  false,C. Somettimes,D. depends on IDE,B
+2,How many keyword arguments can be passed to a function in a single function call?,,,A. 0,B. 1,C. 0 or more,D. 1 or more,C
+2,How are keyword arguments specified in the function heading?,,,A. one-star followed by a valid identifier,B. one underscore followed by a valid identifier,C. two stars followed by a valid identifier,D. two underscores followed by a valid identifier,C
+2,What will be the output of the following Python code?              t[5],,,A. IndexError,B. NameError,C. TypeError,D. ValuError,B
+2,"What will be the output of the following Python code, if the time module has already been imported?     4 + '3'",,,A. NameError,B. IndexError,C. ValueError,D. TypeError,D
+2,What will be the output of the following Python code?        int('65.43'),,,A. ImportError,B. valueError,C. TypeError,D. NameError,B
+2,Which of the following statements is true?,,,A. The standard exceptions are automatically imported into Python programs,B. All raised standard exceptions must be handled in Python,"C. When there is a deviation from the rules of a programming language, a semantic error is thrown","D. If any exception is thrown in try block, else block is executed",A
+2,Which of the following is not a standard exception in Python?,,,A. NameError,B. IOError,C. AssignmentError,D. ValuError,C
+2,An exception is ____________,,,A. an object,B. a special function,C. a standard module,D. a module,A
+3,"What is “Hello”.replace(“l”, “e”)?",,,A. Heeeo,B. Heelo,C. Heleo,D. None,A
+3,To retrieve the character at index 3 from string s=”Hello” what command do we execute ?,,,A. s[] ,B. s.getitem(3),C. s.__getitem__(3),D. s.getItem(3),C
+3,To return the length of string s what command do we execute?,,,A. s.__len__(),B. len(s),C. size(s),D. s.size(),A
+3,"If a class defines the __str__(self) method, for an object obj for the class, you can use which command to invoke the __str__ method.",,,A.  obj.__str__(),B. str(obj),C.  print obj,D. all of the mentioned,D
+3,"To check whether string s1 contains another string s2, use ________",,,A. s1.__contains__(s2),B. s2 in s1,C. s1.contains(s2),D. si.in(s2),A
+3,"Suppose i is 5 and j is 4, i + j is same as ________",,,A.  i.__add(j),B. i.__add__(j),C.  i.__Add(j),D. i.__ADD(j),B
+3,What function do you use to read a string?,,,A. input(“Enter a string”),B.  eval(input(“Enter a string”)),C.  enter(“Enter a string”),D. eval(enter(“Enter a string”)),A
+3,What is returned by math.ceil(3.4)?,,,A. 3,B. 4,C. 4.0,D. 3.0,B
+3,What is the value returned by math.floor(3.4)?,,,A. 3,B. 4,C. 4.0,D. 3.0,A
+3,Is the output of the function abs() the same as that of the function math.fabs()?,,,A. sometimes,B. always,C. never,D. none of the above,A
+3,What is the value returned by math.fact(6)?,,,A.  720,B. 6,"C. [1, 2, 3, 6] ",D. error,D
+3,What is the value of x if x = math.factorial(0)?,,,A. 1,B. 0,C. error,D. none of the above,B
+3,What will be the output of print(math.factorial(4.5))?,,,A. 24,B. 120,C. error,D. 24.0,C
+3,Which of the following data structures is returned by the functions globals() and locals()?,,,A. list,B. set,C. dictionary,D. tuple,C
+3,"On assigning a value to a variable inside a function, it automatically becomes a global variable.",,,A. True,B. false,C. Sometimes,D. None of the above,B
+3,Which is the most appropriate definition for recursion?,,,A.A function that calls itself,B. A function execution instance that calls another execution instance of the same function,C. A class method that calls another class method,D. An in-built method that is automatically called,B
+3,Only problems that are recursively defined can be solved using recursion.,,,A. True ,B. false,C. Sometimes,D. never,B
+3,Which of these is false about recursion?,,,A. 	Recursive function can be replaced by a non-recursive function,B. 	Recursive functions usually take more memory space than non-recursive function,C. Recursive functions run faster than non-recursive function,D. Recursion makes programs easier to understand,C
+3,Which of the following statements is false about recursion?,,,A. 	Every recursive function must have a base case,B. Infinite recursion can occur if the base case isn’t properly mentioned,C. A recursive function makes the code easier to understand,D. Every recursive function must have a return value,D
+3,"To open a file c:\scores.txt for reading, we use _____________",,,"A. infile = open(“c:\scores.txt”, “r”)","B. infile = open(“c:\\scores.txt”, “r”)","C. infile = open(file = “c:\scores.txt”, “r”)","D.  infile = open(file = “c:\\scores.txt”, “r”)",B
+3,"To read two characters from a file object infile, we use ____________",,,A. infile.read(2),B.  infile.read(),C. infile.readline(),D. infile.readlines(),A
+3,Which of the following is the same as math.exp(p)?,,,A. e ** p,B.  math.e ** p,C.  p ** e,D. p ** math.e,B
+3,What is returned by math.expm1(p)?,,,A.  (math.e ** p) – 1,B. math.e ** (p – 1),C. error,D. none of the mentioned,A
+3,"What does math.sqrt(X, Y) do?",,,A. calculate the Xth root of Y,B. calculate the Yth root of X,C. error,D. return a tuple with the square root of X and Y,C
+3,What is the data type of (1)?,,,A. Tuple,B. 	Integer,C. List,D. Both tuple and integer,B
+3,"If a=(1,2,3,4), a[1:-1] is _________",,,"A. 	Error, tuple slicing doesn’t exist","B. [2,3] ","C. (2,3,4)","D. (2,3)",D
+3,"What type of data is: a=[(1,1),(2,4),(3,9)]?",,,A.  Array of tuples,B. List of tuples,C. Tuples of lists,D. Invalid type,B
+3,How do you get the name of a file from a file object (fp)?,,,A.  fp.name,B. fp.file(name),C. self.__name__(fp),D. fp.__name__(),A
+3,What happens if no arguments are passed to the seek function?,,,A. file position is set to the start of file,B. file position is set to the end of file,C. file position remains unchanged,D. error,D
+1,"If the class name is X, what is the type of its “this” pointer (in a nonstatic, non-const member function)?",const X* const,X* const,const X* const,X* const,X*,X&,d
+1,Which classes allow primitive types to be accessed as objects?,Storage,Virtual,Storage,Virtual,Friend,Wrapper,b
+1,When is std::bad_alloc exception thrown?,When new operator cannot allocate memory,When alloc function fails,When new operator cannot allocate memory,When alloc function fails,"When type requested for new operation is considered bad, thsis exception is thrown",When delete operator cannot delete the allocated (corrupted) object,d
+1,Which one of the following is not a fundamental data type in C++,float,string,float,string,int,wchar_t,a
+1,"Which of the following is a valid destructor of the class name ""Country""",int ~Country(),void Country(),int ~Country(),void Country(),int ~Country(Country obj),void ~Country(),b
+1,Which of the following correctly describes C++ language?,Statically typed language,Dynamically typed language,Statically typed language,Dynamically typed language,Both Statically and Dynamically typed language,Type-less language,d
+1,Which of the following keyword supports dynamic,abstract,virtual,abstract,virtual,dynamic,typeid,a
+1,Which of the following is the most preferred way of throwing and handling exceptions?,Throw by value and catch by reference,Throw by reference and catch by reference,Throw by value and catch by reference,Throw by reference and catch by reference,Throw by value and catch by value,Throw the pointer value and provide catch for the pointer type,b
+1,Which of the following is not true about preprocessor directives,They begin with a hash symbol,They are processed by a preprocessor,They begin with a hash symbol,They are processed by a preprocessor,They form am intergral part of the code,They have to end with a semi colon,a
+1,What's wrong? while( (i < 10) && (i > 24)),The logical operator && cannot beused in a test condition,the while loop is an exit-conditioned loop,The logical operator && cannot beused in a test condition,the while loop is an exit-conditioned loop,The test condition is always false,The test condition is always true,d
+1,A continue statement causes execution to skip to,The return 0; statement,The first statement after the loop,The return 0; statement,The first statement after the loop,The statement following the continue statement,The next iteration is always true,c
+1,What's wrong? (x = 4 && y = 5) ? (a = 5) ; (b = 6);,The question mark should be an equal sign,The first semicolon should be a colon,The question mark should be an equal sign,The first semicolon should be a colon,There are too many variables in the statement,The conditional operator is only used with apstrings,d
+1,"What's wrong? for (int k = 2, k <=12, k++)",The increment should always be ++k,The variable must always be the letter i when using a for loop,The increment should always be ++k,The variable must always be the letter i when using a for loop,There should be a semicolon at the end of the statement,The commas should be semicolons,b
+1,Which of the following is not recommended in a header file?,Type definitions (typedefs),Class Definitions,Type definitions (typedefs),Class Definitions,Function Definitions,Template Definitions,d
+1,Which of the STL containers store the elements contiguously (in adjecent memory locations)?,std::vector,std::list,std::vector,std::list,std::map,std::set,c
+1,Which of the following is not a standard exception built in C++.,std::bad_creat,std::bad_alloc,std::bad_creat,std::bad_alloc,std::bad_cast,std::bad_typeid,a
+1,What does STL stand for?,Simple Template Library,Standard Template Library,Simple Template Library,Standard Template Library,Static Type Library,Single Type-based Library,b
+1,What is the difference between overloaded functions and overridden functions?,Overriding is a dynamic or run-time binding and overloading is static or Compile-time binding,Redefining a function in a friend func overriding while redefining a func in a derived class – overloading,Overriding is a dynamic or run-time binding and overloading is static or Compile-time binding,Redefining a function in a friend func overriding while redefining a func in a derived class – overloading,Overloading is a static or compile-time binding and Overriding is a dynamic or run-time binding,Redefining a function in a friend class is called function overloading while in derived is overriding,b
+1,Which one of the following is not a valid reserved keyword in C++,Explicit,Public,Explicit,Public,Implicit,Private,c
+1,Each pass through a loop is called a/an,Enumeration,Iteration,Enumeration,Iteration,Culmination,Pass through,c
+1,Which of the following is true about const member functions?,Const membes can be invoked on both cosnt as well as non const objects,const members can be invoked only on const objects and non const objects,Const membes can be invoked on both cosnt as well as non const objects,const members can be invoked only on const objects and non const objects,non const members can be invoked on const objects as well as non const objects,None of the above,b
+1,Which of the following relationship is known as inheritancerelationship?,has-a’ relationship,is-a’ relationship,has-a’ relationship,is-a’ relationship,association relationship,None of the above,a
+1,"If class A is friend of class B and if class B is friend of class C, which of the following is true?",Class C is a friend of class A,Class A is a friend of class C,Class C is a friend of class A,Class A is a friend of class C,Class A and class C do not have any friendship,None of the above,b
+1,A direct access file is:,A file in which records are arranged in a way they are inserted in a file,A file in which records are arranged in a particular order,A file in which records are arranged in a way they are inserted in a file,A file in which records are arranged in a particular order,Files which are stored on a direct access storage medium,None of the above,c
+1,Which of the following is not a component of file system,Access method,Auxiliary storage management,Access method,Auxiliary storage management,Free integrity mechanism,None of the above,c
+1,Seek time is,Time taken to receive a data,Time taken by read/write head mechanism to position itself over appropriate cylinder,Time taken to receive a data,Time taken by read/write head mechanism to position itself over appropriate cylinder,Time taken by appropriate sector to come under read/write,None of the above,d
+1,In mulit-list organization,Records that have equivalent value for given secondary index item are linked together in a list,Records are loaded in ordered sequence defined by collating sequence by content of the key,Records that have equivalent value for given secondary index item are linked together in a list,Records are loaded in ordered sequence defined by collating sequence by content of the key,Records are directly accessed by record key field,None of the above,b
+1,Which of the following is/are advantages of cellular partitioned structure:,Simultaneous read operations can be overlapped,Search time is reduced,Simultaneous read operations can be overlapped,Search time is reduced,Both A & B,None of the above,a
+1,*ptr++ is equivalenet to:,ptr++,*ptr,ptr++,*ptr,#ERROR!,None of the above,c
+1,The conditional compilation,It is taken care of by the compiler,It is setting the compiler option conditionally,It is taken care of by the compiler,It is setting the compiler option conditionally,It is compiling a program based on a condition,None of the above,d
+1,Originally ‘C’ was developed as:,System programming language,General purpose language,System programming language,General purpose language,Data procecssing language,None of the above,c
+1,An inverted file,Loacates info about data in small fields maintained apart from actual data record,A file which stores opposite records,Loacates info about data in small fields maintained apart from actual data record,A file which stores opposite records,A file which stores information about records of a system,None of the above,b
+1,Which of the following is not a file operation:,Repositioning,Truncating,Repositioning,Truncating,Appending,None of the above,a
+1,Latency time is:,Time taken by read/write head mechanism to position itself over appropriate cylinder,Time taken to transfer a data from memory,Time taken by read/write head mechanism to position itself over appropriate cylinder,Time taken to transfer a data from memory,Time taken by appropriate sector to come under read/write,None of the above,d
+1,The two types of file structure existing in VSAM file are,"Key sequenced structure, entry sequenced structure","Key sequenced structure, exit sequenced structure","Key sequenced structure, entry sequenced structure","Key sequenced structure, exit sequenced structure","Entry sequenced structure, Exit sequenced structure",None of the above,c
+1,How many copies of a class static member are shared between objects of the class?,A copy of the static member is shared by all objects of a class,A copy is created only when at least one object is created from that list,A copy of the static member is shared by all objects of a class,A copy is created only when at least one object is created from that list,A copy of the static member function is created for each instantiation of the class,No memory is allocated for the static members of a class,c
+1,Which looping process checks the test condition at the end of the loop?,for,while,for,while,Do-while,no looping process checks the test solution atthe end,a
+1,The default access level assigned to members of a class is,private,public,private,public,protected,needs to be assigned,c
+1,Which of the following correctly describes the meaning of‘namespace’ feature in C++?,Namespaces refer to the memory space allocation for names used in a program,Namespaces refer to space between the names in a program,Namespaces refer to the memory space allocation for names used in a program,Namespaces refer to space between the names in a program,Namespaces refer to the packing structure of classes in a program,Namespaces provide facilities for organizing the names in a program to avoid name clashes,a
+1,Which of the following correctly describes the meaning of ‘namespace’ feature in C++?,Namespaces refer to the memory space allocation for names used in a program,Namespaces refer to space between the names in a program,Namespaces refer to the memory space allocation for names used in a program,Namespaces refer to space between the names in a program,Namespaces refer to the packing structure of classes in a program,Namespaces provide facilities for organizing the names in a program to avoid name clashes,d
+1,Which of the following language is not supported by C++?,Exception handling,Reflection,Exception handling,Reflection,Operator overloading,Namesapces,d
+1,"class derived: public base1, public base2 { } is an example of",Polymorphic inheritance,Multilevel inheritance,Polymorphic inheritance,Multilevel inheritance,Hierarchical inheritance,Multiple inheritance,b
+1,Which of the following languages is a subset of C++ language?,C language,Java language,C language,Java language,C# language,Language,d
+1,How do we declare an ‘interface’ class?,By making all the methods pure virtual in a class,By making all the methods abstract using the keyword “abstract’ in a class,By making all the methods pure virtual in a class,By making all the methods abstract using the keyword “abstract’ in a class,By declaring the class interference with the keyword ‘interface’,It is not possible to create interface class in C#,a
+1,How do we declare an abstract class?,By providing at least one pure virtual method in a class,By declaring at least one method abstract using the keyword ‘abstract’ in a class,By providing at least one pure virtual method in a class,By declaring at least one method abstract using the keyword ‘abstract’ in a class,By declaring the class abstract by using keyword ‘abstract’,It is not possible to create abstract class in C++,a
+1,Which of the following is not an advantage of secondary memory,It is cost-effective,It has large storage capacity,It is cost-effective,It has large storage capacity,It has highest speed,It is easily portable,a
+1,What happens when a pointer is deleted twice?,It can abort the program,It can cause a failure,It can abort the program,It can cause a failure,It can cause an error,it can cause a trap,c
+1,Which of the following language feature is not an access specifier in C++?,public,private,public,private,protected,internal,d
+1,Expression C=i++ causes,Value of i assigned to C and then i incremented by 1,i to be incremented by 1 and then value of i assigned to C,Value of i assigned to C and then i incremented by 1,i to be incremented by 1 and then value of i assigned to C,value of i assigned to C,i to be incremented by 1,d
+1,The statement i++; is equivalent to,i=i+i,i=i+1,i=i+i,i=i+1,i=i-1,i--,b
+1,"In C language, a hexadecimal number is represented by writing",x,xo,x,xo,ox,h,b
+1,Which of the following library function below by default aborts the program?,terminate(),end(),terminate(),end(),abort(),exit(),d
+1,"If a member needs to have unique value for all the objects of that same class, declare the member as",Global variable outside class,Local variable inside constructor,Global variable outside class,Local variable inside constructor,Static variable inside class,Dynamic variable inside class,a
+1,"Value of ix+j, if i,j are integer type and ix long type would be",integer,float,integer,float,long integer,double precision,b
+1,Which of the following below can perform conversions between pointers to related classes?,cast_static,dynamic_cast,cast_static,dynamic_cast,static_cast,cast_dynamic,c
+1,How do we define a constructor?,X~() {},X() {}~,X~() {},X() {}~,X() ~{},~x() {},c
+1,"When class B is inherited from class A, what is the order in which the constructers of those classes are called",Class A first Class B nect,Class B first Class a next,Class A first Class B nect,Class B first Class a next,Class B’s only as it is the child class,Class A’s only as it is the parent class,a
+1,Which of the following is the most general exception handler that catches exception of any type?,catch(std::exception),catch(std::any_exception),catch(std::exception),catch(std::any_exception),Catch(...),catch(),a
+1,Which of the following is the most general exception handler that catches exception of ‘any type’?,catch(std::exception),catch(std::any_exception),catch(std::exception),catch(std::any_exception),Catch(...),catch(),c
+1,"In a group of nested loops, which loop is executed the most number of times?",The outermost loop,The innermost loop,The outermost loop,The innermost loop,all loops are executed the same number of times,cannot be determined without knowing the size of the loops,c
+1,What is the Difference between struct and class in terms of Access Modifier?,By default all struct members are private while class members are public,By default all struct members are protected while class members are private,By default all struct members are private while class members are public,By default all struct members are protected while class members are private,By default all struct members are public while class members are private,By default all struct members are public while class members are protected,b
+1,Inline functions are invoked at the time of,Run time,Compile time,Run time,Compile time,Depends on how it is invoked,Both b & c,c
+1,What defines a general set of operations that will be applied to various types of data?,Template class,Function template,Template class,Function template,Class template,Both a & c,d
+1,"Under which of the following circumstances, synchronization takes place?",When the file is closed,When the buffer is empty,When the file is closed,When the buffer is empty,"Explicitly, with manipulators",Both a & c,b
+1,Which of the following functions below can be used Allocate space for array in memory?,calloc(),malloc(),calloc(),malloc(),realloc(),Both a & b,d
+1,"Statement scanf(“%d”,80);",Assign an integer to variable,Give an error message,Assign an integer to variable,Give an error message,Print the value of i,Assign a float to variable i,a
+1,STL is based on which of the following programmingparadigms?,Structured Programming,Object Oriented Programming,Structured Programming,Object Oriented Programming,Fucntional Programming,Aspect Oriented Programming,c
+1,"If there is more than one statement in the block of a for loop, which of the following must be placed at the beginning and the ending of the loop block?",Parenteses ( ),Braces { },Parenteses ( ),Braces { },Brackets [ ],Arrows < >,c
+1,Which of the following members do get inherited but become private members in child class,public,private,public,private,protected,all of these,b
+1,Which looping process is best used when the number of iterations is known?,for,while,for,while,Do-while,all looping processes require that the iterations to be known,c
+1,In a C language ‘3’ represents,A digit,An integer,A digit,An integer,A character,A word,a
+1,Which of the following is the most common way of implementing C++?,C++ programs are directly compiled into native code by a compiler,C++ programs are first compiled to intermediate code by a compiler then executed by virtual space,C++ programs are directly compiled into native code by a compiler,C++ programs are first compiled to intermediate code by a compiler then executed by virtual space,C++ programs are interpereted by an interpreter,C++ editor directly compiles and executes the program,c
+1,Which header file should we include for using std::auto_ptr?,<memory>,<alloc>,<memory>,<alloc>,<autoptr>,<smartptr>,a
+1,Which of the following operators can be implemented as a nonmember operator?,# (pre processor directive),( ) (function call operator),# (pre processor directive),( ) (function call operator),[ ] (array access operator),#ERROR!,c
+1,What is the implicit pointer that is passed as the first argument for nonstatic member functions?,self’ pointer,std::auto_ptr pointer,self’ pointer,std::auto_ptr pointer,myself’ pointer,this’ pointer,d
+1,Which of the following operators can be overloaded?,. (dot or member access operator),& (address-of operator),. (dot or member access operator),& (address-of operator),sizeof operator,?: (conditional operator),d
+1,Which of the following operator cannot be overloaded?,NAME?,Equality operator (==),NAME?,Equality operator (==),Arrow operator (->),Scope resolution operator (::),a
+1,Which of the following operators below allow to define the member functions of a class outside the class?,::,?,::,?,:?,%,a
+1,Which of the following is not a valid conditional inclusions in preprocessor directives,#ifdef,#ifundef,#ifdef,#ifundef,#endif,#elif,a
+1,Which of the following is not a standard exception built in C++.,std::bad_creat,std::bad_alloc,std::bad_creat,std::bad_alloc,std::bad_cast,std::bad_typeid,b
+1,"If a member needs to have unique value for all the objects of that same class, declare the member as",Global variable outside class,Local variable inside constructor,Global variable outside class,Local variable inside constructor,Static variable inside class,Dynamic variable inside class,a
+1,"Under which of the following circumstances, synchronization takes place?",When file is closed,When buffer is empty,When file is closed,When buffer is empty,"Explicitly, with manipulators",Both b & c,b
+1,Which of the following functions below can be used Allocate space for array in memory?,calloc(),malloc(),calloc(),malloc(),realloc(),Both a & b,d
+1,Which of the following is not a valid conditional inclusions in preprocessor directives,#ifdef,#ifundef,#ifdef,#ifundef,#endif,#elif,a
+1,"Value of a in a = (b = 5, b + 5); is",Junk value,Syntax error,Junk value,Syntax error,5,10,b
+1,Minimum number of temporary variable needed to swap the contents of 2 variables is:,1,2,1,2,3,0,d
+1,There is nothing like a virtual constructor of a class.,FALSE,TRUE,FALSE,TRUE,,,a
+1,C++ provides facility to specify that the compiler should match function calls with the correct definition at the run time. This process is called as,Static Binding,Dynamic Binding,Static Binding,Dynamic Binding,,,b
+1,"The output of this program is :
+ Int
+ main () { cout << ""Hello World!"" return 0; }",Hello World,Syntax error,Hello World,Syntax error,0,Hello World!,b
+2,"The return value of the following code is
+ Class1& test(Class1 obj)
+ {
+ Class1 *ptr = new Class1();
+ .........
+ return ptr;
+ }",object of class 1,reference to ptr,object of class 1,reference to ptr,reference to class1,object pointed by ptr,b
+2,"The output of
+ {
+ int a = 5; int b = 10;
+ cout << (a>b?a:b);
+ }",5,10,5,10,Syntax Error,None of the above,b
+2,"The output of this program is
+ int a = 10; void main()
+ {
+ int a = 20;
+ cout << a << ::a;
+ }",Syntax Error,10 20,Syntax Error,10 20,20 10,20 20,c
+2,"Observe following program and answer
+ class Example{ public: int a,b,c; Example(){a=b=c=1;}
+ //Constructor 1
+ Example(int a){a = a; b = c = 1;}
+ //Constructor 2
+ Example(int a,int b){a = a; b = b; c = 1;}
+ //Constructor 3
+ Example(int a,int b,int c){ a = a; b = b; c = c;}
+ //Constructor 4
+ }
+ In the above example of constructor overloading, the following statement will call which constructor",Constructor 2,Constructor 4,Constructor 2,Constructor 4,Constructor 1,Type mismatch error,b
