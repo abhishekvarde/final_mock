@@ -5,24 +5,11 @@
     {% load static %}
     <meta charset="utf-8">
 
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+    <script src="{% static 'jquery-3.4.1.min.js' %}"></script>
 
-
-    <!--    <script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK"></script>-->
-    <!--    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
-    <!--    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>-->
-
-    <!--    <script type="text/x-mathjax-config">-->
-    <!--      MathJax.Hub.Config({-->
-    <!--       TeX: { equationNumbers: { autoNumber: "AMS" } }-->
-    <!--      });-->
-    <!--    </script>-->
-
-    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full"></script>
-<script>
+    <script src="{% static 'MathJax.js' %}"></script>
+    
+    <script>
 
     function end_time(){
 
@@ -65,8 +52,8 @@
 </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" user-scalable="no" maximum-scale="1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'w3.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
     <title>Exam Portal</title>
     <style type="text/css">
 
@@ -180,8 +167,8 @@
             padding: 1.5px;
             border-radius: 10px;
             float: right;
-            margin-top: 30px;
-            margin-left:0%;
+            margin-top: 35px;
+            margin-bottom: :3em;
             width: 100%;
         }
 
@@ -473,6 +460,11 @@
                     <button onclick="assign({{ question_no_next }})" type="submit" id="next" class="btn btn-primary save">Save & Next</button>
                 </a>
                 {% endif %}
+                {% if question_number == "30" %}
+                <a class="button2">
+                    <button type="submit" id="next" class="btn btn-primary save">Save</button>
+                </a>
+                {% endif %}
 
             </div>
             <button type="button" class="btn btn-primary finish_test" data-toggle="modal" data-target="#exampleModalCenter">
@@ -575,9 +567,9 @@ console.log(img.width);
 
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="{% static 'jquery-3.4.1.slim.min.js' %}" ></script>
+    <script src="{% static 'popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
 
 
 </form>

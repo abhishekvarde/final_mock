@@ -100,8 +100,11 @@ def otp(request):
                     student_details.first_name = student1.first_name
                     student_details.last_name = student1.last_name
                     student_details.save()
-
-                user = authenticate(request, username=entered_email, password=entered_otp)
+                if User.objects.filter(username=entered_email):
+                    user = User.objects.get(username=entered_email)
+                else:
+                    return redirect('/stes_test/otp/')
+                #user = authenticate(request, username=entered_email, password=entered_otp)
                 if user is not None:
                     login(request, user)
                 return redirect("/stes_test/main_test/")
@@ -110,6 +113,7 @@ def otp(request):
                 messages.warning(request, 'Invalid username or password.')
                 return render(request, 'otp.html')
         else:
+            return redirect("/")
             student_details = student(first_name="first_name", last_name="last_name", email=entered_email,
                                       phone_no=phone_no, random_no=entered_otp)
             student_details.save()
@@ -355,11 +359,16 @@ def calculate_result(request):
     marked_answers[int(previous_question_no) - 1] = marked_answer
 
     i = 0
+    mark = 1
     for p in physics_answers:
         if p == marked_answers[i]:
-            physics_marks += 1
+            physics_marks += mark
+        if i == 14:
+            mark = 2
+        if i == 24:
+            mark = 3
         i += 1
-
+    """
     for p in chemistry_answers:
         if p == marked_answers[i]:
             chemistry_marks += 1
@@ -369,7 +378,7 @@ def calculate_result(request):
         if p == marked_answers[i]:
             math_marks += 2
         i += 1
-
+    """
     marked_answers = ",".join(marked_answers)
     total_marks = physics_marks + chemistry_marks + math_marks
 
