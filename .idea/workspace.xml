@@ -97,6 +97,7 @@
       <workItem from="1580898549783" duration="85000" />
       <workItem from="1580898675668" duration="3572000" />
       <workItem from="1580905757146" duration="1515000" />
+      <workItem from="1580961037554" duration="368000" />
     </task>
     <servers />
   </component>
@@ -112,10 +113,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1580131231497" />
-    <state x="377" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1580905758291">
+    <state x="377" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1580961052375">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="377" y="241" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1580905758291" />
+    <state x="377" y="241" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1580961052375" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1580205879030" />
   </component>
 </project>

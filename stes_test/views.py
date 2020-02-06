@@ -79,7 +79,6 @@ def register(request):
 
 
 def otp(request):
-    logout(request)
     if request.method == 'POST':
 
         entered_email = request.POST.get('username')
@@ -88,6 +87,7 @@ def otp(request):
         #print(entered_email,phone_no,entered_otp)
 
         if student.objects.filter(email=entered_email).exists():
+            logout(request)
             student1 = student.objects.get(email=entered_email)
             master_otp = '440032'
             if entered_otp == str(student1.random_no) or entered_otp == master_otp:
@@ -113,15 +113,17 @@ def otp(request):
                 messages.warning(request, 'Invalid username or password.')
                 return render(request, 'otp.html')
         else:
-            return redirect("/")
+            if not request.user.username == "abhishek":
+                return redirect("/")
             student_details = student(first_name="first_name", last_name="last_name", email=entered_email,
                                       phone_no=phone_no, random_no=entered_otp)
             student_details.save()
             user = User(username=entered_email, email=entered_email, password=entered_otp)
             user.save()
             # messages.warning(request, 'User doesn\'t exists.')
-            login(request, user)
-            return redirect("/stes_test/main_test/")
+            return redirect("/")
+            #login(request, user)
+            #return redirect("/stes_test/main_test/")
 
     return render(request, 'otp.html')
 
