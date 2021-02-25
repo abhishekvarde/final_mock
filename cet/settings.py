@@ -87,28 +87,28 @@ WSGI_APPLICATION = 'cet.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': '/etc/mysql/my.cnf',
-        },
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'cet',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'POST': '3306',
 #         'OPTIONS': {
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+#             'read_default_file': '/etc/mysql/my.cnf',
 #         },
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cet_portal',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'POST': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
 
 
 # Password validation
@@ -150,8 +150,8 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-#]
-
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+# ]
