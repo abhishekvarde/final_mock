@@ -1,6 +1,6 @@
 from datetime import date
 from django.shortcuts import render, HttpResponse, redirect
-from .models import student, question_answers, results
+from .models import student, question_answers, results, physics, math, chemistry
 from django.db import connection
 from django.contrib.auth.models import User
 from .models import student
@@ -8,6 +8,7 @@ import random
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 import http.client
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -535,3 +536,290 @@ def sendOtp(phone_no, random_str):
 def scroller(request):
     if request.method == 'POST':
         return render(request, "scroller.html", {"username": request.POST.get("username")})
+
+# ---------- #
+
+def main_test(request):
+    # print(request.user.is_authenticated)
+    # print(request.user.username)
+
+    if not request.user.is_authenticated:
+        return welcome(request)
+
+    if request.method == 'GET':
+        messages.warning(request, 'Missuse of question paper')
+        return otp(request)
+
+    username = request.POST.get('username')
+
+    if question_answers.objects.filter(username=username).first():
+
+        cursor = connection.cursor()
+
+        username = request.POST.get('username')
+        bookmark = request.POST.get('bookmark2')
+        invalid = request.POST.get('invalid2')
+        previous_question_no = request.POST.get('previous_question_no')
+        next_question_no = request.POST.get('next_question_no')
+        marked_answer = request.POST.get('marked_answer')
+        backend_time = request.POST.get('time_left')
+
+        # print("username is " + username)
+        # print("username is " + backend_time)
+        #
+        # print("bookmark " + str(bookmark))
+        # print("invalid " + str(invalid))
+        # print("previous_question_no " + str(previous_question_no))
+        # print("next_question_no " + str(next_question_no))
+        # print("marked_answer " + str(marked_answer))
+
+        if marked_answer is None or marked_answer == "":
+            marked_answer = "0"
+        if bookmark is None or bookmark == "":
+            bookmark = "0"
+        if invalid is None or invalid == "":
+            invalid = "0"
+        if previous_question_no is None or previous_question_no == "":
+            previous_question_no = "1"
+        if next_question_no is None or next_question_no == "":
+            next_question_no = "1"
+        if marked_answer is None or marked_answer == "":
+            marked_answer = "0"
+        if backend_time == "" or backend_time is None:
+            cursor.execute(
+                "select time_left from stes_test_question_answers where username = \""
+                + username + "\"")
+            q = cursor.fetchall()
+            backend_time = q[0][0]
+        else:
+            # if backend_time == "0":
+            #     return calculate_result(request)
+            # print("Error time")
+            backend_time = int(backend_time)
+            cursor.execute(
+                "update stes_test_question_answers set time_left = " + str(backend_time) + " where username = \""
+                + username + "\"")
+
+        # print("I am at the end")
+
+        user = username  # request.user
+        subject_id = 0
+        if int(next_question_no) <= 50:
+            cursor.execute(
+                "select bookmark, invalid, marked_answers, physics_questions, attempted from "
+                "stes_test_question_answers where "
+                "username = \""
+                + user + "\"")
+            subject_id = 1
+        elif 51 <= int(next_question_no) <= 100:
+            cursor.execute(
+                "select bookmark, invalid, marked_answers, chemistry_questions, attempted from "
+                "stes_test_question_answers where "
+                "username = \""
+                + user + "\"")
+            subject_id = 2
+        else:
+            cursor.execute(
+                "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
+                "where "
+                "username = \""
+                + user + "\"")
+            subject_id = 3
+
+        question_number = int(next_question_no) - 50 * (subject_id - 1)
+
+        qset = cursor.fetchall()
+
+        bookmark_list = qset[0][0].split(",")
+        invalid_list = qset[0][1].split(",")
+        marked_answer_list = qset[0][2].split(",")
+        new_question_number = qset[0][3].split(",")
+        attempted = qset[0][4].split(",")
+
+        # print("New questions all ids is : " + str(len(new_question_number)))
+
+        # print("current question number is : " + str(question_number))
+
+        question_id_in_subject_table = new_question_number[question_number - 1]
+        next_question_marked_answer = marked_answer_list[int(next_question_no) - 1]
+
+        # print("question id to be featched : -" + str(question_id_in_subject_table) + "-")
+
+        if previous_question_no is not None:
+            bookmark_list[int(previous_question_no) - 1] = bookmark
+            invalid_list[int(previous_question_no) - 1] = invalid
+            marked_answer_list[int(previous_question_no) - 1] = marked_answer
+
+            if marked_answer != "0":
+                # print("Marked answer : " + marked_answer)
+                # print("Attempted changed for question : " + previous_question_no)
+                attempted[int(previous_question_no) - 1] = "1"
+            else:
+                attempted[int(previous_question_no) - 1] = "0"
+
+            bookmark_list1 = ",".join(bookmark_list)
+            invalid_list1 = ",".join(invalid_list)
+            marked_answer_list1 = ",".join(marked_answer_list)
+            attempted1 = ",".join(attempted)
+
+            cursor.execute("update stes_test_question_answers set bookmark = \"" + bookmark_list1 +
+                           "\" , invalid = \"" + invalid_list1 + "\" , marked_answers = \"" + marked_answer_list1 +
+                           "\" , attempted = \"" + attempted1 + "\" where username = \"" + user + "\"")
+
+        if int(next_question_no) <= 50:
+            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_physics where "
+                           "question_id = " + question_id_in_subject_table)
+        elif 51 <= int(next_question_no) <= 100:
+            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_chemistry where "
+                           "question_id = " + question_id_in_subject_table)
+        else:
+            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
+                           "question_id = " + question_id_in_subject_table)
+
+        new_question_data = cursor.fetchall()
+
+        # print(new_question_data)
+
+        physics = []
+        chemistry = []
+        math = []
+
+        for i in range(1, 151):
+            if i <= 50:
+                physics.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            elif 51 <= i <= 100:
+                chemistry.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            else:
+                math.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+
+        # print(physics)
+
+        question_no_prev = int(next_question_no) - 1
+        question_no_next = int(next_question_no) + 1
+
+        question_bookmark_status = bookmark_list[int(next_question_no) - 1]
+        question_invalid_status = invalid_list[int(next_question_no) - 1]
+
+        # print(new_question_data)
+
+        return render(request, 'ok.html',
+                      {"new_question_data": new_question_data, "question_number": next_question_no,
+                       "question_no_prev": question_no_prev, "question_no_next": question_no_next,
+                       "physics": physics, "chemistry": chemistry, "math": math, "bookmark": question_bookmark_status,
+                       "invalid": question_invalid_status, "username": username, "backend_time": backend_time,
+                       "next_question_marked_answer": next_question_marked_answer})
+
+    else:
+
+        print("username recived : " + username)
+
+        cursor = connection.cursor()
+        cursor.execute(
+            "update stes_test_physics set rand = rand() where question_id > 0;"
+            "update stes_test_chemistry set rand = rand() where question_id > 0;"
+            "update stes_test_math set rand = rand() where question_id > 0;")
+
+        cursor.execute(
+            "select question_id, answer answer from stes_test_physics order by rand limit 50;")
+        qset1 = cursor.fetchall()
+
+        cursor.execute(
+            "select question_id, answer from stes_test_chemistry order by rand limit 50;")
+        qset2 = cursor.fetchall()
+
+        cursor.execute(
+            "select question_id, answer from stes_test_math order by rand limit 50;")
+        qset3 = cursor.fetchall()
+
+        physicsQ = []
+        physicsA = []
+        chemistryQ = []
+        chemistryA = []
+        mathQ = []
+        mathA = []
+
+        for q in qset1:
+            physicsQ.append(str(q[0]))
+            physicsA.append(str(q[1]))
+
+        for q in qset2:
+            chemistryQ.append(str(q[0]))
+            chemistryA.append(str(q[1]))
+
+        for q in qset3:
+            mathQ.append(str(q[0]))
+            mathA.append(str(q[1]))
+
+        ins = question_answers(username=username,
+                               physics_questions=",".join(physicsQ),
+                               physics_answers=",".join(physicsA),
+                               chemistry_questions=",".join(chemistryQ),
+                               chemistry_answers=",".join(chemistryA),
+                               math_questions=",".join(mathQ),
+                               math_answers=",".join(mathA),
+                               )
+        ins.save()
+
+        cursor = connection.cursor()
+        user = username  # request.user
+        cursor.execute(
+            "select physics_questions, marked_answers from stes_test_question_answers where username = \"" + user + "\"")
+        new_set = cursor.fetchall()
+        question_id = (new_set[0][0].split(","))[0]
+        next_question_marked_answer = (new_set[0][1].split(",")[0])
+
+        cursor.execute("select question, option1, option2, option3, option4, image from stes_test_physics where "
+                       "question_id = " + question_id)
+
+        new_question_data = cursor.fetchall()
+
+        physics = []
+        chemistry = []
+        math = []
+
+        for i in range(1, 151):
+            if i <= 50:
+                physics.append((i, 0, 0))
+            elif 51 <= i <= 100:
+                chemistry.append((i, 0, 0))
+            else:
+                math.append((i, 0, 0))
+
+        question_no_prev = 0
+        question_no_next = 2
+
+        return render(request, 'ok.html', {"new_question_data": new_question_data, "question_number": 1,
+                                           "question_no_prev": question_no_prev, "question_no_next": question_no_next,
+                                           "physics": physics, "chemistry": chemistry, "math": math, "bookmark": 0,
+                                           "invalid": 0, "username": username, "backend_time": 10800000,
+                                           "next_question_marked_answer": next_question_marked_answer})
+
+# def choose_qset(request):
+#
+#     return render(request, 'qset.html')
+def check_test(request):
+
+    if request.method == "POST":
+
+        Qset = request.POST["qset"]
+
+        context_dict = {
+            "phy" : '',
+            "chem" : '',
+            "math" : ''
+        }
+
+        if Qset.lower() == "physics":
+            phy_data = physics.objects.all()
+            context_dict["phy"] = phy_data
+
+        elif Qset.lower() == "chemistry":
+            chem_data = chemistry.objects.all()
+            context_dict["chem"] = chem_data
+        else:
+            math_data = math.objects.all()
+            context_dict["math"] = math_data
+
+        return render(request, 'validate.html', context=context_dict)
+
+    return render(request, 'validate.html')

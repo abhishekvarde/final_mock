@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Validate Questions</title>
+  </head>
+  <body>
+    <h2>Validate Question Bank</h2>
+
+    <p>Choose Your Question Set</p>
+    <form method="POST" action="/stes_test/validate/">
+      {% csrf_token %}
+    <select class="" name="qset">
+      <option>--Choose Your Question Set--</option>
+      <option value="physics">physics</option>
+      <option value="chemistry">chemistry</option>
+      <option value="maths">Maths</option>
+    </select>
+
+    <button type="submit" name="Submit">Submit</button>
+    </form>
+
+    <div class="question">
+      {% if phy %}
+      
+        {% for q in phy %}
+        <ul>
+          <li>{{ q.question }}</li>
+          <p>{{ q.option1 }}</p>
+          <p>{{ q.option2 }}</p>
+          <p>{{ q.option3 }}</p>
+          <p>{{ q.option4 }}</p
+          <p>{{q.answer }}</p>
+        </ul>
+        {% endfor %}
+
+      {% elif chem %}
+        {% for q in chem %}
+        <ul>
+          <li>{{ q.question }}</li>
+          <p>{{ q.option1 }}</p>
+          <p>{{ q.option2 }}</p>
+          <p>{{ q.option3 }}</p>
+          <p>{{ q.option4 }}</p
+          <p>{{q.answer }}</p>
+        </ul>
+        {% endfor %}
+
+      {% elif math %}
+        {% for q in math %}
+        <ul>
+          <li>{{ q.question }}</li>
+          <p>{{ q.option1 }}</p>
+          <p>{{ q.option2 }}</p>
+          <p>{{ q.option3 }}</p>
+          <p>{{ q.option4 }}</p
+          <p>{{q.answer }}</p>
+        </ul>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>

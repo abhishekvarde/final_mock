@@ -32,9 +32,10 @@ SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 # SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['157.245.139.161','206.189.40.232', 'sinhgadonline.com', '127.0.0.1','www.sinhgadonline.com']
+ALLOWED_HOSTS = ['157.245.139.161', '206.189.40.232',
+                 'sinhgadonline.com', '127.0.0.1', 'www.sinhgadonline.com', '*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -90,8 +91,13 @@ WSGI_APPLICATION = 'cet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cet_new',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
         'OPTIONS': {
-            'read_default_file': '/etc/mysql/my.cnf',
+            # 'read_default_file': '/etc/mysql/my.cnf',
         },
     }
 }
@@ -150,8 +156,8 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = [
+# STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, "static"),
-#]
+# ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
