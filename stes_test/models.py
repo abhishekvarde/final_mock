@@ -15,7 +15,7 @@ class physics(models.Model):
     rand = models.FloatField(default=0)
 
     def __str__(self):
-        return self.question_id
+        return self.question
 
 
 class chemistry(models.Model):
@@ -30,7 +30,7 @@ class chemistry(models.Model):
     rand = models.FloatField(default=0)
 
     def __str__(self):
-        return self.question_id
+        return self.question
 
 
 class math(models.Model):
@@ -45,7 +45,7 @@ class math(models.Model):
     rand = models.FloatField(default=0)
 
     def __str__(self):
-        return self.question_id
+        return self.question
 
 
 class student(models.Model):
