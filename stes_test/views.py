@@ -586,31 +586,38 @@ def edit(request):
 
 def check_test(request):
 
+    Qset = ""
+
     if request.method == "POST":
-
         Qset = request.POST["qset"]
+        request.session["Qset"] = Qset
 
-        context_dict = {
-            "phy" : '',
-            "chem" : '',
-            "math" : ''
-        }
+    request.session["subject"] = request.session.get("Qset")
+    print(request.session["subject"])
+    context_dict = {
+        'page_obj': '',
+        'subject': request.session["subject"]
+    }
 
-        if Qset.lower() == "physics":
-            phy_data = physics.objects.all()
-            context_dict["phy"] = phy_data
-            request.session["subject"] = "physics"
+    if Qset.lower() == "physics" or request.session["subject"] == "physics":
+        phy_data = physics.objects.all()
+        paginator = Paginator(phy_data, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context_dict["page_obj"] = page_obj
 
-        elif Qset.lower() == "chemistry":
-            chem_data = chemistry.objects.all()
-            context_dict["chem"] = chem_data
-            request.session["subject"] = "chemistry"
+    elif Qset.lower() == "chemistry" or request.session["subject"] == "chemistry":
+        chem_data = chemistry.objects.all()
+        paginator = Paginator(chem_data, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context_dict["page_obj"] = page_obj
 
-        else:
-            math_data = math.objects.all()
-            context_dict["math"] = math_data
-            request.session["subject"] = "maths"
+    elif Qset.lower() == "maths" or request.session["subject"] == "maths":
+        math_data = math.objects.all()
+        paginator = Paginator(math_data, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context_dict["page_obj"] = page_obj
 
-        return render(request, 'validate.html', context=context_dict)
-
-    return render(request, 'validate.html')
+    return render(request, 'validate.html', context=context_dict)

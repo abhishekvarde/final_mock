@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Validate Questions</title>
 
-    <style>
-      .btn{
-        display: grid;
-        grid-auto-flow: column;
-      }
-      .btn .btn_edit, .btn_confirm{
-        background-color: white;
-        border: 2px solid yellow;
-        color: black;
-        padding: 3px;
-        width: 60px;
-        height: 30px;
-        cursor: pointer;
-      }
-      .btn_confirm{
-        border: 2px solid green;
-      }
-      .btn .btn_invalid, .btn_valid{
-        background-color: white;
-        border: 2px solid red;
-        color: black;
-        padding: 3px;
-        width: 60px;
-        height: 30px;
-        cursor: pointer;
-      }
-      .btn_valid{
-        border: 2px solid green;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>Validate Question Bank</h2>
+<head>
+  <meta charset="utf-8">
+  <title>Validate Questions</title>
 
-    <p>Choose Your Question Set</p>
-    <form method="POST" action="/stes_test/validate/">
-      {% csrf_token %}
+  <style>
+    .btn {
+      display: grid;
+      grid-auto-flow: column;
+    }
+
+    .btn .btn_edit,
+    .btn_confirm {
+      background-color: white;
+      border: 2px solid yellow;
+      color: black;
+      padding: 3px;
+      width: 60px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .btn_confirm {
+      border: 2px solid green;
+    }
+
+    .btn .btn_invalid,
+    .btn_valid {
+      background-color: white;
+      border: 2px solid red;
+      color: black;
+      padding: 3px;
+      width: 60px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .btn_valid {
+      border: 2px solid green;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Validate Question Bank</h2>
+
+  <p>Choose Your Question Set</p>
+  <form method="POST" action="/stes_test/validate/">
+    {% csrf_token %}
     <select class="" name="qset">
       <option>--Choose Your Question Set--</option>
       <option value="physics">physics</option>
@@ -49,156 +57,176 @@
     </select>
 
     <button type="submit" name="Submit">Submit</button>
-    </form>
-<section class="question_container">
-  <div class="container">
-      {% if phy %}
+  </form>
+  <section class="question_container">
+    <div class="container">
+      {% if subject == "physics" %}
 
-        {% for q in phy %}
-        <div class="question">
-          <h2>{{ q.question }}</h2>
-          <p>{{ q.option1 }}</p>
-          <p>{{ q.option2 }}</p>
-          <p>{{ q.option3 }}</p>
-          <p>{{ q.option4 }}</p
-          <p> {{q.answer }}</p>
+      {% for q in page_obj %}
+      <div class="question">
+        <h2>{{ q.question }}</h2>
+        <p>{{ q.option1 }}</p>
+        <p>{{ q.option2 }}</p>
+        <p>{{ q.option3 }}</p>
+        <p>{{ q.option4 }}</p>
+        <p> {{q.answer }}</p>
         <div class="btn">
           <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
           {% if q.is_valid %}
-          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">valid</div>
+          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">
+            valid</div>
           {% else %}
-          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False" data-task="validate">Invalid</div>
+          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
+            data-task="validate">Invalid</div>
           {% endif %}
         </div>
       </div>
-        {% endfor %}
+      {% endfor %}
 
-      {% elif chem %}
-        {% for q in chem %}
-        <div class="question">
-          <h2>{{ q.question }}</h2>
-          <p>{{ q.option1 }}</p>
-          <p>{{ q.option2 }}</p>
-          <p>{{ q.option3 }}</p>
-          <p>{{ q.option4 }}</p
-          <p> {{q.answer }}</p>
-          <div class="btn">
-            <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
-            {% if q.is_valid %}
-            <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">valid</div>
-            {% else %}
-            <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False" data-task="validate">Invalid</div>
-            {% endif %}
-          </div>
-      </div>
-        {% endfor %}
-
-      {% elif math %}
-        {% for q in math %}
-        <div class="question">
-          <h2>{{ q.question }}</h2>
-          {% if q.image %}
-            <img src="/static/{{q.image}}" loading="lazy" width="50%" height="50%">
-            {% endif %}
-          <p>{{ q.option1 }}</p>
-          <p>{{ q.option2 }}</p>
-          <p>{{ q.option3 }}</p>
-          <p>{{ q.option4 }}</p
-          <p>{{q.answer }}</p>
-          <div class="btn">
-            <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
-            {% if q.is_valid %}
-            <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">valid</div>
-            {% else %}
-            <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False" data-task="validate">Invalid</div>
-            {% endif %}
-          </div>
+      {% elif subject == "chemistry" %}
+      {% for q in page_obj %}
+      <div class="question">
+        <h2>{{ q.question }}</h2>
+        <p>{{ q.option1 }}</p>
+        <p>{{ q.option2 }}</p>
+        <p>{{ q.option3 }}</p>
+        <p>{{ q.option4 }}</p <p> {{q.answer }}</p>
+        <div class="btn">
+          <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
+          {% if q.is_valid %}
+          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">
+            valid</div>
+          {% else %}
+          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
+            data-task="validate">Invalid</div>
+          {% endif %}
         </div>
-        {% endfor %}
+      </div>
+      {% endfor %}
+
+      {% elif subject == "maths" %}
+      {% for q in page_obj %}
+      <div class="question">
+        <h2>{{ q.question }}</h2>
+        {% if q.image %}
+        <img src="/static/{{q.image}}" loading="lazy" width="50%" height="50%">
+        {% endif %}
+        <p>{{ q.option1 }}</p>
+        <p>{{ q.option2 }}</p>
+        <p>{{ q.option3 }}</p>
+        <p>{{ q.option4 }}</p <p>{{q.answer }}</p>
+        <div class="btn">
+          <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
+          {% if q.is_valid %}
+          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">
+            valid</div>
+          {% else %}
+          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
+            data-task="validate">Invalid</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
       {% endif %}
     </div>
-  </body>
-  <script>
-    edit = document.getElementsByClassName("btn_edit");
-    validation = document.getElementsByClassName("validation");
+
+    <div>
+      <span>
+          {% if page_obj.has_previous %}
+           <a href="?page={{page_obj.previous_page_number}}">Previous</a>
+          {% endif %}
+           <span>{{ page_obj.number }}</span>
+          {% if page_obj.has_next %}
+           <a href="?page={{page_obj.next_page_number}}">Next</a>
+          {% endif %}
+
+      </span>
+  </div>
+
+</body>
+<script>
+  edit = document.getElementsByClassName("btn_edit");
+  validation = document.getElementsByClassName("validation");
 
 
-    // edit button
-    Array.from(edit).forEach(function(e) {
+  // edit button
+  Array.from(edit).forEach(function (e) {
     e.addEventListener("click", () => {
-        // grab question h2 element
-        question_elm = e.parentElement.parentElement.children[0];
-        question_id = e.getAttribute("data-question-id");
-        // operation to be performed.
-        task = e.getAttribute("data-task");
+      // grab question h2 element
+      question_elm = e.parentElement.parentElement.children[0];
+      question_id = e.getAttribute("data-question-id");
+      // operation to be performed.
+      task = e.getAttribute("data-task");
 
-        if (e.innerText != "Confirm"){
-          e.className = "btn_confirm";
-          e.innerText = "Confirm";
+      if (e.innerText != "Confirm") {
+        e.className = "btn_confirm";
+        e.innerText = "Confirm";
 
-        }
-        else{
-          e.className = "btn_edit"
-          e.innerText = "Edit";
-          send(question_elm.innerText, question_id, task);
-        }
-
-        // set contenteditable attribute to h2 tag
-        if(question_elm.hasAttribute("contenteditable") == false){
-          question_elm.setAttribute("contenteditable","");
-        }
-    })});
-
-    // Invalid button
-    Array.from(validation).forEach(function(e) {
-    e.addEventListener("click", () => {
-        // grab question h2 element
-        question_elm = e.parentElement.parentElement.children[0];
-        question_id = e.getAttribute("data-question-id");
-        task = e.getAttribute("data-task");
-        is_valid = e.getAttribute("data-valid");
-
-        if(is_valid != "True"){
-            e.classList.remove("btn_invalid")
-            e.classList.add("btn_valid")
-            e.innerText = "valid";
-            is_valid = "True";
-            e.setAttribute("data-valid","True");
-            send(question_elm.innerText, question_id, task, is_valid);
-        }else{
-            e.classList.remove("btn_valid");
-            e.classList.add("btn_invalid");
-            e.innerText = "Invalid";
-            is_valid = "False";
-            e.setAttribute("data-valid","False");
-            send(question_elm.innerText, question_id, task, is_valid);
-        }
-
-        // set contenteditable attribute to h2 tag
-        if(question_elm.hasAttribute("contenteditable") == false){
-          question_elm.setAttribute("contenteditable","");
-        }
-    })});
-
-    function send(question, question_id, task, is_valid="True"){
-      let data = {
-        "task" : task,
-        "is_valid" : is_valid,
-        "question_id" : question_id,
-        "question" : question
+      } else {
+        e.className = "btn_edit"
+        e.innerText = "Edit";
+        send(question_elm.innerText, question_id, task);
       }
 
-      fetch('/stes_test/edit/', {
-        method : 'POST',
+      // set contenteditable attribute to h2 tag
+      if (question_elm.hasAttribute("contenteditable") == false) {
+        question_elm.setAttribute("contenteditable", "");
+      }
+    })
+  });
+
+  // Invalid button
+  Array.from(validation).forEach(function (e) {
+    e.addEventListener("click", () => {
+      // grab question h2 element
+      question_elm = e.parentElement.parentElement.children[0];
+      question_id = e.getAttribute("data-question-id");
+      task = e.getAttribute("data-task");
+      is_valid = e.getAttribute("data-valid");
+
+      if (is_valid != "True") {
+        e.classList.remove("btn_invalid")
+        e.classList.add("btn_valid")
+        e.innerText = "valid";
+        is_valid = "True";
+        e.setAttribute("data-valid", "True");
+        send(question_elm.innerText, question_id, task, is_valid);
+      } else {
+        e.classList.remove("btn_valid");
+        e.classList.add("btn_invalid");
+        e.innerText = "Invalid";
+        is_valid = "False";
+        e.setAttribute("data-valid", "False");
+        send(question_elm.innerText, question_id, task, is_valid);
+      }
+
+      // set contenteditable attribute to h2 tag
+      if (question_elm.hasAttribute("contenteditable") == false) {
+        question_elm.setAttribute("contenteditable", "");
+      }
+    })
+  });
+
+  function send(question, question_id, task, is_valid = "True") {
+    let data = {
+      "task": task,
+      "is_valid": is_valid,
+      "question_id": question_id,
+      "question": question
+    }
+
+    fetch('/stes_test/edit/', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(data)
+        },
+        body: JSON.stringify(data)
       })
       .then(response => response.json())
       .then(json => alert(json["status"]))
       .catch(err => console.log(err));
 
-    }
-  </script>
+  }
+</script>
+
 </html>
