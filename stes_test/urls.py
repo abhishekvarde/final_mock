@@ -11,5 +11,5 @@ urlpatterns = [
     path('calculate_result/', views.calculate_result, name='calculate_result'),
     path('scroller/', views.scroller, name='scroller'),
     path('validate/', views.check_test, name='validate'),
-    # path('choose_qset/', views.choose_qset, name='qset')
+    path('edit/', views.edit, name='edit')
 ]

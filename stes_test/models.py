@@ -13,6 +13,7 @@ class physics(models.Model):
     option4 = models.CharField(max_length=400)
     answer = models.CharField(max_length=10)
     rand = models.FloatField(default=0)
+    is_valid = models.BooleanField(default = True)
 
     def __str__(self):
         return self.question
@@ -28,6 +29,7 @@ class chemistry(models.Model):
     option4 = models.CharField(max_length=400)
     answer = models.CharField(max_length=10)
     rand = models.FloatField(default=0)
+    is_valid = models.BooleanField(default = True)
 
     def __str__(self):
         return self.question
@@ -43,6 +45,7 @@ class math(models.Model):
     option4 = models.CharField(max_length=400)
     answer = models.CharField(max_length=10)
     rand = models.FloatField(default=0)
+    is_valid = models.BooleanField(default = True)
 
     def __str__(self):
         return self.question
@@ -98,5 +101,3 @@ class results(models.Model):
 
     def __str__(self):
         return self.username
-
-

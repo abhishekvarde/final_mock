@@ -14,7 +14,6 @@ def welcome(request):
 
 
 def display_results(request):
-
     if request.user.is_authenticated and request.user.username == "super_admin":
 
         if request.method == 'POST':
@@ -83,7 +82,6 @@ def display_results(request):
 
 
 def admin_login(request):
-
     if request.method == 'POST':
 
         email = request.POST.get('email')
