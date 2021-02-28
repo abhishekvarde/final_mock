@@ -1,232 +1,534 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Validate Questions</title>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <title>Validate Questions</title>
+    <style type="text/css">
+      * {
+          box-sizing: border-box;
+          padding: 0;
+          margin: 0;
+          font-family: 'Poppins';
+      }
+      
+      a{
+        text-decoration: none;
+      }
+      .navbar h3{
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .header {
+          text-align: center;
+          margin-top: 20px;
+          width: 100%;
+          font-size: 40px;
+          font-weight: bold;
+      }
+  
+      .container {
+          display: flex;
+          height: 80vh;
+          width: 90%;
+          margin: auto;
+          margin-top: 1vh;
+      }
+  
+      textarea {
+          resize: none;
+          border: none;
+          background-color: rgb(233, 233, 233);
+          border: 1px solid rgb(0, 183, 255);
+          border-radius: 5px;
+          font-size: 16px;
+      }
+  
+      textarea:disabled {
+          background-color: white;
+          border: none;
+          color: rgb(14, 14, 14);
+      }
+  
+      .main-form {
+          background-color: white;
+          border-radius: 0.25rem;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+          color: #4a4a4a;
+          max-width: 75%;
+          overflow: scroll;
+          position: relative;
+          padding: 20px;
+          width: 100%;
+          height: 80vh;
+          margin-right: 10px;
+      }
+  
+      .question {
+          min-height: 70px;
+          max-height: 200px;
+          width: 95%;
+          margin: 10px 20px;
+          padding: 10px 0;
+      }
+      .options{
+          margin: 8px;
+          font-size: 16px;
+          display: flex;
+          flex-direction: column;
+          padding-left: 40px;
+      }
+      .option-block{
+          display: flex;
+          flex-direction: row;
+          margin:8px;
+      }
+      .option-block label{
+        margin: 0px 5px;
+      }
+      .option{
+          padding-left: 15px;
+      }
+      .block{
+          width: 100%;
+          text-align: center;
+          font-size: 18px;
+          font-weight: bold;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 30px;
+      }
+      .answer-block{
+        width:40%;
+        text-align: center;
+      }
+      .answer-block select{
+        resize: none;
+        border: none;
+        background-color: rgb(233, 233, 233);
+        border: 1px solid rgb(0, 183, 255);
+        border-radius: 5px;
+        font-size: 18px;
+        padding: 0px 5px;
+        margin-left: 5px;
+        width: 50px;
+      }
+      .answer-block select:disabled{
+        background-color: white;
+        border: none;
+        color: rgb(14, 14, 14);
+      }
+      .nav-grid {
+          display: grid;
+          grid-template-columns: auto auto auto auto;
+          margin-top: 50px;
+      }
+  
+      .nav-circles {
+          margin: 8px;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          background-color: rgb(200, 200, 200);
+      }
+  
+      .nav-circles:hover {
+          background-color: rgb(165, 165, 165);
+          cursor: pointer;
+      }
+  
+      .red {
+          background-color: rgb(255, 115, 115);
+      }
+  
+      .red:hover {
+          background-color: rgb(255, 45, 45);
+          cursor: pointer;
+      }
+  
+      .blue {
+          background-color: rgb(127, 204, 255);
+      }
+  
+      .blue:hover {
+          background-color: rgb(43, 195, 255);
+          cursor: pointer;
+      }
+  
+      .green {
+          background-color: rgb(92, 255, 146);
+      }
+  
+      .green:hover {
+          background-color: rgb(41, 255, 105);
+          cursor: pointer;
+      }
+  
+      .legend {
+          text-align: left;
+          margin-top: 75px;
+          padding: 20px;
+      }
+  
+      li {
+          font-size: 18px;
+          font-weight: bold;
+      }
+  
+      .navigation {
+          max-width: 25%;
+          height: 80vh;
+          padding: 20px;
+          text-align: center;
+          margin-left: 10px;
+          border-radius: 0.25rem;
+          background-color: white;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+          color: #4a4a4a;
+          overflow: scroll;
+          position: relative;
+      }
 
-  <style>
-    .btn {
-      display: grid;
-      grid-auto-flow: column;
-    }
+      .controls {
+          padding: 10px 20px;
+          margin-top: 10px;
+          margin-right: 10px;
+          display: flex;
+          font-size: 18px;
+          justify-content: space-between;
+      }
 
-    .btn .btn_edit,
-    .btn_confirm {
-      background-color: white;
-      border: 2px solid yellow;
-      color: black;
-      padding: 3px;
-      width: 60px;
-      height: 30px;
-      cursor: pointer;
-    }
+      .hidden {
+          display: none;
+      }
+      .btn_valid{
+          background-color: rgb(92, 255, 146);
+          color: black;
+          padding: 10px 50px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
+      }
+      .btn_valid:hover{
+        background-color: rgb(41, 255, 105);
+      }
+      .btn_invalid, #cancel{
+          background-color: rgb(243, 81, 81);
+          color: white;
+          padding: 10px 50px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
+          margin-right: 10px;
+      }
+      
+      .btn_invalid:hover,
+      #cancel:hover{
+        background-color: rgb(255, 45, 45);
+      }
 
-    .btn_confirm {
-      border: 2px solid green;
-    }
-
-    .btn .btn_invalid,
-    .btn_valid {
-      background-color: white;
-      border: 2px solid red;
-      color: black;
-      padding: 3px;
-      width: 60px;
-      height: 30px;
-      cursor: pointer;
-    }
-
-    .btn_valid {
-      border: 2px solid green;
-    }
-  </style>
+      .btn_block{
+        width:60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+      }
+      .edit{
+          background-color: rgb(43, 195, 255);
+          color: white;
+          padding: 10px 50px;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
+      }
+      .confirm {
+          background-color: rgb(77, 250, 129);
+          padding: 10px 50px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
+      }
+  
+      .btn{
+          background-color: rgb(77, 250, 129);
+          padding: 10px 50px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+          color: black;
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
+      }
+  
+      .btn:disabled {
+          background-color: rgb(102, 102, 102);
+          box-shadow: none;
+          cursor: initial;
+      }
+  
+      .btn:hover {
+          box-shadow: none;
+      }
+    </style>
 </head>
 
-<body>
-  <h2>Validate Question Bank</h2>
+<body>  
+  <!-- <nav class="navbar navbar-light bg-dark">
+    <img src="{% static 'sinhgad.png' %}" width="100" height="70" class="d-inline-block align-top" alt="My image"/>
+    <h3>Sinhgad Technical Education Society</h3>
+  </nav> -->
+    <div class="header">Validate Questions</div>
+    <form method="POST" action="/stes_test/validate/">
+      {% csrf_token %}
+      <select class="" name="qset">
+        <option>--Choose Your Question Set--</option>
+        <option value="physics">physics</option>
+        <option value="chemistry">chemistry</option>
+        <option value="maths">Maths</option>
+      </select>
 
-  <p>Choose Your Question Set</p>
-  <form method="POST" action="/stes_test/validate/">
-    {% csrf_token %}
-    <select class="" name="qset">
-      <option>--Choose Your Question Set--</option>
-      <option value="physics">physics</option>
-      <option value="chemistry">chemistry</option>
-      <option value="maths">Maths</option>
-    </select>
-
-    <button type="submit" name="Submit">Submit</button>
-  </form>
-  <section class="question_container">
-    <div class="container">
-      {% if subject == "physics" %}
-
-      {% for q in page_obj %}
-      <div class="question">
-        <h2>{{ q.question }}</h2>
-        <p>{{ q.option1 }}</p>
-        <p>{{ q.option2 }}</p>
-        <p>{{ q.option3 }}</p>
-        <p>{{ q.option4 }}</p>
-        <p> {{q.answer }}</p>
-        <div class="btn">
-          <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
-          {% if q.is_valid %}
-          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">
-            valid</div>
-          {% else %}
-          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
-            data-task="validate">Invalid</div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-
-      {% elif subject == "chemistry" %}
-      {% for q in page_obj %}
-      <div class="question">
-        <h2>{{ q.question }}</h2>
-        <p>{{ q.option1 }}</p>
-        <p>{{ q.option2 }}</p>
-        <p>{{ q.option3 }}</p>
-        <p>{{ q.option4 }}</p <p> {{q.answer }}</p>
-        <div class="btn">
-          <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
-          {% if q.is_valid %}
-          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">
-            valid</div>
-          {% else %}
-          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
-            data-task="validate">Invalid</div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-
-      {% elif subject == "maths" %}
-      {% for q in page_obj %}
-      <div class="question">
-        <h2>{{ q.question }}</h2>
-        {% if q.image %}
-        <img src="/static/{{q.image}}" loading="lazy" width="50%" height="50%">
-        {% endif %}
-        <p>{{ q.option1 }}</p>
-        <p>{{ q.option2 }}</p>
-        <p>{{ q.option3 }}</p>
-        <p>{{ q.option4 }}</p <p>{{q.answer }}</p>
-        <div class="btn">
-          <div class="btn_edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
-          {% if q.is_valid %}
-          <div class="validation btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">
-            valid</div>
-          {% else %}
-          <div class="validation btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
-            data-task="validate">Invalid</div>
-          {% endif %}
-        </div>
-      </div>
-      {% endfor %}
+      <button type="submit" name="Submit">Submit</button>
+    </form>
+    <form action="/stes_test/validate/" method="POST">
+      {% csrf_token %}
+      <input type="hidden" value="{{subject}}" name="qset">
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
       {% endif %}
-    </div>
+      <div class="container">
+        <div class="main-form">
+          <div class="question_block">
+            {% for q in page_obj %}
+              <label style="font-size: 20px; font-weight: bold; margin-left: 20px;">Question {{ q.question_id }}:</label><br>
+              <textarea id="{{q.question_id}}" class="question" for="ques" draggable="false" disabled contenteditable="false">
+                {{q.question}}
+              </textarea>
+              {% if q.image %}
+                  <div style="padding:15px; margin-left:30px;">
+                      <img src="/static/{{ q.image}}" id="images" class="d-inline-block align-top" alt="image"/>
+                  </div>
+              {% endif %}
+              <div class="options">
+                <div class="option-block">
+                  <label>A.</label>
+                  <textarea id="option1" cols="30" rows="1" class="option" disabled contenteditable="false">{{ q.option1 }}</textarea>
+                </div>
+                <div class="option-block">
+                  <label>B.</label>
+                  <textarea id="option2" cols="30" rows="1" class="option" disabled contenteditable="false">{{ q.option2 }}</textarea>
+                </div>
+                <div class="option-block">
+                  <label>C.</label>
+                  <textarea id="option3" cols="30" rows="1" class="option" disabled contenteditable="false">{{ q.option3 }}</textarea>
+                </div>
+                <div class="option-block">
+                  <label>D.</label>
+                  <textarea id="option4" cols="30" rows="1" class="option" disabled contenteditable="false">{{ q.option4 }}</textarea>
+                </div>
+              </div>
+              <div class="block">
+                <div class="answer-block">
+                  <label>Answer: </label>
+                  <select id="answer" name="answer" disabled>
+                    <option value="{{q.answer}}">{{q.answer}}</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                  </select>
+                </div>
+                <div class="btn_block">
+                  <button type="button" class="hidden" id="cancel" onclick="offedit()">Cancel</button>
+                  <div class="btn_edit edit" data-question-id="{{q.question_id}}" data-task="edit">Edit</div>
+                </div>
+              </div>
+          </div>
+          <div class="controls">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}" class="btn">Previous</a>
+            {% endif %}
+            {% if q.is_valid %}
+              <div class="btn btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">Mark as Valid</div>
+            {% else %}
+              <div class="btn btn_invalid" data-question-id="{{q.question_id}}" data-valid="False" data-task="validate">Mark as Invalid</div>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}" class="btn">Next</a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="navigation">
+          <label style="font-size: 20px; font-weight: bold;">Quick Navigation</label>
+            <div class="legend">
+              <ul>
+                  <li style="color: rgb(255, 115, 115);">Edited</li>
+                  <li style="color: rgb(127, 204, 255);">Selected</li>
+                  <li style="color: rgb(92, 255, 146);">Correct</li>
+              </ul>
+            </div>
+            <div class="nav-grid">
+                {% for q in page_obj %}
+                  <a class="nav-circles">
+                      {% if q.1 == "1" %}
+                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-warning btn-circle btn-sm">{{ q.0 }}</button>
+                      {% elif q.2 == "1" %}
+                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-danger btn-circle btn-sm">{{ q.0 }}</button>
+                      {% elif q.3 == "1" %}
+                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-success btn-circle btn-sm">{{ q.0 }}</button>
+                      {% else %}
+                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-secondary btn-circle btn-sm">{{ q.0 }}</button>
+                      {% endif %}
+                  </a>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+    </form>
+    
+  <script>
+    edit = document.getElementsByClassName("btn_edit");
+    validation = document.getElementsByClassName("validation");
 
-    <div>
-      <span>
-          {% if page_obj.has_previous %}
-           <a href="?page={{page_obj.previous_page_number}}">Previous</a>
-          {% endif %}
-           <span>{{ page_obj.number }}</span>
-          {% if page_obj.has_next %}
-           <a href="?page={{page_obj.next_page_number}}">Next</a>
-          {% endif %}
-
-      </span>
-  </div>
-
-</body>
-<script>
-  edit = document.getElementsByClassName("btn_edit");
-  validation = document.getElementsByClassName("validation");
-
-
-  // edit button
-  Array.from(edit).forEach(function (e) {
-    e.addEventListener("click", () => {
-      // grab question h2 element
-      question_elm = e.parentElement.parentElement.children[0];
-      question_id = e.getAttribute("data-question-id");
-      // operation to be performed.
-      task = e.getAttribute("data-task");
-
-      if (e.innerText != "Confirm") {
-        e.className = "btn_confirm";
-        e.innerText = "Confirm";
-
-      } else {
-        e.className = "btn_edit"
-        e.innerText = "Edit";
-        send(question_elm.innerText, question_id, task);
+    function offedit(){
+      var x = document.querySelectorAll(".option");
+      for (let i = 0; i < 4; i++) {
+          x[i].disabled = true;
+          x[i].contentEditable = false;
       }
-
-      // set contenteditable attribute to h2 tag
-      if (question_elm.hasAttribute("contenteditable") == false) {
-        question_elm.setAttribute("contenteditable", "");
+      document.getElementsByClassName("question")[0].disabled = true;
+      document.getElementsByClassName("question")[0].contentEditable = false;
+      document.getElementById("cancel").classList.add("hidden");
+      if(document.getElementsByClassName("btn_confirm")!=undefined){
+        var a = document.getElementsByClassName("btn_confirm")[0];
+        a.innerText = "Edit";
+        a.className = "btn_edit edit";
       }
-    })
-  });
-
-  // Invalid button
-  Array.from(validation).forEach(function (e) {
-    e.addEventListener("click", () => {
-      // grab question h2 element
-      question_elm = e.parentElement.parentElement.children[0];
-      question_id = e.getAttribute("data-question-id");
-      task = e.getAttribute("data-task");
-      is_valid = e.getAttribute("data-valid");
-
-      if (is_valid != "True") {
-        e.classList.remove("btn_invalid")
-        e.classList.add("btn_valid")
-        e.innerText = "valid";
-        is_valid = "True";
-        e.setAttribute("data-valid", "True");
-        send(question_elm.innerText, question_id, task, is_valid);
-      } else {
-        e.classList.remove("btn_valid");
-        e.classList.add("btn_invalid");
-        e.innerText = "Invalid";
-        is_valid = "False";
-        e.setAttribute("data-valid", "False");
-        send(question_elm.innerText, question_id, task, is_valid);
-      }
-
-      // set contenteditable attribute to h2 tag
-      if (question_elm.hasAttribute("contenteditable") == false) {
-        question_elm.setAttribute("contenteditable", "");
-      }
-    })
-  });
-
-  function send(question, question_id, task, is_valid = "True") {
-    let data = {
-      "task": task,
-      "is_valid": is_valid,
-      "question_id": question_id,
-      "question": question
+      document.getElementById('answer').disabled = true;
+      document.querySelector(".btn").disabled = false;
     }
 
-    fetch('/stes_test/edit/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(data)
+    // edit button
+    Array.from(edit).forEach(function (e) {
+      e.addEventListener("click", () => {
+        // grab question h2 element
+        question_elm = document.getElementsByClassName("question")[0];
+        question_id = e.getAttribute("data-question-id");
+        // operation to be performed.
+        task = e.getAttribute("data-task");
+        console.log(e);
+        if (e.innerText != "Confirm") {
+          e.className = "btn_confirm confirm";
+          e.innerText = "Confirm";
+          var x = document.querySelectorAll(".option");
+          for (let i = 0; i < 4; i++) {
+              x[i].disabled = false;
+              x[i].contentEditable = true;
+          }
+          document.getElementsByClassName("question")[0].disabled = false;
+          document.getElementsByClassName("question")[0].contentEditable = true;
+          document.getElementById("cancel").classList.remove("hidden");
+          document.getElementById("answer").disabled = false;
+          document.querySelector(".btn").disabled = true;
+        }else {
+          e.className = "btn_edit edit"
+          e.innerText = "Edit";
+          var x = document.querySelectorAll(".option");
+          for (let i = 0; i < 4; i++) {
+              x[i].disabled = true;
+              x[i].contentEditable = false;
+          }
+          document.getElementsByClassName("question")[0].disabled = true;
+          document.getElementsByClassName("question")[0].contentEditable = false;
+          document.getElementById("cancel").classList.add("hidden");
+          document.getElementById('answer').disabled = true;
+          document.querySelector(".btn").disabled = false;
+          send(question_elm.value, question_id, task);
+        }
       })
-      .then(response => response.json())
-      .then(json => alert(json["status"]))
-      .catch(err => console.log(err));
+    });
 
-  }
-</script>
+    // Invalid button
+    Array.from(validation).forEach(function (e) {
+      e.addEventListener("click", () => {
+        // grab question h2 element
+        question_elm = e.parentElement.parentElement.children[0];
+        question_id = e.getAttribute("data-question-id");
+        task = e.getAttribute("data-task");
+        is_valid = e.getAttribute("data-valid");
+
+        if (is_valid != "True") {
+          e.classList.remove("btn_invalid")
+          e.classList.add("btn_valid")
+          e.innerText = "valid";
+          is_valid = "True";
+          e.setAttribute("data-valid", "True");
+          send(question_elm.innerText, question_id, task, is_valid);
+        } else {
+          e.classList.remove("btn_valid");
+          e.classList.add("btn_invalid");
+          e.innerText = "Invalid";
+          is_valid = "False";
+          e.setAttribute("data-valid", "False");
+          send(question_elm.innerText, question_id, task, is_valid);
+        }
+
+        // set contenteditable attribute to h2 tag
+        if (question_elm.hasAttribute("contenteditable") == false) {
+          question_elm.setAttribute("contenteditable", "");
+        }
+      })
+    });
+
+    function send(question, question_id, task, is_valid = "True") {
+      let data = {
+        "task": task,
+        "is_valid": is_valid,
+        "question_id": question_id,
+        "question": question
+      }
+
+      fetch('/stes_test/edit/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(json => alert(json["status"]))
+        .catch(err => console.log(err));
+
+    }
+  </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+</body>
 
 </html>

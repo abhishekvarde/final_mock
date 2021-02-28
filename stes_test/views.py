@@ -549,8 +549,8 @@ def edit(request):
     if request.method == "POST":
 
         data = json.loads(request.body)
+        # print(data)
         subject = request.session.get("subject")
-
         question_id = data["question_id"]
         question = data["question"]
         task = data["task"]
@@ -593,7 +593,7 @@ def check_test(request):
         request.session["Qset"] = Qset
 
     request.session["subject"] = request.session.get("Qset")
-    print(request.session["subject"])
+    
     context_dict = {
         'page_obj': '',
         'subject': request.session["subject"]
@@ -601,21 +601,21 @@ def check_test(request):
 
     if Qset.lower() == "physics" or request.session["subject"] == "physics":
         phy_data = physics.objects.all()
-        paginator = Paginator(phy_data, 3)
+        paginator = Paginator(phy_data, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context_dict["page_obj"] = page_obj
 
     elif Qset.lower() == "chemistry" or request.session["subject"] == "chemistry":
         chem_data = chemistry.objects.all()
-        paginator = Paginator(chem_data, 3)
+        paginator = Paginator(chem_data, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context_dict["page_obj"] = page_obj
 
     elif Qset.lower() == "maths" or request.session["subject"] == "maths":
         math_data = math.objects.all()
-        paginator = Paginator(math_data, 3)
+        paginator = Paginator(math_data, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         context_dict["page_obj"] = page_obj
