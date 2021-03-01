@@ -601,23 +601,71 @@ def check_test(request):
 
     if Qset.lower() == "physics" or request.session["subject"] == "physics":
         phy_data = physics.objects.all()
-        paginator = Paginator(phy_data, 1)
+        paginator = Paginator(phy_data, 20)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        if request.POST.get('q_no'):
+            question_number = int(request.POST.get('q_no'))
+        else:
+            question_number = 1
+        question  = physics.objects.filter(question_id=question_number)
+        context_dict['next_page'] = question_number+1
+        context_dict['previous_page'] = question_number-1
+        if context_dict['previous_page']==0:
+            context_dict['has_previous'] = False
+        else:
+            context_dict['has_previous'] = True
+        if context_dict['next_page']==len(phy_data):
+            context_dict['has_next'] = False
+        else:
+            context_dict['has_next'] = True
+        context_dict['question'] = question
         context_dict["page_obj"] = page_obj
+
 
     elif Qset.lower() == "chemistry" or request.session["subject"] == "chemistry":
         chem_data = chemistry.objects.all()
-        paginator = Paginator(chem_data, 1)
+        paginator = Paginator(chem_data, 20)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        if request.POST.get('q_no'):
+            question_number = int(request.POST.get('q_no'))
+        else:
+            question_number = 1
+        question  = chemistry.objects.filter(question_id=question_number)
+        context_dict['next_page'] = question_number+1
+        context_dict['previous_page'] = question_number-1
+        if context_dict['previous_page']==0:
+            context_dict['has_previous'] = False
+        else:
+            context_dict['has_previous'] = True
+        if context_dict['next_page']==len(phy_data):
+            context_dict['has_next'] = False
+        else:
+            context_dict['has_next'] = True
+        context_dict['question'] = question
         context_dict["page_obj"] = page_obj
 
     elif Qset.lower() == "maths" or request.session["subject"] == "maths":
         math_data = math.objects.all()
-        paginator = Paginator(math_data, 1)
+        paginator = Paginator(math_data, 20)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        if request.POST.get('q_no'):
+            question_number = int(request.POST.get('q_no'))
+        else:
+            question_number = 1
+        question  = math.objects.filter(question_id=question_number)
+        context_dict['next_page'] = question_number+1
+        context_dict['previous_page'] = question_number-1
+        if context_dict['previous_page']==0:
+            context_dict['has_previous'] = False
+        else:
+            context_dict['has_previous'] = True
+        if context_dict['next_page']==len(phy_data):
+            context_dict['has_next'] = False
+        else:
+            context_dict['has_next'] = True
+        context_dict['question'] = question
         context_dict["page_obj"] = page_obj
-
     return render(request, 'validate.html', context=context_dict)

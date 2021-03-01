@@ -5,7 +5,7 @@
   {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.number">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
       .main-form {
           background-color: white;
           border-radius: 0.25rem;
-          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.number2);
           color: #4a4a4a;
           max-width: 75%;
           overflow: scroll;
@@ -173,7 +173,7 @@
   
       .legend {
           text-align: left;
-          margin-top: 75px;
+          margin-top: 20px;
           padding: 20px;
       }
   
@@ -190,7 +190,7 @@
           margin-left: 10px;
           border-radius: 0.25rem;
           background-color: white;
-          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+          box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.number2);
           color: #4a4a4a;
           overflow: scroll;
           position: relative;
@@ -263,7 +263,7 @@
           box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
       }
   
-      .btn{
+      .btn1{
           background-color: rgb(77, 250, 129);
           padding: 10px 50px;
           border: none;
@@ -274,13 +274,13 @@
           box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
       }
   
-      .btn:disabled {
+      .btn1:disabled {
           background-color: rgb(102, 102, 102);
           box-shadow: none;
           cursor: initial;
       }
   
-      .btn:hover {
+      .btn1:hover {
           box-shadow: none;
       }
     </style>
@@ -316,7 +316,8 @@
       <div class="container">
         <div class="main-form">
           <div class="question_block">
-            {% for q in page_obj %}
+              <input type="hidden" id="next_question_no" name="q_no" value="">
+            {% for q in question %}
               <label style="font-size: 20px; font-weight: bold; margin-left: 20px;">Question {{ q.question_id }}:</label><br>
               <textarea id="{{q.question_id}}" class="question" for="ques" draggable="false" disabled contenteditable="false">
                 {{q.question}}
@@ -362,43 +363,33 @@
               </div>
           </div>
           <div class="controls">
-            {% if page_obj.has_previous %}
-            <a href="?page={{page_obj.previous_page_number}}" class="btn">Previous</a>
+            {% if has_previous %}
+              <button class="btn1" type="submit" onclick="assign({{previous_page}})">Previous</button>
             {% endif %}
             {% if q.is_valid %}
               <div class="btn btn_valid" data-question-id="{{q.question_id}}" data-valid="True" data-task="validate">Mark as Valid</div>
             {% else %}
               <div class="btn btn_invalid" data-question-id="{{q.question_id}}" data-valid="False" data-task="validate">Mark as Invalid</div>
             {% endif %}
-            {% if page_obj.has_next %}
-            <a href="?page={{page_obj.next_page_number}}" class="btn">Next</a>
+            {% if has_next %}
+              <button class="btn1" type="submit" onclick="assign({{next_page}})">Next</button>
             {% endif %}
           </div>
         {% endfor %}
       </div>
       <div class="navigation">
           <label style="font-size: 20px; font-weight: bold;">Quick Navigation</label>
+            <div class="nav-grid">
+                {% for q in page_obj %}
+                  <button class="nav-circles" type="submit" onclick="assign({{q.question_id}})">{{q.question_id}}</button>
+                {% endfor %}
+            </div>
             <div class="legend">
               <ul>
                   <li style="color: rgb(255, 115, 115);">Edited</li>
                   <li style="color: rgb(127, 204, 255);">Selected</li>
                   <li style="color: rgb(92, 255, 146);">Correct</li>
               </ul>
-            </div>
-            <div class="nav-grid">
-                {% for q in page_obj %}
-                  <a class="nav-circles">
-                      {% if q.1 == "1" %}
-                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-warning btn-circle btn-sm">{{ q.0 }}</button>
-                      {% elif q.2 == "1" %}
-                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-danger btn-circle btn-sm">{{ q.0 }}</button>
-                      {% elif q.3 == "1" %}
-                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-success btn-circle btn-sm">{{ q.0 }}</button>
-                      {% else %}
-                      <button onclick="assign({{ q.0 }})" type="submit" id="q_no{{ q.0 }}" class="btn btn-secondary btn-circle btn-sm">{{ q.0 }}</button>
-                      {% endif %}
-                  </a>
-                {% endfor %}
             </div>
         </div>
       </div>
@@ -407,6 +398,10 @@
   <script>
     edit = document.getElementsByClassName("btn_edit");
     validation = document.getElementsByClassName("validation");
+
+    function assign(q_no){
+      document.getElementById("next_question_no").value =  q_no;
+    }
 
     function offedit(){
       var x = document.querySelectorAll(".option");
@@ -423,7 +418,7 @@
         a.className = "btn_edit edit";
       }
       document.getElementById('answer').disabled = true;
-      document.querySelector(".btn").disabled = false;
+      document.querySelector(".btn1").disabled = false;
     }
 
     // edit button
@@ -447,7 +442,7 @@
           document.getElementsByClassName("question")[0].contentEditable = true;
           document.getElementById("cancel").classList.remove("hidden");
           document.getElementById("answer").disabled = false;
-          document.querySelector(".btn").disabled = true;
+          document.querySelector(".btn1").disabled = true;
         }else {
           e.className = "btn_edit edit"
           e.innerText = "Edit";
@@ -460,7 +455,7 @@
           document.getElementsByClassName("question")[0].contentEditable = false;
           document.getElementById("cancel").classList.add("hidden");
           document.getElementById('answer').disabled = true;
-          document.querySelector(".btn").disabled = false;
+          document.querySelector(".btn1").disabled = false;
           send(question_elm.value, question_id, task);
         }
       })
@@ -523,7 +518,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.number/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
