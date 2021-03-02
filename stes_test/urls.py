@@ -10,6 +10,7 @@ urlpatterns = [
     path('main_test/', views.main_test, name='main_test'),
     path('calculate_result/', views.calculate_result, name='calculate_result'),
     path('scroller/', views.scroller, name='scroller'),
-    path('validate/', views.check_test, name='validate'),
+    path('select_qset/', views.select_qset, name="select_qset"),
+    path('validate/', views.check_qset, name='validate'),
     path('edit/', views.edit, name='edit')
 ]

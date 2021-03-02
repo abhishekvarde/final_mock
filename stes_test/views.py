@@ -551,8 +551,16 @@ def edit(request):
         data = json.loads(request.body)
         # print(data)
         subject = request.session.get("subject")
+        if request.session.get("edited_questions")==None:
+            request.session["edited_questions"] = []
+        edited_questions = request.session["edited_questions"]
         question_id = data["question_id"]
         question = data["question"]
+        option1 = data["option1"]
+        option2 = data["option2"]
+        option3 = data["option3"]
+        option4 = data["option4"]
+        answer = data["answer"]
         task = data["task"]
         is_valid = bool(distutils.util.strtobool(data["is_valid"]))
         
@@ -560,14 +568,41 @@ def edit(request):
             # If task to be performend is edit
             try:
                 if(subject.lower() == "physics"):
-                     physics.objects.filter(question_id=question_id).update(question=question)
+                    physics.objects.filter(question_id=question_id).update(
+                        question=question,
+                        option1=option1,
+                        option2=option2,
+                        option3=option3,
+                        option4=option4,
+                        answer=answer,
+                        is_valid=is_valid
+                    )
                 elif(subject.lower() == "chemistry"):
-                    chemistry.objects.filter(question_id=question_id).update(question=question)
+                    chemistry.objects.filter(question_id=question_id).update(
+                        question=question,
+                        option1=option1,
+                        option2=option2,
+                        option3=option3,
+                        option4=option4,
+                        answer=answer,
+                        is_valid=is_valid
+                    )
                 elif(subject.lower() == "maths"):
-                    math.objects.filter(question_id=question_id).update(question=question)
+                    math.objects.filter(question_id=question_id).update(
+                        question=question,
+                        option1=option1,
+                        option2=option2,
+                        option3=option3,
+                        option4=option4,
+                        answer=answer,
+                        is_valid=is_valid
+                    )
                 status = "Edited"
+                if question_id not in edited_questions:
+                    edited_questions.append(int(question_id))
+                request.session["edited_questions"] = edited_questions
             except DataError as e:
-                print("Error occured while updating {}".format(e))
+                # print("Error occured while updating {}".format(e))
                 status = "Error"
         elif task == "validate":
             try:
@@ -579,35 +614,46 @@ def edit(request):
                     math.objects.filter(question_id=question_id).update(is_valid=is_valid)
                 status = "Marked Valid" if is_valid else "Marked Invalid"
             except DataError as e:
-                print("Error occured while updating {}".format(e))
+                # print("Error occured while updating {}".format(e))
                 status = "Error"
 
     return JsonResponse({"status" : status})
 
-def check_test(request):
-
+def select_qset(request):
     Qset = ""
-
     if request.method == "POST":
         Qset = request.POST["qset"]
+        if Qset == "":
+            messages.warning(request, 'Please Select Qset subject')
+            return render(request, template_name="select_qset.html")
         request.session["Qset"] = Qset
+        return redirect('/stes_test/validate/')
+    else:
+        return render(request, template_name="select_qset.html")
 
+def check_qset(request):
+    Qset = request.session.get("Qset")
+    if Qset is None:
+        return redirect('/stes_test/select_qset/')
     request.session["subject"] = request.session.get("Qset")
-    
+    if request.session.get("edited_questions")==None:
+        request.session["edited_questions"] = []
+
     context_dict = {
         'page_obj': '',
-        'subject': request.session["subject"]
+        'subject': request.session["subject"],
+        'edited_questions': request.session["edited_questions"]
     }
 
     if Qset.lower() == "physics" or request.session["subject"] == "physics":
         phy_data = physics.objects.all()
-        paginator = Paginator(phy_data, 20)
-        page_number = request.GET.get('page')
+        paginator = Paginator(phy_data, 30)
+        page_number = request.POST.get('page')
         page_obj = paginator.get_page(page_number)
         if request.POST.get('q_no'):
             question_number = int(request.POST.get('q_no'))
         else:
-            question_number = 1
+            question_number = page_obj.start_index()
         question  = physics.objects.filter(question_id=question_number)
         context_dict['next_page'] = question_number+1
         context_dict['previous_page'] = question_number-1
@@ -621,17 +667,21 @@ def check_test(request):
             context_dict['has_next'] = True
         context_dict['question'] = question
         context_dict["page_obj"] = page_obj
+        pages = []
+        for page in paginator:
+            pages.append([page.number, page.start_index(), page.end_index()])
+        context_dict["pages"] = pages
 
 
     elif Qset.lower() == "chemistry" or request.session["subject"] == "chemistry":
         chem_data = chemistry.objects.all()
-        paginator = Paginator(chem_data, 20)
-        page_number = request.GET.get('page')
+        paginator = Paginator(chem_data, 30)
+        page_number = request.POST.get('page')
         page_obj = paginator.get_page(page_number)
         if request.POST.get('q_no'):
             question_number = int(request.POST.get('q_no'))
         else:
-            question_number = 1
+            question_number = page_obj.start_index()
         question  = chemistry.objects.filter(question_id=question_number)
         context_dict['next_page'] = question_number+1
         context_dict['previous_page'] = question_number-1
@@ -639,22 +689,26 @@ def check_test(request):
             context_dict['has_previous'] = False
         else:
             context_dict['has_previous'] = True
-        if context_dict['next_page']==len(phy_data):
+        if context_dict['next_page']==len(chem_data):
             context_dict['has_next'] = False
         else:
             context_dict['has_next'] = True
         context_dict['question'] = question
         context_dict["page_obj"] = page_obj
+        pages = []
+        for page in paginator:
+            pages.append([page.number, page.start_index(), page.end_index()])
+        context_dict["pages"] = pages
 
     elif Qset.lower() == "maths" or request.session["subject"] == "maths":
         math_data = math.objects.all()
-        paginator = Paginator(math_data, 20)
-        page_number = request.GET.get('page')
+        paginator = Paginator(math_data, 30)
+        page_number = request.POST.get('page')
         page_obj = paginator.get_page(page_number)
         if request.POST.get('q_no'):
             question_number = int(request.POST.get('q_no'))
         else:
-            question_number = 1
+            question_number = page_obj.start_index()
         question  = math.objects.filter(question_id=question_number)
         context_dict['next_page'] = question_number+1
         context_dict['previous_page'] = question_number-1
@@ -662,10 +716,15 @@ def check_test(request):
             context_dict['has_previous'] = False
         else:
             context_dict['has_previous'] = True
-        if context_dict['next_page']==len(phy_data):
+        if context_dict['next_page']==len(math_data):
             context_dict['has_next'] = False
         else:
             context_dict['has_next'] = True
         context_dict['question'] = question
         context_dict["page_obj"] = page_obj
+        pages = []
+        for page in paginator:
+            pages.append([page.number, page.start_index(), page.end_index()])
+        context_dict["pages"] = pages
+    # print(context_dict)
     return render(request, 'validate.html', context=context_dict)
