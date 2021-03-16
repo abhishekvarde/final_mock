@@ -436,6 +436,9 @@ def calculate_result(request):
 
     username = request.user.username
 
+    physics_attempted = 0
+    chemistry_attempted = 0
+    math_attempted = 0
     # print("My ustad is : " + username)
 
     cursor = connection.cursor()
@@ -511,11 +514,27 @@ def calculate_result(request):
                   total_marks=total_marks)
     set.save()
 
-    logout(request)
+    context_dict = {
+        'physics_marks':physics_marks,
+        'physics_attempted':physics_attempted,
+        'physics_unattempted':50 - physics_attempted,
+        'chemistry_marks':chemistry_marks,
+        'chemistry_attempted':chemistry_attempted,
+        'chemistry_unattempted':50 - chemistry_attempted,
+        'math_marks':math_marks,
+        'math_correct_ans':int(math_marks/2),
+        'math_attempted':math_attempted,
+        'math_unattempted':50 - math_attempted,
+        'total_marks':total_marks,
+        'total_attempted':physics_attempted + chemistry_attempted + math_attempted,
+        'total_correct_ans':total_marks - int(math_marks/2),
+        'total_unattempted':150 - (physics_attempted + chemistry_attempted + math_attempted),
+    }
+    # logout(request)
 
     # print(str(physics_marks) + str(chemistry_marks) + str(math_marks))
 
-    return render(request, 'bestofluck.html')
+    return render(request, 'bestofluck.html', context=context_dict)
 
 
 # view for messaging API

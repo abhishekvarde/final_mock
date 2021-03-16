@@ -34,7 +34,7 @@ SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['157.245.139.161', '206.189.40.232','sinhgadonline.com', '127.0.0.1', 'www.sinhgadonline.com']
+ALLOWED_HOSTS = ['157.245.103.212', 'sinhgadonline.in', '127.0.0.1', 'www.sinhgadonline.in']
 
 # Application definition
 INSTALLED_APPS = [
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
