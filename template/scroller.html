@@ -1,198 +1,179 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		{% load static %}
-		<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-		<title>Scroller</title>
 
-		<style type="text/css">
+<head>
+	{% load static %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<title>Scroller</title>
 
-			#image {
+	<style type="text/css">
+		#image {
 
-				position: fixed;
-				float: right;
-				margin: 10px;
-				height: 100%;
-
-			}
-
-<!--			.navbar{-->
-<!--				border-radius: 5px;-->
-<!--				height: 60px;-->
-<!--				background: #808080;-->
-<!--			}-->
-
-<!--			.navbar h3{-->
-
-<!--    		color: #fff;-->
-<!--    		font-family: Arial, Helvetica, sans-serif;-->
-
-<!--			}-->
-
-
-			.navbar h3{
-				margin-right: 30px;
-				float: right;
-			}
-
-			#scroller_bar{
-				height: 560px;
-				width: 100%;
-			}
-
-			#scroller_bar img{
-				width: 60%;
-				margin-right: 20%;
-				margin-left: 20%;
-				height: 500px;
-				align-content: center;
-				margin-top: 25px;
-			}
-
-			#img1{
-				display: none;
-			}
-
-			#img2{
-				display: none;
-			}
-
-			#img3{
-				display: none;
-			}
-
-			#img4{
-				display: none;
-			}
-
-			#img5{
-				display: none;
-			}
-
-			#img6{
-				display: none;
-			}
-
-			#img7{
-				display: none;
-			}
-
-			button{
-				border-radius: 20px;
-				background: lightblue;
-				object-position: center;
-				padding: 6px;
-				margin-bottom: 10px;
-				display: none; /*remove this this before*/
-
-
-			}
-
-			button:hover{
-				background: grey;
-				color: white;
-				box-shadow: 5px 5px 5px rgba(60,60,60,0.6);
-			}
-
-			.navbar h3{
-            color: #fff;
-            font-family: Arial, Helvetica, sans-serif;
-<!--            width: 100%;-->
-
-		</style>	
-
-	</head>
-
-	<body>
-
-	<nav class="navbar navbar-light bg-dark">
-
-    <img src="{% static 'images/sinhgad.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image"/>
-
-    <h3>Sinhgad Technical Education Society</h3>
-
-	</nav>
-
-<!--		<nav class="navbar">-->
-<!--			-->
-<!--			<img id="image" src="">-->
-
-<!--			<h3> Sinhgad Institues of technology. </h3>-->
-
-<!--		</nav>-->
-
-		<div id="scroller_bar">
-			<center>
-				<img id="img1" src="{% static 'images/Slide_0.jpg' %}">
-				<img id="img2" src="{% static 'images/Slide_1.jpg' %}">
-				<img id="img3" src="{% static 'images/Slide_2.jpg' %}">
-				<img id="img4" src="{% static 'images/Slide_3.jpg' %}">
-				<img id="img5" src="{% static 'images/Slide_4.jpg' %}">
-				<img id="img6" src="{% static 'images/Slide_5.jpg' %}">
-				<img id="img7" src="{% static 'images/Slide_6.jpg' %}">
-			</center>
-		</div>
-
-		<form method="POST" action="/stes_test/rules/">
-			{% csrf_token %}
-			<center>
-				<button id="but" type="Submit" value="{{ username }}"  name="username"> Proceed </button>
-			</center>
-		</form>
-
-
-
-	</body>
-
-	<script type="text/javascript">
-
-		function sleep(ms) {
-      		return new Promise(resolve => setTimeout(resolve, ms));
-   		}
-		
-		var ids = 1;
-
-		async function Tutor() {
-
-			flog = 0;
-			var k;
-			var j;
-
-			for( i = 0 ; i >= 0 ; i ++ )
-			{
-
-				j = (i % 7) + 1;
-				if( j == 1 ){
-					k = 7;
-				}
-				else{
-					k = j-1;
-				}
-				 
-				console.log(j);
-				console.log(k);
-
-				document.getElementById("img" + j).style.display = "block";
-
-				document.getElementById("img" + k).style.display = "none";
-
-				await sleep(3000);  
-
-				//do stuff
-				if( flog == 0 && j == 7 ){
-					document.getElementById("but").style.display = "block";
-				}
-			}	
-
-			
+			position: fixed;
+			float: right;
+			margin: 10px;
+			height: 100%;
 
 		}
 
-		Tutor();
+		.navbar {
+			border-radius: 5px;
+			height: 60px;
+			background: #808080;
+		}
 
-	</script>	
+		.navbar h3 {
+			color: #fff;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+
+		.navbar h3 {
+			margin-right: 30px;
+			float: right;
+		}
+
+		#scroller_bar {
+			height: 560px;
+			width: 100%;
+		}
+
+		#scroller_bar img {
+			width: 60%;
+			margin-right: 20%;
+			margin-left: 20%;
+			height: 500px;
+			align-content: center;
+			margin-top: 25px;
+		}
+
+		#img1 {
+			display: none;
+		}
+
+		#img2 {
+			display: none;
+		}
+
+		#img3 {
+			display: none;
+		}
+
+		#img4 {
+			display: none;
+		}
+
+		#img5 {
+			display: none;
+		}
+
+		#img6 {
+			display: none;
+		}
+
+		#img7 {
+			display: none;
+		}
+
+		button {
+			border-radius: 20px;
+			background: lightblue;
+			object-position: center;
+			padding: 6px;
+			margin-bottom: 10px;
+			display: none;
+			/*remove this this before*/
+
+
+		}
+
+		button:hover {
+			background: grey;
+			color: white;
+			box-shadow: 5px 5px 5px rgba(60, 60, 60, 0.6);
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-light bg-dark">
+		<img src="{% static 'images/sinhgad.png' %}" width="100" height="80" class="d-inline-block align-top" alt="My image" />
+		<h3>Sinhgad Technical Education Society</h3>
+	</nav>
+	<div id="scroller_bar">
+		<center>
+			<img id="img1" src="{% static 'images/Slide_0.jpg' %}">
+			<img id="img2" src="{% static 'images/Slide_1.jpg' %}">
+			<img id="img3" src="{% static 'images/Slide_2.jpg' %}">
+			<img id="img4" src="{% static 'images/Slide_3.jpg' %}">
+			<img id="img5" src="{% static 'images/Slide_4.jpg' %}">
+			<img id="img6" src="{% static 'images/Slide_5.jpg' %}">
+			<img id="img7" src="{% static 'images/Slide_6.jpg' %}">
+		</center>
+	</div>
+
+	<form method="POST" action="/stes_test/rules/">
+		{% csrf_token %}
+		<center>
+			<button id="but" type="Submit" value="{{ username }}" name="username"> Proceed </button>
+		</center>
+	</form>
+
+
+
+</body>
+
+<script type="text/javascript">
+
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	var ids = 1;
+
+	async function Tutor() {
+
+		flog = 0;
+		var k;
+		var j;
+
+		for (i = 0; i >= 0; i++) {
+
+			j = (i % 7) + 1;
+			if (j == 1) {
+				k = 7;
+			}
+			else {
+				k = j - 1;
+			}
+
+			console.log(j);
+			console.log(k);
+
+			document.getElementById("img" + j).style.display = "block";
+
+			document.getElementById("img" + k).style.display = "none";
+
+			await sleep(3000);
+
+			//do stuff
+			if (flog == 0 && j == 7) {
+				document.getElementById("but").style.display = "block";
+			}
+		}
+
+
+
+	}
+
+	Tutor();
+
+</script>
 
 
 </html>

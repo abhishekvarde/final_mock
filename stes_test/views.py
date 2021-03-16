@@ -436,9 +436,6 @@ def calculate_result(request):
 
     username = request.user.username
 
-    physics_attempted = 0
-    chemistry_attempted = 0
-    math_attempted = 0
     # print("My ustad is : " + username)
 
     cursor = connection.cursor()
@@ -461,7 +458,7 @@ def calculate_result(request):
         + username + "\"")
 
     cursor.execute(
-        "select physics_answers, chemistry_answers, math_answers, marked_answers from stes_test_question_answers "
+        "select physics_answers, chemistry_answers, math_answers, marked_answers, attempted from stes_test_question_answers "
         "where username = \"" + username + "\"")
     qset = cursor.fetchall()
     # print("Quesry set for username : " + username)
@@ -471,6 +468,12 @@ def calculate_result(request):
     chemistry_answers = qset[0][1]
     math_answers = qset[0][2]
     marked_answers = qset[0][3]
+    attempted = qset[0][4]
+
+    attempted = list(map(int,attempted.split(",")))
+    physics_attempted = len(list(filter(lambda a:a!=0,attempted[:50])))
+    chemistry_attempted = len(list(filter(lambda a:a!=0,attempted[50:100])))
+    math_attempted = len(list(filter(lambda a:a!=0,attempted[100:])))
 
     physics_marks = 0
     chemistry_marks = 0
@@ -530,7 +533,8 @@ def calculate_result(request):
         'total_correct_ans':total_marks - int(math_marks/2),
         'total_unattempted':150 - (physics_attempted + chemistry_attempted + math_attempted),
     }
-    # logout(request)
+    
+    logout(request)
 
     # print(str(physics_marks) + str(chemistry_marks) + str(math_marks))
 

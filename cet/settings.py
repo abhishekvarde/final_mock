@@ -93,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cet_portal',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'Pavan@2409',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
