@@ -59,7 +59,7 @@
 				document.getElementById("demo").innerHTML = "Time Remaining : " + "EXPIRED";
 				end_time();
 
-				// document.getElementById("submit_test").click();
+				document.getElementById("submit_test").click();
 			}
 		}, 1000);
 	</script>
@@ -126,10 +126,12 @@
 			grid-auto-flow: row;
 			grid-template-columns: 75% 25%;
 			padding: 10px 35px;
+			margin-bottom: 5vh;
 		}
 
 		.container {
 			width: 100%;
+			overflow-y: scroll;
 		}
 
 		.navigation {
@@ -140,6 +142,29 @@
 			padding: 0px 10px;
 		}
 
+		.nav-titles{
+        display: flex;
+				justify-content: space-between;
+		}
+		.nav-title{
+				padding: 7px 0px;
+				width: 100px;
+				margin: 0 5px;
+		}
+
+		.selected {
+				box-shadow: none;
+				background-color: white;
+				color: #0d6efd;
+				border-color: #0d6efd;
+		}
+
+		.selected:hover {
+				box-shadow: none;
+				background-color: white;
+				color: #0d6efd;
+				border-color: #0d6efd;
+		}
 		.line {
 			border-bottom: 1px solid black;
 			position: relative;
@@ -149,44 +174,44 @@
 
 		.btn.btn-warning.btn-circle.btn-sm {
 			position: relative;
-			width: 32px;
-			height: 32px;
+			width: 36px;
+			height: 36px;
 			padding: 6px 0px;
-			border-radius: 16px;
-			font-size: 12px;
+			border-radius: 50%;
+			font-size: 14px;
 			text-align: center;
 			margin-top: 3px;
 		}
 
 		.btn.btn-success.btn-circle.btn-sm {
 			position: relative;
-			width: 32px;
-			height: 32px;
+			width: 36px;
+			height: 36px;
 			padding: 6px 0px;
-			border-radius: 16px;
-			font-size: 12px;
+			border-radius: 50%;
+			font-size: 14px;
 			text-align: center;
 			margin-top: 3px;
 		}
 
 		.btn.btn-danger.btn-circle.btn-sm {
 			position: relative;
-			width: 32px;
-			height: 32px;
+			width: 36px;
+			height: 36px;
 			padding: 6px 0px;
-			border-radius: 16px;
-			font-size: 12px;
+			border-radius: 50%;
+			font-size: 14px;
 			text-align: center;
 			margin-top: 3px;
 		}
 
 		.btn.btn-secondary.btn-circle.btn-sm {
 			position: relative;
-			width: 32px;
-			height: 32px;
+			width: 36px;
+			height: 36px;
 			padding: 6px 0px;
-			border-radius: 16px;
-			font-size: 12px;
+			border-radius: 50%;
+			font-size: 14px;
 			text-align: center;
 			margin-top: 3px;
 		}
@@ -258,10 +283,23 @@
 
 		.finish_test {
 			position: relative;
+			margin: 0px auto;
 			float: right;
 			border-radius: 10px;
 			margin-top: 25%;
+			margin-right: 25%;
+		}
 
+		h3{
+			font-size: 1.5rem;
+		}
+
+		h4{
+			font-size: 1.25rem;
+		}
+
+		.hide{
+			display: none;
 		}
 	</style>
 </head>
@@ -298,7 +336,7 @@
 			<input type="hidden" id="imp" name="next_question_no" value="">
 			<input type="hidden" name="username" value="{{ username }}">
 			<div class="container">
-				<div class="col-sm-11 ">
+				<div class="col">
 					<a href="question">
 						<input type="hidden" name="previous_question_no" value="{{ question_number }}">
 					</a>
@@ -320,28 +358,28 @@
 						<div class="form-check" style="padding: 5px;">
 							<input class="radio-inline" type="radio" name="marked_answer" id="exampleRadiosA" value="A">
 							<label class="form-check-label" for="exampleRadiosA">
-								<h4><b>A.</b> {{ new_question_data.0.1 }}</h4>
+								<h4><b>A. </b> {{ new_question_data.0.1 }}</h4>
 							</label>
 						</div>
 
 						<div class="form-check" style="padding: 5px;">
 							<input class="radio-inline" type="radio" name="marked_answer" id="exampleRadiosB" value="B">
 							<label class="form-check-label" for="exampleRadiosB">
-								<h4><b>B.</b> {{ new_question_data.0.2 }}</h4>
+								<h4><b>B. </b> {{ new_question_data.0.2 }}</h4>
 							</label>
 						</div>
 
 						<div class="form-check" style="padding: 5px;">
 							<input class="radio-inline" type="radio" name="marked_answer" id="exampleRadiosC" value="C">
 							<label class="form-check-label" for="exampleRadiosC">
-								<h4><b>C.</b> {{ new_question_data.0.3 }}</h4>
+								<h4><b>C. </b> {{ new_question_data.0.3 }}</h4>
 							</label>
 						</div>
 
 						<div class="form-check" style="padding: 5px;">
 							<input class="radio-inline" type="radio" name="marked_answer" id="exampleRadiosD" value="D">
 							<label class="form-check-label" for="exampleRadiosD">
-								<h4><b>D.</b> {{ new_question_data.0.4 }}</h4>
+								<h4><b>D. </b> {{ new_question_data.0.4 }}</h4>
 							</label>
 						</div>
 					</div>
@@ -370,41 +408,17 @@
 						</a>
 						{% endif %}
 					</div>
-					<button type="button" class="btn btn-primary finish_test" data-toggle="modal"
-						data-target="#exampleModalCenter" style="margin-top: 10%;">
-						Finish test
-					</button>
-					<!-- Modal -->
-					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLongTitle">Alert Message</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									Do you really want to exit the test?
-								</div>
-								<div class="modal-footer">
-									<button id="submit_test" onclick="end_time()" type="submit" formaction="/stes_test/calculate_result/"
-										class="btn btn-danger submit">Finish test
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="navigation" style="font-family: 'Poppins';">
 				<input type="hidden" name="username" value="{{ username }}">
-				<div class="navtab">
-					<div class="nav-title">
-						<h5>Physics</h5>
-					</div>
-					<hr>
+				<div class="nav-titles">
+					<button type="button" class="nav-title btn btn-primary">Physics</button>
+					<button type="button" class="nav-title btn btn-primary">Chemistry</button>
+					<button type="button" class="nav-title btn btn-primary">Maths</button>
+				</div>
+				<hr>
+				<div class="navtab hide">
 					<div class="nav-buttons">
 						{% for n in physics %}
 						<a class="button1">
@@ -427,11 +441,7 @@
 						{% endfor %}
 					</div>
 				</div>
-				<div class="navtab">
-					<div class="nav-title">
-						<h5>Chemistry</h5>
-					</div>
-					<hr>
+				<div class="navtab hide">
 					<div class="nav-buttons">
 						{% for n in chemistry %}
 						<a class="button1">
@@ -454,11 +464,7 @@
 						{% endfor %}
 					</div>
 				</div>
-				<div class="navtab">
-					<div class="nav-title">
-						<h5>Mathematics</h5>
-					</div>
-					<hr>
+				<div class="navtab hide">
 					<div class="nav-buttons">
 						{% for n in math %}
 						<a class="button1">
@@ -482,6 +488,46 @@
 						{% endfor %}
 					</div>
 				</div>
+				<script>
+					var nav_titles = document.getElementsByClassName('nav-title');
+					var nav_tabs = document.getElementsByClassName('navtab');
+					var sub = Math.floor({{ question_number }} / 50);
+					nav_titles[sub].classList.add("selected");
+					nav_tabs[sub].classList.remove('hide');
+
+					$(".nav-title").click(function() {
+						$(".nav-title").removeClass("selected");
+						$(this).addClass("selected");
+						nav_tabs[sub].classList.add('hide');
+						sub = $(this).index();
+						nav_tabs[sub].classList.remove('hide');
+					})
+				</script>
+				<button type="button" class="btn btn-primary finish_test" data-toggle="modal"
+				data-target="#exampleModalCenter" style="margin-top: 10%;">
+					Finish test
+				</button>
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Alert Message</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Do you really want to exit the test?
+						</div>
+						<div class="modal-footer">
+							<button id="submit_test" onclick="end_time()" type="submit" formaction="/stes_test/calculate_result/"
+								class="btn btn-danger submit">Finish test
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			</div>
 		</div>
 		<script>
@@ -492,10 +538,8 @@
 				{% endif %}
 			}
 
-
 			$("button#invalid").click(function () {
 				$("#question{{ question_number }}").toggleClass("invalid");
-
 			});
 
 			$("button#bookmark").click(function () {

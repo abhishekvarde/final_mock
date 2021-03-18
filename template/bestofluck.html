@@ -1,14 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 	{% load static %}
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 	<title>otp</title>
 	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@500&display=swap');
+
 		.navbar h3 {
 			color: #fff;
 			font-family: Arial, Helvetica, sans-serif;
@@ -27,38 +29,56 @@
 		<h3>Sinhgad Technical Education Society</h3>
 	</nav>
 	<div class="profile">
-		{% if messages %}
-		{% for message in messages %}
-		<div class="alert alert-{{ message.tags }}">
-			{{message}}
-		</div>
-		{% endfor %}
-		{% endif %}
+		{% if messages %} {% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">{{message}}</div>
+		{% endfor %} {% endif %}
 	</div>
-	<div class="container py-5 ">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col">
 				<div class="card card-outline-secondary">
 					<div class="card-header bg-secondary">
-						<h3 style="text-align: center; padding:20px;" class="mb-0">
-							Congratulations, test submitted successfully. <br>
-							Result<br>
+						<h3 style="text-align: center; padding: 20px; line-height: 2.5rem" class="mb-0">
+							<span style="
+                    font-family: 'DM Serif Display', serif;
+                    font-size: 40px;
+                  ">
+								Congratulations !
+								<br />
+								Test submitted successfully. <br />
+							</span>
 						</h3>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" style="text-align: center; margin-top: 40px">
+			<div class="col" style="border-top: black 3px solid; border-bottom: black 3px solid;padding: 1px;">
+				<div class="col" style="border-top: black 2px solid; border-bottom: black 2px solid; padding: 1px;">
+					<div class="col" style="border-top: black 1px solid; border-bottom: black 1px solid;">
+						<span style="font-size: 35px; font-family: 'DM serif Display'">RESULT</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 50px">
 			<div class="table-responsive">
-				<table class="table table-striped">
-					<thead>
+				<table class="table" style="font-family: 'Poppins'">
+					<colgroup>
+						<col style="background-color: #fff" />
+						<col style="background-color: rgb(215, 248, 255)" />
+						<col style="background-color: rgb(203, 255, 193)" />
+						<col style="background-color: rgb(255, 199, 199)" />
+						<col style="background-color: rgb(255, 250, 200)" />
+					</colgroup>
+					<thead style="font-size: 1.2rem; text-align: center">
 						<th>Subject</th>
-						<th>Attempted</th>	<!--show in blue-->
-						<th>Correct Answers</th> <!--show in green-->
-						<th>Not Attempted</th>  <!--show in red-->
-						<th>Marks</th>  <!--show in bold and best color-->
+						<th>Attempted</th>
+						<th>Correct Answers</th>
+						<th>Not Attempted</th>
+						<th>Marks</th>
 					</thead>
-					<tbody>
+					<tbody style="text-align: center">
 						<tr>
 							<td>Physics</td>
 							<td>{{physics_attempted}}</td>
@@ -91,8 +111,14 @@
 				</table>
 			</div>
 		</div>
-		<div class="row">
-			<h1>Thank You</h1>
+		<div class="row" style="text-align: center; margin: 40px 0px">
+			<div class="col" style="border-top: black 3px solid; border-bottom: black 3px solid;padding: 1px;">
+				<div class="col" style="border-top: black 2px solid; border-bottom: black 2px solid; padding: 1px;">
+					<div class="col" style="border-top: black 1px solid; border-bottom: black 1px solid;">
+						<span style="font-size: 35px; font-family: 'DM serif Display'">Thank You!!!</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
