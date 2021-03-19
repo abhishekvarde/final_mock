@@ -86,6 +86,7 @@
 
     textarea {
       resize: none;
+      height: auto;
       border: none;
       background-color: rgb(233, 233, 233);
       border: 1px solid rgb(0, 183, 255);
@@ -409,29 +410,29 @@
           <textarea id="{{q.question_id}}" class="question" for="ques" draggable="false" disabled
             contenteditable="false">{{q.question}}</textarea>
           {% if q.image %}
-          <div style="padding:15px; margin-left:30px;">
+          <div style="padding:15px; margin:5px;">
             <img src="/static/{{ q.image}}" id="images" class="d-inline-block align-top" alt="image" />
           </div>
           {% endif %}
           <div class="options">
             <div class="option-block">
               <label>A.</label>
-              <textarea id="option1" cols="30" rows="1" class="option" disabled
+              <textarea id="option1" cols="80" rows="1" class="option" disabled
                 contenteditable="false">{{ q.option1 }}</textarea>
             </div>
             <div class="option-block">
               <label>B.</label>
-              <textarea id="option2" cols="30" rows="1" class="option" disabled
+              <textarea id="option2" cols="80" rows="1" class="option" disabled
                 contenteditable="false">{{ q.option2 }}</textarea>
             </div>
             <div class="option-block">
               <label>C.</label>
-              <textarea id="option3" cols="30" rows="1" class="option" disabled
+              <textarea id="option3" cols="80" rows="1" class="option" disabled
                 contenteditable="false">{{ q.option3 }}</textarea>
             </div>
             <div class="option-block">
               <label>D.</label>
-              <textarea id="option4" cols="30" rows="1" class="option" disabled
+              <textarea id="option4" cols="80" rows="1" class="option" disabled
                 contenteditable="false">{{ q.option4 }}</textarea>
             </div>
           </div>
@@ -457,10 +458,10 @@
           <button class="btn1" type="submit" onclick="assign({{previous_page}})">Previous</button>
           {% endif %}
           {% if not q.is_valid %}
-          <div class="btn btn_valid" data-question-id="{{q.question_id}}" data-valid="True"
+          <div class="btn btn_valid validation" data-question-id="{{q.question_id}}" data-valid="True"
            data-task="validate">Mark as Valid</div>
           {% else %}
-          <div class="btn btn_invalid" data-question-id="{{q.question_id}}" data-valid="False"
+          <div class="btn btn_invalid validation" data-question-id="{{q.question_id}}" data-valid="False"
            data-task="validate">Mark as Invalid</div>
           {% endif %}
           {% if has_next %}
@@ -509,6 +510,7 @@
   <script>
     edit = document.getElementsByClassName("btn_edit");
     validation = document.getElementsByClassName("validation");
+    options = document.getElementsByClassName("option");
 
     function assign(q_no) {
       document.getElementById("next_question_no").value = q_no;
@@ -531,6 +533,20 @@
       document.getElementById('answer').disabled = true;
       document.querySelector(".btn1").disabled = false;
     }
+
+
+    // options textarea
+    Array.from(options).forEach(function (textField){
+      if (textField.clientHeight < textField.scrollHeight)
+      {
+        textField.style.height = textField.scrollHeight + "px";
+        if (textField.clientHeight < textField.scrollHeight)
+        {
+          textField.style.height = 
+            (textField.scrollHeight * 2 - textField.clientHeight) + "px";
+        }
+      };
+    })
 
     // edit button
     Array.from(edit).forEach(function (e) {
@@ -574,7 +590,8 @@
           option3=document.getElementById("option3");
           option4=document.getElementById("option4");
           answer=document.getElementById("answer");
-          send(question_id, question_elm.value, option1.value, option2.value, option3.value, option4.value, answer.value, task);
+          is_valid = "True";
+          send(question_id, question_elm.value, option1.value, option2.value, option3.value, option4.value, answer.value, task, is_valid);
         }
       })
     });
@@ -582,8 +599,8 @@
     // Invalid button
     Array.from(validation).forEach(function (e) {
       e.addEventListener("click", () => {
-        // grab question h2 element
-        question_elm = e.parentElement.parentElement.children[0];
+        // grab question element
+        question_elm = document.getElementsByClassName("question")[0];
         option1=document.getElementById("option1");
         option2=document.getElementById("option2");
         option3=document.getElementById("option3");
@@ -596,17 +613,15 @@
         if (is_valid != "True") {
           e.classList.remove("btn_invalid")
           e.classList.add("btn_valid")
-          e.innerText = "valid";
-          is_valid = "True";
-          e.setAttribute("data-valid", "True");
+          e.innerText = "Mark as Valid";
+          e.setAttribute("data-valid","True");
           send(question_id, question_elm.value, option1.value, option2.value, option3.value, option4.value, answer.value, task, is_valid);
         } else {
           e.classList.remove("btn_valid");
           e.classList.add("btn_invalid");
-          e.innerText = "Invalid";
-          is_valid = "False";
-          e.setAttribute("data-valid", "False");
-          send(question_id, question_elm.value, option1.value, option2.value, option3.value, option4.value, answer.value, is_valid);
+          e.innerText = "Mark as Invalid";
+          e.setAttribute("data-valid","False");
+          send(question_id, question_elm.value, option1.value, option2.value, option3.value, option4.value, answer.value, task, is_valid);
         }
 
         // set contenteditable attribute to h2 tag
@@ -616,7 +631,7 @@
       })
     });
 
-    function send(question_id, question, option1, option2, option3, option4, answer, task, is_valid = "True") {
+    function send(question_id, question, option1, option2, option3, option4, answer, task, is_valid) {
       let data = {
         "task": task,
         "is_valid": is_valid,
@@ -638,9 +653,21 @@
       })
         .then(response => response.json())
         .then(json => alert(json["status"]))
-        .catch(err => console.log(err));
+        .catch(err => {console.log(err)});
 
     }
+
+    var img = document.getElementById('images')
+    var height = img.height;
+    var width = img.width;
+    img.width = 250;
+    img.heigth = 250 * (height / width);
+
+    // console.log(height);
+    // console.log(width);
+
+    // console.log(img.height);
+    // console.log(img.width);
   </script>
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

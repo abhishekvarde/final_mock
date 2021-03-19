@@ -635,10 +635,10 @@ def edit(request):
                     chemistry.objects.filter(question_id=question_id).update(is_valid=is_valid)
                 elif(subject.lower() == "maths"):
                     math.objects.filter(question_id=question_id).update(is_valid=is_valid)
-                status = "Marked Valid" if is_valid else "Marked Invalid"
+                status = "Marked as Valid" if is_valid else "Marked as Invalid"
             except DataError as e:
                 # print("Error occured while updating {}".format(e))
-                status = "Error"
+                status = "Error occured while updating. Try again."
 
     return JsonResponse({"status" : status})
 
