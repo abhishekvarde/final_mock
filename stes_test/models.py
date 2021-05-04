@@ -13,7 +13,7 @@ class physics(models.Model):
     option4 = models.CharField(max_length=400)
     answer = models.CharField(max_length=10)
     rand = models.FloatField(default=0)
-    is_valid = models.BooleanField(default = True)
+    is_valid = models.BooleanField(default=True)
 
     def __str__(self):
         return self.question
@@ -29,7 +29,7 @@ class chemistry(models.Model):
     option4 = models.CharField(max_length=400)
     answer = models.CharField(max_length=10)
     rand = models.FloatField(default=0)
-    is_valid = models.BooleanField(default = True)
+    is_valid = models.BooleanField(default=True)
 
     def __str__(self):
         return self.question
@@ -45,7 +45,23 @@ class math(models.Model):
     option4 = models.CharField(max_length=400)
     answer = models.CharField(max_length=10)
     rand = models.FloatField(default=0)
-    is_valid = models.BooleanField(default = True)
+    is_valid = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.question
+
+
+class biology(models.Model):
+    question_id = models.AutoField(primary_key=True)
+    question = models.CharField(max_length=1000)
+    image = models.CharField(max_length=400, default='')
+    option1 = models.CharField(max_length=400)
+    option2 = models.CharField(max_length=400)
+    option3 = models.CharField(max_length=400)
+    option4 = models.CharField(max_length=400)
+    answer = models.CharField(max_length=10)
+    rand = models.FloatField(default=0)
+    is_valid = models.BooleanField(default=True)
 
     def __str__(self):
         return self.question
@@ -76,12 +92,15 @@ defaultValues = ",".join(defaultValues)
 
 class question_answers(models.Model):
     username = models.CharField(max_length=40)
+    paper_type = models.CharField(max_length=3)
     physics_questions = models.CharField(max_length=250)
     physics_answers = models.CharField(max_length=250)
     chemistry_questions = models.CharField(max_length=250)
     chemistry_answers = models.CharField(max_length=250)
     math_questions = models.CharField(max_length=250)
     math_answers = models.CharField(max_length=250)
+    biology_questions = models.CharField(max_length=250)
+    biology_answers = models.CharField(max_length=250)
     marked_answers = models.CharField(max_length=300, default=defaultValues)
     bookmark = models.CharField(max_length=300, default=defaultValues)
     invalid = models.CharField(max_length=300, default=defaultValues)
@@ -94,9 +113,11 @@ class question_answers(models.Model):
 
 class results(models.Model):
     username = models.CharField(max_length=40)
+    paper_type = models.CharField(max_length=3)
     physics_marks = models.IntegerField(default=0)
     chemistry_marks = models.IntegerField(default=0)
     math_marks = models.IntegerField(default=0)
+    biology_marks = models.IntegerField(default=0)
     total_marks = models.IntegerField(default=0)
 
     def __str__(self):

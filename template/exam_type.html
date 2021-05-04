@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  {% load static %}
+  <head>
+    <title>Login</title>
+    <style>
+      body {
+        background: no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-color: rgba(190, 190, 186, 0.979);
+        background-size: cover;
+        background-position: right;
+      }
+
+      .div-wrapper {
+        position: relative;
+        height: 50px;
+        width: 50px;
+      }
+
+      .div-wrapper img {
+        position: absolute;
+        padding-left: 50px;
+        top: 0px;
+        left: 2px;
+        height: 120px;
+        width: 140px;
+      }
+
+      h1 {
+        text-align: center;
+        margin:0px;
+      }
+
+      .page {
+        width: 80%;
+        padding: 5% 0 0;
+        margin: auto;
+      }
+
+      .form{
+        display: flex;
+        flex-flow: row;
+        gap: 5%;
+        padding-bottom: 5%;
+      }
+
+      .form-block {
+        position: relative;
+        z-index: 1;
+        background: #e2dede;
+        width: 30%;
+        padding: 5px;
+        text-align: center;
+        font-size: 19px;
+        opacity: 0.7;
+        box-shadow: 0 0 20px 0 rgba(87, 22, 22, 0.2),
+          0 5px 5px 0 rgba(44, 11, 11, 0.24);
+        border-radius:15px;
+        padding-bottom: 15px;
+      }
+
+      .form-block>h1{
+        padding: 5px;
+        margin: 0px;
+      }
+      
+      .form-block>p{
+        font-size:24px;
+        margin: 5px;
+      }
+      
+      .form-block>label{
+        cursor: pointer;
+        padding: 0px 40px;
+      }
+      .radio{
+        padding: auto;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      button {
+        position: absolute;
+        text-transform: uppercase;
+        outline: 0;
+        background-color: #c8cec8ce;
+        width: 10%;
+        height: 40px;
+        margin: 4px 2px;
+        border: #707271;
+        align-content: center;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        margin-left: 45%;
+        border-radius: 30px;
+
+        box-shadow: 0 0 20px 0 rgba(10, 8, 8, 0.2),
+          0 5px 5px 0 rgba(54, 14, 14, 0.24);
+      }
+
+      button:hover {
+        box-shadow: none;
+      }
+    </style>
+  </head>
+
+  <body
+    style="background-image: url({% static 'images/singhgad_institutes.jpg' %})"
+  >
+    <a href="/stes_test/">
+      <div class="div-wrapper">
+        <img src="{% static 'images/sinhgad.png' %}" />
+      </div>
+    </a>
+    <h1 style="color: black">Welcome to exam portal!</h1>
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %} {% endif %}
+
+    <form class="form2" action="/stes_test/exam_type/" method="POST">
+      <div class="page">
+        <div class="form">
+          {% csrf_token %}
+          <div class="form-block">
+            <input
+              type="radio"
+              class="radio"
+              name="exam_type"
+              value="PCM"
+              id="PCM"
+              required
+            />
+            <label for="PCM">
+              <div>
+                <h1>PCM</h1>
+                <p>Physics</p>
+                <p>Chemistry</p>
+                <p>Maths</p>
+              </div>
+            </label>
+          </div>
+          <div class="form-block">
+            <input
+              type="radio"
+              class="radio"
+              name="exam_type"
+              value="PCB"
+              id="PCB"
+            />
+            <label for="PCB">
+              <div>
+                <h1>PCB</h1>
+                <p>Physics</p>
+                <p>Chemistry</p>
+                <p>Biology</p>
+              </div>
+            </label>
+          </div>
+          <div class="form-block">
+            <input type="radio" class="radio" name="exam_type" value="BMB" id="BMB"/>
+            <label for="BMB">
+              <div>
+              <h1>PCMB</h1>
+              <p>Physics</p>
+              <p>Chemistry</p>
+              <p>Maths & Biology</p>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <button type="submit">Proceed</button>
+    </form>
+  </body>
+</html>

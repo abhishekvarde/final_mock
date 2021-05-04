@@ -406,7 +406,7 @@
         <div class="question_block">
           <input type="hidden" id="next_question_no" name="q_no" value="">
           {% for q in question %}
-          <label style="font-size: 20px; font-weight: bold; margin-left: 20px;">Question {{q.question_id}}:</label><br>
+          <label style="font-size: 20px; font-weight: bold; margin-left: 20px;"><i>{{ subject_name }} -</i> Question {{q.question_id}}:</label><br>
           <textarea id="{{q.question_id}}" class="question" for="ques" draggable="false" disabled
             contenteditable="false">{{q.question}}</textarea>
           {% if q.image %}

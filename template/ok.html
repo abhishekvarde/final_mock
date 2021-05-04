@@ -1,24 +1,11 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-
 	{% load static %}
 	<meta charset="utf-8">
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
 		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-
-	<!--    <script type="text/javascript" src="https://www.hostmath.com/Math/MathJax.js?config=OK"></script>-->
-	<!--    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
-	<!--    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>-->
-
-	<!--    <script type="text/x-mathjax-config">-->
-	<!--      MathJax.Hub.Config({-->
-	<!--       TeX: { equationNumbers: { autoNumber: "AMS" } }-->
-	<!--      });-->
-	<!--    </script>-->
 
 	<script type="text/javascript" async
 		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full"></script>
@@ -415,7 +402,16 @@
 				<div class="nav-titles">
 					<button type="button" class="nav-title btn btn-primary">Physics</button>
 					<button type="button" class="nav-title btn btn-primary">Chemistry</button>
-					<button type="button" class="nav-title btn btn-primary">Maths</button>
+					{% ifequal type "PCM" %}
+						<button type="button" class="nav-title btn btn-primary">Maths</button>
+					{% else %}
+						{% ifequal type "PCB" %}
+							<button type="button" class="nav-title btn btn-primary">Biology</button>
+						{% else %}
+							<button type="button" class="nav-title btn btn-primary">Maths</button>
+							<button type="button" class="nav-title btn btn-primary">Biology</button>
+						{% endifequal %}
+					{% endifequal %}
 				</div>
 				<hr>
 				<div class="navtab hide">
@@ -464,30 +460,108 @@
 						{% endfor %}
 					</div>
 				</div>
-				<div class="navtab hide">
-					<div class="nav-buttons">
-						{% for n in math %}
-						<a class="button1">
-							<button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}"
-								class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
-							{% if n.1 == "1" %}
-							<script>
-								console.log("Cant do it");
-								document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
-							</script>
-							{% elif n.2 == "1" %}
-							<script>
-								document.getElementById("question{{ n.0 }}").classList.toggle('invalid');
-							</script>
-							{% elif n.3 == "1" %}
-							<script>
-								document.getElementById("question{{ n.0 }}").classList.toggle('attempted');
-							</script>
-							{% endif %}
-						</a>
-						{% endfor %}
+				{% ifequal type "PCM" %}
+					<div class="navtab hide">
+						<div class="nav-buttons">
+							{% for n in math %}
+							<a class="button1">
+								<button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}"
+									class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
+								{% if n.1 == "1" %}
+								<script>
+									console.log("Cant do it");
+									document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
+								</script>
+								{% elif n.2 == "1" %}
+								<script>
+									document.getElementById("question{{ n.0 }}").classList.toggle('invalid');
+								</script>
+								{% elif n.3 == "1" %}
+								<script>
+									document.getElementById("question{{ n.0 }}").classList.toggle('attempted');
+								</script>
+								{% endif %}
+							</a>
+							{% endfor %}
+						</div>
 					</div>
-				</div>
+				{% else %}
+					{% ifequal type "PCB" %}
+						<div class="navtab hide">
+							<div class="nav-buttons">
+								{% for n in biology %}
+								<a class="button1">
+									<button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}"
+										class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
+									{% if n.1 == "1" %}
+									<script>
+										console.log("Cant do it");
+										document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
+									</script>
+									{% elif n.2 == "1" %}
+									<script>
+										document.getElementById("question{{ n.0 }}").classList.toggle('invalid');
+									</script>
+									{% elif n.3 == "1" %}
+									<script>
+										document.getElementById("question{{ n.0 }}").classList.toggle('attempted');
+									</script>
+									{% endif %}
+								</a>
+								{% endfor %}
+							</div>
+						</div>
+					{% else %}
+						<div class="navtab hide">
+							<div class="nav-buttons">
+								{% for n in math %}
+								<a class="button1">
+									<button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}"
+										class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
+									{% if n.1 == "1" %}
+									<script>
+										console.log("Cant do it");
+										document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
+									</script>
+									{% elif n.2 == "1" %}
+									<script>
+										document.getElementById("question{{ n.0 }}").classList.toggle('invalid');
+									</script>
+									{% elif n.3 == "1" %}
+									<script>
+										document.getElementById("question{{ n.0 }}").classList.toggle('attempted');
+									</script>
+									{% endif %}
+								</a>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="navtab hide">
+							<div class="nav-buttons">
+								{% for n in biology %}
+								<a class="button1">
+									<button onclick="assign({{ n.0 }})" type="submit" id="question{{ n.0 }}"
+										class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
+									{% if n.1 == "1" %}
+									<script>
+										console.log("Cant do it");
+										document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
+									</script>
+									{% elif n.2 == "1" %}
+									<script>
+										document.getElementById("question{{ n.0 }}").classList.toggle('invalid');
+									</script>
+									{% elif n.3 == "1" %}
+									<script>
+										document.getElementById("question{{ n.0 }}").classList.toggle('attempted');
+									</script>
+									{% endif %}
+								</a>
+								{% endfor %}
+							</div>
+						</div>
+					{% endifequal %}
+				{% endifequal %}
 				<script>
 					var nav_titles = document.getElementsByClassName('nav-title');
 					var nav_tabs = document.getElementsByClassName('navtab');

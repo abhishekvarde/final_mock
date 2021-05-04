@@ -3,7 +3,7 @@ import random
 import json
 from datetime import date
 from django.shortcuts import render, HttpResponse, redirect
-from .models import student, question_answers, results, physics, math, chemistry
+from .models import student, question_answers, results, physics, math, chemistry, biology
 from django.db import connection, DataError
 from django.contrib.auth.models import User
 from .models import student
@@ -14,6 +14,9 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+import os
+import pandas as pd
+from cet.settings import BASE_DIR
 
 # Create your views here.
 
@@ -48,8 +51,8 @@ def register(request):
 
         flag = 0
         if len(first_name) == 0 or len(last_name) == 0 or len(college) == 0 or len(address_line_1) == 0 or len(
-                email) == 0 or len(
-            phone_no) == 0:
+            email) == 0 or len(
+                phone_no) == 0:
             messages.warning(request, 'All fields are mandatory')
             flag = 1
         if len(phone_no) != 10:
@@ -58,17 +61,20 @@ def register(request):
 
         for no in phone_no:
             if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
-                messages.warning(request, 'Mobile Number should have only have numeric character')
+                messages.warning(
+                    request, 'Mobile Number should have only have numeric character')
                 flag = 1
                 break
 
         if len(alt_phone_no) != 10:
-            messages.warning(request, 'Alternate Mobile Number should have 10 digits')
+            messages.warning(
+                request, 'Alternate Mobile Number should have 10 digits')
             flag = 1
 
         for no in alt_phone_no:
             if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
-                messages.warning(request, 'Alternate Mobile Number should have only have numeric character')
+                messages.warning(
+                    request, 'Alternate Mobile Number should have only have numeric character')
                 flag = 1
                 break
 
@@ -124,7 +130,8 @@ def otp(request):
                 # print("otp matched")
                 if not User.objects.filter(username=entered_email).exists():
                     # print("User doesn't exists.")
-                    student_details = User.objects.create_user(entered_email, entered_email, entered_otp)
+                    student_details = User.objects.create_user(
+                        entered_email, entered_email, entered_otp)
                     # first_name=student1.first_name, last_name=student1.last_name,
                     # email=entered_email)
                     student_details.first_name = student1.first_name
@@ -132,7 +139,8 @@ def otp(request):
                     student_details.save()
 
                 # user = authenticate(request, username=username, password=password)
-                user = authenticate(request, username=entered_email, password=entered_otp)
+                user = authenticate(
+                    request, username=entered_email, password=entered_otp)
                 if user is not None:
                     # print("User is authenticated.")
                     login(request, user)
@@ -141,8 +149,7 @@ def otp(request):
                 # else:
                 # print("fgdsjkhgsdkjhfgkdsjfhgksdjfghsdlkjfghsdlkfjghdskfjghdslkjghdlkjgfhdkjhgkjdhgkjsdhgkjshd")
                 # return rules(request)
-                return scroller(request)
-                # return redirect('/stes_test/scroller/')
+                return redirect('/stest_test/exam_type/')
 
             else:
                 messages.warning(request, 'Invalid username or password.')
@@ -177,6 +184,7 @@ def main_test(request):
         return otp(request)
 
     username = request.POST.get('username')
+    p_type = request.POST.get('exam_type')         # Paper type PCM/PCB/PCMB
 
     if question_answers.objects.filter(username=username).first():
 
@@ -223,7 +231,8 @@ def main_test(request):
             # print("Error time")
             backend_time = int(backend_time)
             cursor.execute(
-                "update stes_test_question_answers set time_left = " + str(backend_time) + " where username = \""
+                "update stes_test_question_answers set time_left = " +
+                str(backend_time) + " where username = \""
                 + username + "\"")
 
         # print("I am at the end")
@@ -244,13 +253,33 @@ def main_test(request):
                 "username = \""
                 + user + "\"")
             subject_id = 2
-        else:
+        elif p_type == "PCM":
             cursor.execute(
                 "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
                 "where "
                 "username = \""
                 + user + "\"")
             subject_id = 3
+        elif p_type == "PCB":
+            cursor.execute(
+                "select bookmark, invalid, marked_answers, biology_questions, attempted from stes_test_question_answers "
+                "where "
+                "username = \""
+                + user + "\"")
+            subject_id = 4
+        # else:
+        #     cursor.execute(
+        #         "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
+        #         "where "
+        #         "username = \""
+        #         + user + "\"")
+        #     subject_id = 5
+        #     cursor.execute(
+        #         "select bookmark, invalid, marked_answers, biology_questions, attempted from stes_test_question_answers "
+        #         "where "
+        #         "username = \""
+        #         + user + "\"")
+        #     subject_id = 6
 
         question_number = int(next_question_no) - 50 * (subject_id - 1)
 
@@ -267,7 +296,8 @@ def main_test(request):
         # print("current question number is : " + str(question_number))
 
         question_id_in_subject_table = new_question_number[question_number - 1]
-        next_question_marked_answer = marked_answer_list[int(next_question_no) - 1]
+        next_question_marked_answer = marked_answer_list[int(
+            next_question_no) - 1]
 
         # print("question id to be featched : -" + str(question_id_in_subject_table) + "-")
 
@@ -298,10 +328,17 @@ def main_test(request):
         elif 51 <= int(next_question_no) <= 100:
             cursor.execute("select question, option1, option2, option3, option4, image from stes_test_chemistry where "
                            "question_id = " + question_id_in_subject_table)
-        else:
+        elif p_type == "PCM":
             cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
                            "question_id = " + question_id_in_subject_table)
-
+        elif p_type == "PCB":
+            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_biology where "
+                           "question_id = " + question_id_in_subject_table)
+        # else:
+        #     cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
+        #                    "question_id = " + question_id_in_subject_table)
+        #     cursor.execute("select question, option1, option2, option3, option4, image from stes_test_biology where "
+        #                    "question_id = " + question_id_in_subject_table)
         new_question_data = cursor.fetchall()
 
         # print(new_question_data)
@@ -309,14 +346,26 @@ def main_test(request):
         physics = []
         chemistry = []
         math = []
+        biology = []
 
         for i in range(1, 151):
             if i <= 50:
-                physics.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+                physics.append(
+                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
             elif 51 <= i <= 100:
-                chemistry.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+                chemistry.append(
+                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            elif p_type == "PCM":
+                math.append(
+                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            elif p_type == "PCB":
+                biology.append(
+                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
             else:
-                math.append((i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+                math.append(
+                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+                biology.append(
+                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
 
         # print(physics)
 
@@ -329,21 +378,23 @@ def main_test(request):
         # print(new_question_data)
 
         return render(request, 'ok.html',
-                      {"new_question_data": new_question_data, "question_number": next_question_no,
+                      {"new_question_data": new_question_data, "exam_type": p_type, "question_number": next_question_no,
                        "question_no_prev": question_no_prev, "question_no_next": question_no_next,
-                       "physics": physics, "chemistry": chemistry, "math": math, "bookmark": question_bookmark_status,
+                       "physics": physics, "chemistry": chemistry, "math": math, "biology": biology, "bookmark": question_bookmark_status,
                        "invalid": question_invalid_status, "username": username, "backend_time": backend_time,
                        "next_question_marked_answer": next_question_marked_answer})
 
     else:
 
-        print("username recived : " + username)
+        print("username received : " + username)
 
         cursor = connection.cursor()
         cursor.execute(
             "update stes_test_physics set rand = rand() where question_id > 0;"
             "update stes_test_chemistry set rand = rand() where question_id > 0;"
-            "update stes_test_math set rand = rand() where question_id > 0;")
+            "update stes_test_math set rand = rand() where question_id > 0;"
+            "update stes_test_biology set rand = rand() where question_id > 0;"
+        )
 
         cursor.execute(
             "select question_id, answer answer from stes_test_physics order by rand limit 50;")
@@ -353,9 +404,15 @@ def main_test(request):
             "select question_id, answer from stes_test_chemistry order by rand limit 50;")
         qset2 = cursor.fetchall()
 
-        cursor.execute(
-            "select question_id, answer from stes_test_math order by rand limit 50;")
-        qset3 = cursor.fetchall()
+        if p_type == "PCM" or p_type == "BMB":
+            cursor.execute(
+                "select question_id, answer from stes_test_math order by rand limit 50;")
+            qset3 = cursor.fetchall()
+
+        if p_type == "PCB" or p_type == "BMB":
+            cursor.execute(
+                "select question_id, answer from stes_test_biology order by rand limit 50;")
+            qset4 = cursor.fetchall()
 
         physicsQ = []
         physicsA = []
@@ -363,6 +420,8 @@ def main_test(request):
         chemistryA = []
         mathQ = []
         mathA = []
+        biologyQ = []
+        biologyA = []
 
         for q in qset1:
             physicsQ.append(str(q[0]))
@@ -376,6 +435,10 @@ def main_test(request):
             mathQ.append(str(q[0]))
             mathA.append(str(q[1]))
 
+        for q in qset4:
+            biologyQ.append(str(q[0]))
+            biologyA.append(str(q[1]))
+
         ins = question_answers(username=username,
                                physics_questions=",".join(physicsQ),
                                physics_answers=",".join(physicsA),
@@ -383,6 +446,8 @@ def main_test(request):
                                chemistry_answers=",".join(chemistryA),
                                math_questions=",".join(mathQ),
                                math_answers=",".join(mathA),
+                               biology_questions=",".join(biologyQ),
+                               biology_answers=",".join(biologyA),
                                )
         ins.save()
 
@@ -402,21 +467,24 @@ def main_test(request):
         physics = []
         chemistry = []
         math = []
+        biology = []
 
         for i in range(1, 151):
             if i <= 50:
                 physics.append((i, 0, 0))
             elif 51 <= i <= 100:
                 chemistry.append((i, 0, 0))
-            else:
+            elif p_type == "PCM":
                 math.append((i, 0, 0))
+            elif p_type == "PCB":
+                biology.append((i, 0, 0))
 
         question_no_prev = 0
         question_no_next = 2
 
-        return render(request, 'ok.html', {"new_question_data": new_question_data, "question_number": 1,
+        return render(request, 'ok.html', {"new_question_data": new_question_data, "exam_type": p_type, "question_number": 1,
                                            "question_no_prev": question_no_prev, "question_no_next": question_no_next,
-                                           "physics": physics, "chemistry": chemistry, "math": math, "bookmark": 0,
+                                           "physics": physics, "chemistry": chemistry, "math": math, "biology": biology, "bookmark": 0,
                                            "invalid": 0, "username": username, "backend_time": 10800000,
                                            "next_question_marked_answer": next_question_marked_answer})
 
@@ -427,6 +495,7 @@ def rules(request):
             # print("Iam here")
             return main_test(request)
         else:
+            # print(request.POST.get("exam_type"))
             return render(request, 'rules.html', {"username": request.POST.get("username")})
 
 
@@ -458,7 +527,7 @@ def calculate_result(request):
         + username + "\"")
 
     cursor.execute(
-        "select physics_answers, chemistry_answers, math_answers, marked_answers, attempted from stes_test_question_answers "
+        "select physics_answers, chemistry_answers, math_answers, biology_answers, marked_answers, attempted from stes_test_question_answers "
         "where username = \"" + username + "\"")
     qset = cursor.fetchall()
     # print("Quesry set for username : " + username)
@@ -467,27 +536,32 @@ def calculate_result(request):
     physics_answers = qset[0][0]
     chemistry_answers = qset[0][1]
     math_answers = qset[0][2]
-    marked_answers = qset[0][3]
-    attempted = qset[0][4]
+    biology_answers = qset[0][3]
+    marked_answers = qset[0][4]
+    attempted = qset[0][5]
 
-    attempted = list(map(int,attempted.split(",")))
-    physics_attempted = len(list(filter(lambda a:a!=0,attempted[:50])))
-    chemistry_attempted = len(list(filter(lambda a:a!=0,attempted[50:100])))
-    math_attempted = len(list(filter(lambda a:a!=0,attempted[100:])))
+    attempted = list(map(int, attempted.split(",")))
+    physics_attempted = len(list(filter(lambda a: a != 0, attempted[:50])))
+    chemistry_attempted = len(
+        list(filter(lambda a: a != 0, attempted[50:100])))
+    math_attempted = len(list(filter(lambda a: a != 0, attempted[100:])))
 
     physics_marks = 0
     chemistry_marks = 0
     math_marks = 0
+    biology_marks = 0
 
     physics_answers = physics_answers.split(",")
     chemistry_answers = chemistry_answers.split(",")
     math_answers = math_answers.split(",")
+    biology_marks = biology_answers.split(",")
     marked_answers = marked_answers.split(",")
     marked_answers[int(previous_question_no) - 1] = marked_answer
 
     # print(len(physics_answers))
     # print(len(chemistry_answers))
     # print(len(math_answers))
+    # print(len(biology_answers))
     # print(len(marked_answers))
 
     i = 0
@@ -506,34 +580,44 @@ def calculate_result(request):
             math_marks += 2
         i += 1
 
+    for p in biology_answers:
+        if p == marked_answers[i]:
+            biology_marks += 2
+        i += 1
+
     marked_answers = ",".join(marked_answers)
-    total_marks = physics_marks + chemistry_marks + math_marks
+    total_marks = physics_marks + chemistry_marks + math_marks + biology_marks
 
     cursor.execute("update stes_test_question_answers set marked_answers = \"" + marked_answers +
                    "\" where username = \"" + username + "\"")
 
     set = results(username=username, physics_marks=physics_marks, chemistry_marks=chemistry_marks,
                   math_marks=math_marks,
+                  biology_marks=biology_marks,
                   total_marks=total_marks)
     set.save()
 
     context_dict = {
-        'physics_marks':physics_marks,
-        'physics_attempted':physics_attempted,
-        'physics_unattempted':50 - physics_attempted,
-        'chemistry_marks':chemistry_marks,
-        'chemistry_attempted':chemistry_attempted,
-        'chemistry_unattempted':50 - chemistry_attempted,
-        'math_marks':math_marks,
-        'math_correct_ans':int(math_marks/2),
-        'math_attempted':math_attempted,
-        'math_unattempted':50 - math_attempted,
-        'total_marks':total_marks,
-        'total_attempted':physics_attempted + chemistry_attempted + math_attempted,
-        'total_correct_ans':total_marks - int(math_marks/2),
-        'total_unattempted':150 - (physics_attempted + chemistry_attempted + math_attempted),
+        'physics_marks': physics_marks,
+        'physics_attempted': physics_attempted,
+        'physics_unattempted': 50 - physics_attempted,
+        'chemistry_marks': chemistry_marks,
+        'chemistry_attempted': chemistry_attempted,
+        'chemistry_unattempted': 50 - chemistry_attempted,
+        'math_marks': math_marks,
+        'math_correct_ans': int(math_marks/2),
+        'math_attempted': math_attempted,
+        'math_unattempted': 50 - math_attempted,
+        'biology_marks': biology_marks,
+        'biology_correct_ans': int(biology_marks/2),
+        'biology_attempted': biology_attempted,
+        'biology_unattempted': 50 - biology_attempted,
+        'total_marks': total_marks,
+        'total_attempted': physics_attempted + chemistry_attempted + math_attempted + biology_attempted,
+        'total_correct_ans': total_marks - int(math_marks/2) - int(biology_marks/2),
+        'total_unattempted': 150 - (physics_attempted + chemistry_attempted + math_attempted + biology_attempted),
     }
-    
+
     logout(request)
 
     # print(str(physics_marks) + str(chemistry_marks) + str(math_marks))
@@ -545,7 +629,8 @@ def calculate_result(request):
 def sendOtp(phone_no, random_str):
     conn = http.client.HTTPSConnection("api.msg91.com")
 
-    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP for STES online exam is : " + random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
+    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP for STES online exam is : " + \
+        random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
 
     headers = {
         'authkey': "310833AqdXKu1ZYhO5e1f3f0cP1",
@@ -559,10 +644,39 @@ def sendOtp(phone_no, random_str):
 
     print(data.decode("utf-8"))
 
+# View for selecting Exam-paper-type
+
+def addQuestions(request):
+	path = os.path.join(BASE_DIR , 'questions.xlsx')
+	# print(path)
+	df = pd.read_excel(path)
+	# print(df)
+	for i in range(len(df)):
+		row = df.loc[i,:]
+		# print(row)
+		_, created = biology.objects.get_or_create(
+				question_id=row['question_id'],
+				question= row['question'],
+                image=row['image'],
+				option1= row['option1'],
+				option2= row['option2'],
+				option3= row['option3'],
+				option4= row['option4'],
+				answer= row['answer'],
+			)
+
+
+def select_type(request):
+    if request.method == 'POST':
+        return scroller(request)
+    else:
+        return render(request, "exam_type.html", {"username": request.POST.get("username")})
+
 
 def scroller(request):
     if request.method == 'POST':
-        return render(request, "scroller.html", {"username": request.POST.get("username")})
+        print(request.POST.get("exam_type"))
+        return render(request, "scroller.html", {"username": request.POST.get("username"), "exam_type": request.POST.get("exam_type")})
 
 # ---------- Validation ------------#
 
@@ -574,7 +688,7 @@ def edit(request):
         data = json.loads(request.body)
         # print(data)
         subject = request.session.get("subject")
-        if request.session.get("edited_questions")==None:
+        if request.session.get("edited_questions") == None:
             request.session["edited_questions"] = []
         edited_questions = request.session["edited_questions"]
         question_id = data["question_id"]
@@ -586,7 +700,7 @@ def edit(request):
         answer = data["answer"]
         task = data["task"]
         is_valid = bool(distutils.util.strtobool(data["is_valid"]))
-        
+
         if task == "edit":
             # If task to be performend is edit
             try:
@@ -620,6 +734,17 @@ def edit(request):
                         answer=answer,
                         is_valid=is_valid
                     )
+                
+                elif(subject.lower() == "biology"):
+                    biology.objects.filter(question_id=question_id).update(
+                        question=question,
+                        option1=option1,
+                        option2=option2,
+                        option3=option3,
+                        option4=option4,
+                        answer=answer,
+                        is_valid=is_valid
+                    )
                 status = "Edited"
                 if question_id not in edited_questions:
                     edited_questions.append(int(question_id))
@@ -630,17 +755,24 @@ def edit(request):
         elif task == "validate":
             try:
                 if(subject.lower() == "physics"):
-                     physics.objects.filter(question_id=question_id).update(is_valid=is_valid)
+                    physics.objects.filter(
+                        question_id=question_id).update(is_valid=is_valid)
                 elif(subject.lower() == "chemistry"):
-                    chemistry.objects.filter(question_id=question_id).update(is_valid=is_valid)
+                    chemistry.objects.filter(
+                        question_id=question_id).update(is_valid=is_valid)
                 elif(subject.lower() == "maths"):
-                    math.objects.filter(question_id=question_id).update(is_valid=is_valid)
+                    math.objects.filter(question_id=question_id).update(
+                        is_valid=is_valid)
+                elif(subject.lower() == "biology"):
+                    biology.objects.filter(question_id=question_id).update(
+                        is_valid=is_valid)
                 status = "Marked as Valid" if is_valid else "Marked as Invalid"
             except DataError as e:
                 # print("Error occured while updating {}".format(e))
                 status = "Error occured while updating. Try again."
 
-    return JsonResponse({"status" : status})
+    return JsonResponse({"status": status})
+
 
 def select_qset(request):
     Qset = ""
@@ -654,17 +786,19 @@ def select_qset(request):
     else:
         return render(request, template_name="select_qset.html")
 
+
 def check_qset(request):
     Qset = request.session.get("Qset")
     if Qset is None:
         return redirect('/stes_test/select_qset/')
     request.session["subject"] = request.session.get("Qset")
-    if request.session.get("edited_questions")==None:
+    if request.session.get("edited_questions") == None:
         request.session["edited_questions"] = []
 
     context_dict = {
         'page_obj': '',
         'subject': request.session["subject"],
+        'subject_name': request.session["subject"][0].upper() + request.session["subject"][1:],
         'edited_questions': request.session["edited_questions"]
     }
 
@@ -677,14 +811,14 @@ def check_qset(request):
             question_number = int(request.POST.get('q_no'))
         else:
             question_number = page_obj.start_index()
-        question  = physics.objects.filter(question_id=question_number)
+        question = physics.objects.filter(question_id=question_number)
         context_dict['next_page'] = question_number+1
         context_dict['previous_page'] = question_number-1
-        if context_dict['previous_page']==0:
+        if context_dict['previous_page'] == 0:
             context_dict['has_previous'] = False
         else:
             context_dict['has_previous'] = True
-        if context_dict['next_page']==len(phy_data):
+        if context_dict['next_page'] == len(phy_data):
             context_dict['has_next'] = False
         else:
             context_dict['has_next'] = True
@@ -695,7 +829,6 @@ def check_qset(request):
             pages.append([page.number, page.start_index(), page.end_index()])
         context_dict["pages"] = pages
 
-
     elif Qset.lower() == "chemistry" or request.session["subject"] == "chemistry":
         chem_data = chemistry.objects.all()
         paginator = Paginator(chem_data, 30)
@@ -705,14 +838,14 @@ def check_qset(request):
             question_number = int(request.POST.get('q_no'))
         else:
             question_number = page_obj.start_index()
-        question  = chemistry.objects.filter(question_id=question_number)
+        question = chemistry.objects.filter(question_id=question_number)
         context_dict['next_page'] = question_number+1
         context_dict['previous_page'] = question_number-1
-        if context_dict['previous_page']==0:
+        if context_dict['previous_page'] == 0:
             context_dict['has_previous'] = False
         else:
             context_dict['has_previous'] = True
-        if context_dict['next_page']==len(chem_data):
+        if context_dict['next_page'] == len(chem_data):
             context_dict['has_next'] = False
         else:
             context_dict['has_next'] = True
@@ -732,14 +865,41 @@ def check_qset(request):
             question_number = int(request.POST.get('q_no'))
         else:
             question_number = page_obj.start_index()
-        question  = math.objects.filter(question_id=question_number)
+        question = math.objects.filter(question_id=question_number)
         context_dict['next_page'] = question_number+1
         context_dict['previous_page'] = question_number-1
-        if context_dict['previous_page']==0:
+        if context_dict['previous_page'] == 0:
             context_dict['has_previous'] = False
         else:
             context_dict['has_previous'] = True
-        if context_dict['next_page']==len(math_data):
+        if context_dict['next_page'] == len(math_data):
+            context_dict['has_next'] = False
+        else:
+            context_dict['has_next'] = True
+        context_dict['question'] = question
+        context_dict["page_obj"] = page_obj
+        pages = []
+        for page in paginator:
+            pages.append([page.number, page.start_index(), page.end_index()])
+        context_dict["pages"] = pages
+
+    elif Qset.lower() == "biology" or request.session["subject"] == "biology":
+        biology_data = biology.objects.all()
+        paginator = Paginator(biology_data, 30)
+        page_number = request.POST.get('page')
+        page_obj = paginator.get_page(page_number)
+        if request.POST.get('q_no'):
+            question_number = int(request.POST.get('q_no'))
+        else:
+            question_number = page_obj.start_index()
+        question = biology.objects.filter(question_id=question_number)
+        context_dict['next_page'] = question_number+1
+        context_dict['previous_page'] = question_number-1
+        if context_dict['previous_page'] == 0:
+            context_dict['has_previous'] = False
+        else:
+            context_dict['has_previous'] = True
+        if context_dict['next_page'] == len(biology_data):
             context_dict['has_next'] = False
         else:
             context_dict['has_next'] = True

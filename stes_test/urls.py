@@ -9,6 +9,7 @@ urlpatterns = [
     path('rules/', views.rules, name='rules'),
     path('main_test/', views.main_test, name='main_test'),
     path('calculate_result/', views.calculate_result, name='calculate_result'),
+    path('exam_type/', views.select_type, name='select_type'),
     path('scroller/', views.scroller, name='scroller'),
     path('select_qset/', views.select_qset, name="select_qset"),
     path('validate/', views.check_qset, name='validate'),
