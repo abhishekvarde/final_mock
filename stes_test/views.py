@@ -18,6 +18,8 @@ import os
 import pandas as pd
 from cet.settings import BASE_DIR
 
+import urllib.parse
+
 # Create your views here.
 
 
@@ -502,7 +504,7 @@ def main_test(request):
         return render(request, 'ok.html', {"new_question_data": new_question_data, "exam_type": exam_type, "question_number": 1,
                                            "question_no_prev": question_no_prev, "question_no_next": question_no_next,
                                            "physics": physics, "chemistry": chemistry, "math": math, "biology": biology, "bookmark": 0,
-                                           "invalid": 0, "username": username, "backend_time": 10800000,
+                                           "invalid": 0, "username": username, "backend_time": exam_time,
                                            "next_question_marked_answer": next_question_marked_answer})
 
 
@@ -669,17 +671,22 @@ def calculate_result(request):
 
 # view for messaging API
 def sendOtp(phone_no, random_str):
-    conn = http.client.HTTPSConnection("api.msg91.com")
+    conn = http.client.HTTPSConnection("www.hellotext.live")
 
-    payload = "{ \"sender\": \"StesEx\", \"route\": \"4\", \"country\": \"91\", \"sms\": [ { \"message\": \"Your OTP for STES online exam is : " + \
-        random_str + "\", \"to\": [ \"" + phone_no + "\" ] } ] } "
+    message_content = "Your OTP for STES online exam is : {#" + \
+        random_str + "#} All the best, Prof. Prasad Teli SInhgad Institutes"
 
-    headers = {
-        'authkey': "310833AqdXKu1ZYhO5e1f3f0cP1",
-        'content-type': "application/json"
+    url = {
+        "apikey": "aKwZDUfdL4ID7rgi",
+        "senderid": "PRSTEL",
+        "templateid": "TEST OTP",
+        "number": phone_no,
+        "message": message_content
     }
 
-    conn.request("POST", "/api/v2/sendsms", payload, headers)
+    print(urllib.parse.urlencode(url))
+    url = urllib.parse.urlencode(url)
+    conn.request("POST", "/vb/apikey.php?" + url)
 
     res = conn.getresponse()
     data = res.read()
@@ -687,26 +694,6 @@ def sendOtp(phone_no, random_str):
     print(data.decode("utf-8"))
 
 # View for selecting Exam-paper-type
-
-
-def addQuestions(request):
-    path = os.path.join(BASE_DIR, 'questions.xlsx')
-    # print(path)
-    df = pd.read_excel(path)
-    # print(df)
-    for i in range(len(df)):
-        row = df.loc[i, :]
-        # print(row)
-        _, created = biology.objects.get_or_create(
-            question_id=row['question_id'],
-            question=row['question'],
-            image=row['image'],
-            option1=row['option1'],
-            option2=row['option2'],
-            option3=row['option3'],
-            option4=row['option4'],
-            answer=row['answer'],
-        )
 
 
 def select_type(request):
