@@ -131,6 +131,7 @@
        {% csrf_token %}
         <p><h5><input type="checkbox" name="box1" id="box1"><b><i> I have read all the instructions and ready to give the exam.</i></b></h5></p>
         <br>
+        <input type="hidden" name="exam_type" value="{{ exam_type }}">
     <button type="submit" class="btn btn-success align-center" name = "username" value={{username}} >Accept</button>
 
     </form>

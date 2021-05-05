@@ -72,8 +72,8 @@ def display_results(request):
 
             qset = cursor.fetchall()
 
-            print(qset)
-            return render(request, 'display_results.html', {"qset": qset})
+            # print(qset)
+            return render(request, 'display_results.html', {"qset": qset, "qset_length": len(qset)})
 
     else:
         if request.user.is_authenticated:
@@ -93,6 +93,7 @@ def admin_login(request):
             login(request, user)
             return redirect('display_results')
         else:
+            print("Username :", user)
             return render(request, 'admin_login.html')
 
     return render(request, 'admin_login.html')

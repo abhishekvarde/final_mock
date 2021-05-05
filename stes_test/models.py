@@ -85,14 +85,14 @@ class student(models.Model):
 
 
 defaultValues = []
-for i in range(150):
+for i in range(200):
     defaultValues.append(str(0))
 defaultValues = ",".join(defaultValues)
 
 
 class question_answers(models.Model):
     username = models.CharField(max_length=40)
-    paper_type = models.CharField(max_length=3)
+    exam_type = models.CharField(max_length=4)
     physics_questions = models.CharField(max_length=250)
     physics_answers = models.CharField(max_length=250)
     chemistry_questions = models.CharField(max_length=250)
@@ -101,10 +101,10 @@ class question_answers(models.Model):
     math_answers = models.CharField(max_length=250)
     biology_questions = models.CharField(max_length=250)
     biology_answers = models.CharField(max_length=250)
-    marked_answers = models.CharField(max_length=300, default=defaultValues)
-    bookmark = models.CharField(max_length=300, default=defaultValues)
-    invalid = models.CharField(max_length=300, default=defaultValues)
-    attempted = models.CharField(max_length=300, default=defaultValues)
+    marked_answers = models.CharField(max_length=400, default=defaultValues)
+    bookmark = models.CharField(max_length=400, default=defaultValues)
+    invalid = models.CharField(max_length=400, default=defaultValues)
+    attempted = models.CharField(max_length=400, default=defaultValues)
     time_left = models.IntegerField(default=10800000)
 
     def __str__(self):
@@ -113,7 +113,7 @@ class question_answers(models.Model):
 
 class results(models.Model):
     username = models.CharField(max_length=40)
-    paper_type = models.CharField(max_length=3)
+    exam_type = models.CharField(max_length=4)
     physics_marks = models.IntegerField(default=0)
     chemistry_marks = models.IntegerField(default=0)
     math_marks = models.IntegerField(default=0)

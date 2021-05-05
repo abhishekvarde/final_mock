@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   {% load static %}
+
   <head>
     <title>Login</title>
     <style>
@@ -32,7 +33,7 @@
 
       h1 {
         text-align: center;
-        margin:0px;
+        margin: 0px;
       }
 
       .page {
@@ -41,7 +42,7 @@
         margin: auto;
       }
 
-      .form{
+      .form {
         display: flex;
         flex-flow: row;
         gap: 5%;
@@ -59,25 +60,26 @@
         opacity: 0.7;
         box-shadow: 0 0 20px 0 rgba(87, 22, 22, 0.2),
           0 5px 5px 0 rgba(44, 11, 11, 0.24);
-        border-radius:15px;
+        border-radius: 15px;
         padding-bottom: 15px;
       }
 
-      .form-block>h1{
+      .form-block > h1 {
         padding: 5px;
         margin: 0px;
       }
-      
-      .form-block>p{
-        font-size:24px;
+
+      .form-block > p {
+        font-size: 24px;
         margin: 5px;
       }
-      
-      .form-block>label{
+
+      .form-block > label {
         cursor: pointer;
         padding: 0px 40px;
       }
-      .radio{
+
+      .radio {
         padding: auto;
         width: 100%;
         cursor: pointer;
@@ -162,18 +164,25 @@
             </label>
           </div>
           <div class="form-block">
-            <input type="radio" class="radio" name="exam_type" value="BMB" id="BMB"/>
+            <input
+              type="radio"
+              class="radio"
+              name="exam_type"
+              value="BMB"
+              id="BMB"
+            />
             <label for="BMB">
               <div>
-              <h1>PCMB</h1>
-              <p>Physics</p>
-              <p>Chemistry</p>
-              <p>Maths & Biology</p>
+                <h1>BMB</h1>
+                <p>Physics</p>
+                <p>Chemistry</p>
+                <p>Maths & Biology</p>
               </div>
             </label>
           </div>
         </div>
       </div>
+      <input type="hidden" name="username" value="{{ username }}" />
       <button type="submit">Proceed</button>
     </form>
   </body>

@@ -149,7 +149,7 @@ def otp(request):
                 # else:
                 # print("fgdsjkhgsdkjhfgkdsjfhgksdjfghsdlkjfghsdlkfjghdskfjghdslkjghdlkjgfhdkjhgkjdhgkjsdhgkjshd")
                 # return rules(request)
-                return redirect('/stest_test/exam_type/')
+                return select_type(request)
 
             else:
                 messages.warning(request, 'Invalid username or password.')
@@ -184,13 +184,16 @@ def main_test(request):
         return otp(request)
 
     username = request.POST.get('username')
-    p_type = request.POST.get('exam_type')         # Paper type PCM/PCB/PCMB
+    exam_type = request.POST.get('exam_type')         # Exam type PCM/PCB/PCMB
 
-    if question_answers.objects.filter(username=username).first():
+    # print(username, exam_type)
+
+    if question_answers.objects.filter(username=username, exam_type=exam_type).first():
 
         cursor = connection.cursor()
 
         username = request.POST.get('username')
+        exam_type = request.POST.get('exam_type')
         bookmark = request.POST.get('bookmark2')
         invalid = request.POST.get('invalid2')
         previous_question_no = request.POST.get('previous_question_no')
@@ -199,7 +202,8 @@ def main_test(request):
         backend_time = request.POST.get('time_left')
 
         # print("username is " + username)
-        # print("username is " + backend_time)
+        # print("exam_type is " + exam_type)
+        # print("backend_time is " + backend_time)
         #
         # print("bookmark " + str(bookmark))
         # print("invalid " + str(invalid))
@@ -253,37 +257,35 @@ def main_test(request):
                 "username = \""
                 + user + "\"")
             subject_id = 2
-        elif p_type == "PCM":
+        elif 101 <= int(next_question_no) <= 150 and (exam_type == "PCM" or exam_type == "PCMB"):
+            print("PCM")
             cursor.execute(
                 "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
                 "where "
                 "username = \""
                 + user + "\"")
             subject_id = 3
-        elif p_type == "PCB":
+        elif 101 <= int(next_question_no) <= 150 and exam_type == "PCB":
+            cursor.execute(
+                "select bookmark, invalid, marked_answers, biology_questions, attempted from stes_test_question_answers "
+                "where "
+                "username = \""
+                + user + "\"")
+            subject_id = 3
+        elif 151 <= int(next_question_no) <= 200 and exam_type == "PCMB":
             cursor.execute(
                 "select bookmark, invalid, marked_answers, biology_questions, attempted from stes_test_question_answers "
                 "where "
                 "username = \""
                 + user + "\"")
             subject_id = 4
-        # else:
-        #     cursor.execute(
-        #         "select bookmark, invalid, marked_answers, math_questions, attempted from stes_test_question_answers "
-        #         "where "
-        #         "username = \""
-        #         + user + "\"")
-        #     subject_id = 5
-        #     cursor.execute(
-        #         "select bookmark, invalid, marked_answers, biology_questions, attempted from stes_test_question_answers "
-        #         "where "
-        #         "username = \""
-        #         + user + "\"")
-        #     subject_id = 6
 
+        # print("\nQuestion No: " + str(next_question_no))
+        # print("\nSubject Id: ",subject_id)
         question_number = int(next_question_no) - 50 * (subject_id - 1)
 
         qset = cursor.fetchall()
+        # print(qset)
 
         bookmark_list = qset[0][0].split(",")
         invalid_list = qset[0][1].split(",")
@@ -296,10 +298,11 @@ def main_test(request):
         # print("current question number is : " + str(question_number))
 
         question_id_in_subject_table = new_question_number[question_number - 1]
+
         next_question_marked_answer = marked_answer_list[int(
             next_question_no) - 1]
 
-        # print("question id to be featched : -" + str(question_id_in_subject_table) + "-")
+        # print("question id to be fetched : -" + str(question_id_in_subject_table) + "-")
 
         if previous_question_no is not None:
             bookmark_list[int(previous_question_no) - 1] = bookmark
@@ -307,8 +310,8 @@ def main_test(request):
             marked_answer_list[int(previous_question_no) - 1] = marked_answer
 
             if marked_answer != "0":
-                # print("Marked answer : " + marked_answer)
-                # print("Attempted changed for question : " + previous_question_no)
+                print("Marked answer : " + marked_answer)
+                print("Attempted changed for question : " + previous_question_no)
                 attempted[int(previous_question_no) - 1] = "1"
             else:
                 attempted[int(previous_question_no) - 1] = "0"
@@ -328,17 +331,15 @@ def main_test(request):
         elif 51 <= int(next_question_no) <= 100:
             cursor.execute("select question, option1, option2, option3, option4, image from stes_test_chemistry where "
                            "question_id = " + question_id_in_subject_table)
-        elif p_type == "PCM":
+        elif 101 <= int(next_question_no) <= 150 and (exam_type == "PCM" or exam_type == "PCMB"):
             cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
                            "question_id = " + question_id_in_subject_table)
-        elif p_type == "PCB":
+        elif 101 <= int(next_question_no) <= 150 and exam_type == "PCB":
             cursor.execute("select question, option1, option2, option3, option4, image from stes_test_biology where "
                            "question_id = " + question_id_in_subject_table)
-        # else:
-        #     cursor.execute("select question, option1, option2, option3, option4, image from stes_test_math where "
-        #                    "question_id = " + question_id_in_subject_table)
-        #     cursor.execute("select question, option1, option2, option3, option4, image from stes_test_biology where "
-        #                    "question_id = " + question_id_in_subject_table)
+        elif 151 <= int(next_question_no) <= 200 and exam_type == "PCMB":
+            cursor.execute("select question, option1, option2, option3, option4, image from stes_test_biology where "
+                           "question_id = " + question_id_in_subject_table)
         new_question_data = cursor.fetchall()
 
         # print(new_question_data)
@@ -348,22 +349,20 @@ def main_test(request):
         math = []
         biology = []
 
-        for i in range(1, 151):
+        for i in range(1, 201):
             if i <= 50:
                 physics.append(
                     (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
             elif 51 <= i <= 100:
                 chemistry.append(
                     (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
-            elif p_type == "PCM":
+            elif 101 <= i <= 150 and (exam_type == "PCM" or exam_type == "PCMB"):
                 math.append(
                     (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
-            elif p_type == "PCB":
+            elif 101 <= i <= 150 and exam_type == "PCB":
                 biology.append(
                     (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
-            else:
-                math.append(
-                    (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
+            elif exam_type == "PCMB":
                 biology.append(
                     (i, bookmark_list[i - 1], invalid_list[i - 1], attempted[i - 1]))
 
@@ -376,18 +375,21 @@ def main_test(request):
         question_invalid_status = invalid_list[int(next_question_no) - 1]
 
         # print(new_question_data)
+        total_questions = 150
+        if exam_type == "PCMB":
+            total_questions = 200
 
         return render(request, 'ok.html',
-                      {"new_question_data": new_question_data, "exam_type": p_type, "question_number": next_question_no,
+                      {"new_question_data": new_question_data, "exam_type": exam_type, "question_number": next_question_no,
                        "question_no_prev": question_no_prev, "question_no_next": question_no_next,
                        "physics": physics, "chemistry": chemistry, "math": math, "biology": biology, "bookmark": question_bookmark_status,
                        "invalid": question_invalid_status, "username": username, "backend_time": backend_time,
-                       "next_question_marked_answer": next_question_marked_answer})
+                       "next_question_marked_answer": next_question_marked_answer, " total_questions": total_questions})
 
     else:
 
         print("username received : " + username)
-
+        print("exam_type : " + exam_type)
         cursor = connection.cursor()
         cursor.execute(
             "update stes_test_physics set rand = rand() where question_id > 0;"
@@ -404,12 +406,13 @@ def main_test(request):
             "select question_id, answer from stes_test_chemistry order by rand limit 50;")
         qset2 = cursor.fetchall()
 
-        if p_type == "PCM" or p_type == "BMB":
+        if exam_type == "PCM" or exam_type == "PCMB":
             cursor.execute(
                 "select question_id, answer from stes_test_math order by rand limit 50;")
             qset3 = cursor.fetchall()
 
-        if p_type == "PCB" or p_type == "BMB":
+        if exam_type == "PCB" or exam_type == "PCMB":
+            print("Questions fetched in qset4")
             cursor.execute(
                 "select question_id, answer from stes_test_biology order by rand limit 50;")
             qset4 = cursor.fetchall()
@@ -431,15 +434,22 @@ def main_test(request):
             chemistryQ.append(str(q[0]))
             chemistryA.append(str(q[1]))
 
-        for q in qset3:
-            mathQ.append(str(q[0]))
-            mathA.append(str(q[1]))
+        if exam_type == "PCM" or exam_type == "PCMB":
+            for q in qset3:
+                mathQ.append(str(q[0]))
+                mathA.append(str(q[1]))
 
-        for q in qset4:
-            biologyQ.append(str(q[0]))
-            biologyA.append(str(q[1]))
+        if exam_type == "PCB" or exam_type == "PCMB":
+            for q in qset4:
+                biologyQ.append(str(q[0]))
+                biologyA.append(str(q[1]))
+
+        exam_time = 10800000
+        if exam_type == "PCMB":
+            exam_time = 14400000
 
         ins = question_answers(username=username,
+                               exam_type=exam_type,
                                physics_questions=",".join(physicsQ),
                                physics_answers=",".join(physicsA),
                                chemistry_questions=",".join(chemistryQ),
@@ -448,11 +458,14 @@ def main_test(request):
                                math_answers=",".join(mathA),
                                biology_questions=",".join(biologyQ),
                                biology_answers=",".join(biologyA),
+                               time_left=exam_time,
                                )
         ins.save()
 
         cursor = connection.cursor()
         user = username  # request.user
+
+        # Pick the first question
         cursor.execute(
             "select physics_questions, marked_answers from stes_test_question_answers where username = \"" + user + "\"")
         new_set = cursor.fetchall()
@@ -464,6 +477,7 @@ def main_test(request):
 
         new_question_data = cursor.fetchall()
 
+        # For bookmarks
         physics = []
         chemistry = []
         math = []
@@ -474,15 +488,18 @@ def main_test(request):
                 physics.append((i, 0, 0))
             elif 51 <= i <= 100:
                 chemistry.append((i, 0, 0))
-            elif p_type == "PCM":
+            elif exam_type == "PCM":
                 math.append((i, 0, 0))
-            elif p_type == "PCB":
+            elif exam_type == "PCB":
                 biology.append((i, 0, 0))
+            elif exam_type == "PCMB":
+                math.append((i, 0, 0))
+                biology.append((i+50, 0, 0))
 
         question_no_prev = 0
         question_no_next = 2
 
-        return render(request, 'ok.html', {"new_question_data": new_question_data, "exam_type": p_type, "question_number": 1,
+        return render(request, 'ok.html', {"new_question_data": new_question_data, "exam_type": exam_type, "question_number": 1,
                                            "question_no_prev": question_no_prev, "question_no_next": question_no_next,
                                            "physics": physics, "chemistry": chemistry, "math": math, "biology": biology, "bookmark": 0,
                                            "invalid": 0, "username": username, "backend_time": 10800000,
@@ -492,11 +509,12 @@ def main_test(request):
 def rules(request):
     if request.method == 'POST':
         if request.POST.get("username") and "box1" in request.POST:
-            # print("Iam here")
+            # print("I am here")
+            # print(request.POST.get("exam_type"))
             return main_test(request)
         else:
-            # print(request.POST.get("exam_type"))
-            return render(request, 'rules.html', {"username": request.POST.get("username")})
+            # print("In Rules",request.POST.get("exam_type"))
+            return render(request, 'rules.html', {"username": request.POST.get("username"), "exam_type": request.POST.get("exam_type")})
 
 
 def calculate_result(request):
@@ -527,24 +545,38 @@ def calculate_result(request):
         + username + "\"")
 
     cursor.execute(
-        "select physics_answers, chemistry_answers, math_answers, biology_answers, marked_answers, attempted from stes_test_question_answers "
+        "select exam_type, physics_answers, chemistry_answers, math_answers, biology_answers, marked_answers, attempted from stes_test_question_answers "
         "where username = \"" + username + "\"")
     qset = cursor.fetchall()
     # print("Quesry set for username : " + username)
     # print(qset)
 
-    physics_answers = qset[0][0]
-    chemistry_answers = qset[0][1]
-    math_answers = qset[0][2]
-    biology_answers = qset[0][3]
-    marked_answers = qset[0][4]
-    attempted = qset[0][5]
+    exam_type = qset[0][0]
+    physics_answers = qset[0][1]
+    chemistry_answers = qset[0][2]
+    math_answers = qset[0][3]
+    biology_answers = qset[0][4]
+    marked_answers = qset[0][5]
+    attempted = qset[0][6]
 
     attempted = list(map(int, attempted.split(",")))
     physics_attempted = len(list(filter(lambda a: a != 0, attempted[:50])))
     chemistry_attempted = len(
         list(filter(lambda a: a != 0, attempted[50:100])))
-    math_attempted = len(list(filter(lambda a: a != 0, attempted[100:])))
+    if exam_type == "PCM" or exam_type == "PCMB":
+        math_attempted = len(
+            list(filter(lambda a: a != 0, attempted[100:150])))
+    else:
+        math_attempted = 0
+
+    if exam_type == "PCB":
+        biology_attempted = len(
+            list(filter(lambda a: a != 0, attempted[100:150])))
+    elif exam_type == "PCMB":
+        biology_attempted = len(
+            list(filter(lambda a: a != 0, attempted[151:])))
+    else:
+        biology_attempted = 0
 
     physics_marks = 0
     chemistry_marks = 0
@@ -554,7 +586,7 @@ def calculate_result(request):
     physics_answers = physics_answers.split(",")
     chemistry_answers = chemistry_answers.split(",")
     math_answers = math_answers.split(",")
-    biology_marks = biology_answers.split(",")
+    biology_answers = biology_answers.split(",")
     marked_answers = marked_answers.split(",")
     marked_answers[int(previous_question_no) - 1] = marked_answer
 
@@ -575,15 +607,17 @@ def calculate_result(request):
             chemistry_marks += 1
         i += 1
 
-    for p in math_answers:
-        if p == marked_answers[i]:
-            math_marks += 2
-        i += 1
+    if exam_type == "PCM" or exam_type == "PCMB":
+        for p in math_answers:
+            if p == marked_answers[i]:
+                math_marks += 2
+            i += 1
 
-    for p in biology_answers:
-        if p == marked_answers[i]:
-            biology_marks += 2
-        i += 1
+    if exam_type == "PCB" or exam_type == "PCMB":
+        for p in biology_answers:
+            if p == marked_answers[i]:
+                biology_marks += 2
+            i += 1
 
     marked_answers = ",".join(marked_answers)
     total_marks = physics_marks + chemistry_marks + math_marks + biology_marks
@@ -591,13 +625,21 @@ def calculate_result(request):
     cursor.execute("update stes_test_question_answers set marked_answers = \"" + marked_answers +
                    "\" where username = \"" + username + "\"")
 
-    set = results(username=username, physics_marks=physics_marks, chemistry_marks=chemistry_marks,
+    set = results(username=username,
+                  exam_type=exam_type,
+                  physics_marks=physics_marks,
+                  chemistry_marks=chemistry_marks,
                   math_marks=math_marks,
                   biology_marks=biology_marks,
                   total_marks=total_marks)
     set.save()
 
+    total_questions = 150
+    if exam_type == "PCMB":
+        total_questions = 200
+
     context_dict = {
+        'exam_type': exam_type,
         'physics_marks': physics_marks,
         'physics_attempted': physics_attempted,
         'physics_unattempted': 50 - physics_attempted,
@@ -615,7 +657,7 @@ def calculate_result(request):
         'total_marks': total_marks,
         'total_attempted': physics_attempted + chemistry_attempted + math_attempted + biology_attempted,
         'total_correct_ans': total_marks - int(math_marks/2) - int(biology_marks/2),
-        'total_unattempted': 150 - (physics_attempted + chemistry_attempted + math_attempted + biology_attempted),
+        'total_unattempted': total_questions - (physics_attempted + chemistry_attempted + math_attempted + biology_attempted),
     }
 
     logout(request)
@@ -646,28 +688,29 @@ def sendOtp(phone_no, random_str):
 
 # View for selecting Exam-paper-type
 
+
 def addQuestions(request):
-	path = os.path.join(BASE_DIR , 'questions.xlsx')
-	# print(path)
-	df = pd.read_excel(path)
-	# print(df)
-	for i in range(len(df)):
-		row = df.loc[i,:]
-		# print(row)
-		_, created = biology.objects.get_or_create(
-				question_id=row['question_id'],
-				question= row['question'],
-                image=row['image'],
-				option1= row['option1'],
-				option2= row['option2'],
-				option3= row['option3'],
-				option4= row['option4'],
-				answer= row['answer'],
-			)
+    path = os.path.join(BASE_DIR, 'questions.xlsx')
+    # print(path)
+    df = pd.read_excel(path)
+    # print(df)
+    for i in range(len(df)):
+        row = df.loc[i, :]
+        # print(row)
+        _, created = biology.objects.get_or_create(
+            question_id=row['question_id'],
+            question=row['question'],
+            image=row['image'],
+            option1=row['option1'],
+            option2=row['option2'],
+            option3=row['option3'],
+            option4=row['option4'],
+            answer=row['answer'],
+        )
 
 
 def select_type(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and "exam_type" in request.POST and "username" in request.POST:
         return scroller(request)
     else:
         return render(request, "exam_type.html", {"username": request.POST.get("username")})
@@ -675,7 +718,7 @@ def select_type(request):
 
 def scroller(request):
     if request.method == 'POST':
-        print(request.POST.get("exam_type"))
+        print("In scroller", request.POST.get("exam_type"))
         return render(request, "scroller.html", {"username": request.POST.get("username"), "exam_type": request.POST.get("exam_type")})
 
 # ---------- Validation ------------#
@@ -734,7 +777,7 @@ def edit(request):
                         answer=answer,
                         is_valid=is_valid
                     )
-                
+
                 elif(subject.lower() == "biology"):
                     biology.objects.filter(question_id=question_id).update(
                         question=question,

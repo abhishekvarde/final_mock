@@ -117,11 +117,15 @@
         <img id="img7" src="{% static 'images/Slide_6.jpg' %}" />
       </center>
     </div>
-
+    <div>
+      <h2 style="text-align: center">
+        Please wait while we are loading your Exam.
+      </h2>
+    </div>
     <form method="POST" action="/stes_test/rules/">
       {% csrf_token %}
       <center>
-        <input type="hidden" value="{{ exam_type }}" name="exam_type">
+        <input type="hidden" value="{{ exam_type }}" name="exam_type" />
         <button id="but" type="Submit" value="{{ username }}" name="username">
           Proceed
         </button>

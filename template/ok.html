@@ -46,7 +46,7 @@
 				document.getElementById("demo").innerHTML = "Time Remaining : " + "EXPIRED";
 				end_time();
 
-				document.getElementById("submit_test").click();
+				// document.getElementById("submit_test").click();
 			}
 		}, 1000);
 	</script>
@@ -97,8 +97,10 @@
 		}
 
 		.welcome {
-			float: left;
-			width: 75%;
+			display: flex;
+    	width: 75%;
+    	padding: 0px 20px;
+    	justify-content: space-between;
 		}
 
 		.time {
@@ -311,6 +313,7 @@
 		<div class="top-container">
 			<div class="welcome">
 				<h5><b>Welcome,</b> {{ username }}</h5>
+				<h5>Exam Type: <b>{{ exam_type }}</b></h5>
 			</div>
 			<div class="time">
 				<input type="hidden" id="id_time" name="time_left" value="">
@@ -322,6 +325,7 @@
 		<div class="main-container">
 			<input type="hidden" id="imp" name="next_question_no" value="">
 			<input type="hidden" name="username" value="{{ username }}">
+			<input type="hidden" name="exam_type" value="{{ exam_type }}">
 			<div class="container">
 				<div class="col">
 					<a href="question">
@@ -386,7 +390,7 @@
 							</button>
 						</a>
 						{% endif %}
-						{% if question_number != "150" %}
+						{% if question_number != total_questions %}
 						<a class="button2" href="?page={{ question_no_next }}">
 							<button onclick="assign({{ question_no_next }})" type="submit" id="next" class="btn btn-success save">Save
 								&
@@ -400,16 +404,16 @@
 			<div class="navigation" style="font-family: 'Poppins';">
 				<input type="hidden" name="username" value="{{ username }}">
 				<div class="nav-titles">
-					<button type="button" class="nav-title btn btn-primary">Physics</button>
-					<button type="button" class="nav-title btn btn-primary">Chemistry</button>
-					{% ifequal type "PCM" %}
-						<button type="button" class="nav-title btn btn-primary">Maths</button>
+					<button type="submit" onclick="assign(1)"  class="nav-title btn btn-primary">Physics</button>
+					<button type="submit" onclick="assign(51)"  class="nav-title btn btn-primary">Chemistry</button>
+					{% ifequal exam_type "PCM" %}
+						<button type="submit" onclick="assign(101)"  class="nav-title btn btn-primary">Maths</button>
 					{% else %}
-						{% ifequal type "PCB" %}
-							<button type="button" class="nav-title btn btn-primary">Biology</button>
+						{% ifequal exam_type "PCB" %}
+							<button type="submit" onclick="assign(101)"  class="nav-title btn btn-primary">Biology</button>
 						{% else %}
-							<button type="button" class="nav-title btn btn-primary">Maths</button>
-							<button type="button" class="nav-title btn btn-primary">Biology</button>
+							<button type="submit" onclick="assign(101)"  class="nav-title btn btn-primary">Maths</button>
+							<button type="submit" onclick="assign(151)"  class="nav-title btn btn-primary">Biology</button>
 						{% endifequal %}
 					{% endifequal %}
 				</div>
@@ -460,7 +464,7 @@
 						{% endfor %}
 					</div>
 				</div>
-				{% ifequal type "PCM" %}
+				{% ifequal exam_type "PCM" %}
 					<div class="navtab hide">
 						<div class="nav-buttons">
 							{% for n in math %}
@@ -486,7 +490,7 @@
 						</div>
 					</div>
 				{% else %}
-					{% ifequal type "PCB" %}
+					{% ifequal exam_type "PCB" %}
 						<div class="navtab hide">
 							<div class="nav-buttons">
 								{% for n in biology %}
@@ -520,7 +524,7 @@
 										class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
 									{% if n.1 == "1" %}
 									<script>
-										console.log("Cant do it");
+										// console.log("Cant do it");
 										document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
 									</script>
 									{% elif n.2 == "1" %}
@@ -544,7 +548,7 @@
 										class="btn btn-secondary btn-circle btn-sm">{{ n.0 }}</button>
 									{% if n.1 == "1" %}
 									<script>
-										console.log("Cant do it");
+										// console.log("Cant do it");
 										document.getElementById("question{{ n.0 }}").classList.toggle('bookmark');
 									</script>
 									{% elif n.2 == "1" %}
@@ -566,6 +570,7 @@
 					var nav_titles = document.getElementsByClassName('nav-title');
 					var nav_tabs = document.getElementsByClassName('navtab');
 					var sub = Math.floor({{ question_number }} / 50);
+					if({{ question_number}} % 50 == 0) sub = sub - 1;
 					nav_titles[sub].classList.add("selected");
 					nav_tabs[sub].classList.remove('hide');
 
