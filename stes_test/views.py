@@ -1,7 +1,6 @@
 import distutils.core
 import random
 import json
-from datetime import date
 from django.shortcuts import render, HttpResponse, redirect
 from .models import student, question_answers, results, physics, math, chemistry, biology
 from django.db import connection, DataError
@@ -13,7 +12,7 @@ import http.client
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
+import cet.secrets
 import urllib.parse
 
 # Create your views here.
@@ -670,12 +669,12 @@ def sendOtp(phone_no, random_str):
     conn = http.client.HTTPSConnection("www.hellotext.live")
 
     message_content = "Your OTP for STES online exam is : {" + \
-        random_str + "} All the best, Prof. Prasad Teli SInhgad Institutes"
+        random_str + "} All the best, Prof. Prasad Teli Sinhgad Institutes"
 
     url = {
-        "apikey": "aKwZDUfdL4ID7rgi",
-        "senderid": "PRSTEL",
-        "templateid": "TEST OTP",
+        "apikey": cet.secrets.APIKEY,
+        "senderid": cet.secrets.SENDERID,
+        "templateid": cet.secrets.TEMPLATEID,
         "number": phone_no,
         "message": message_content
     }

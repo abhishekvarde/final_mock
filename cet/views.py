@@ -32,13 +32,13 @@ def display_results(request):
             date_box = "-".join(date_box)
 
             query = """ 
-                           SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.physics_marks,str.chemistry_marks,str.math_marks,str.total_marks,au.date_joined 
+                           SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.exam_type,str.physics_marks,str.chemistry_marks,str.math_marks,str.biology_marks,str.total_marks,au.date_joined 
                            FROM stes_test_student sts 
                            LEFT JOIN stes_test_results str ON sts.email = str.username
                            JOIN auth_user au ON au.username = sts.email
                            where au.date_joined like \"""" + date_box + """\" 
                            UNION 
-                           SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.physics_marks,str.chemistry_marks,str.math_marks,str.total_marks,au.date_joined  
+                           SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.exam_type,str.physics_marks,str.chemistry_marks,str.math_marks,str.biology_marks,str.total_marks,au.date_joined
                            FROM stes_test_student sts
                            RIGHT JOIN stes_test_results str ON sts.email = str.username 
                            JOIN auth_user au ON au.username = sts.email
@@ -56,13 +56,13 @@ def display_results(request):
         else:
             cursor = connection.cursor()
             query = """ 
-                        SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.physics_marks,str.chemistry_marks,str.math_marks,str.total_marks,au.date_joined 
+                        SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.exam_type,str.physics_marks,str.chemistry_marks,str.math_marks,str.biology_marks,str.total_marks,au.date_joined
                         FROM stes_test_student sts 
                         LEFT JOIN stes_test_results str ON sts.email = str.username
                         JOIN auth_user au ON au.username = sts.email
                         where au.date_joined like \"""" + str(date.today()) + """%\"
                         UNION 
-                        SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.physics_marks,str.chemistry_marks,str.math_marks,str.total_marks,au.date_joined  
+                        SELECT sts.first_name,sts.last_name,sts.college,sts.address_line_1,sts.city,sts.district,sts.state,sts.email,sts.phone_no,sts.alt_phone_no,str.exam_type,str.physics_marks,str.chemistry_marks,str.math_marks,str.biology_marks,str.total_marks,au.date_joined
                         FROM stes_test_student sts
                         RIGHT JOIN stes_test_results str ON sts.email = str.username 
                         JOIN auth_user au ON au.username = sts.email
