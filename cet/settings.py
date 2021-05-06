@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from .secrets import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,15 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # print(f)
 
 
-SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
-#
-# with open('/cet/secret_key.txt') as f:
-#     SECRET_KEY = f.read().strip()
-
-# SECRET_KEY = 'kj^7kvotb_+=1217k92^r1o@5zb009jq_dvc25dobwfd=9sd=y'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['157.245.103.212', 'sinhgadonline.in', '127.0.0.1', 'www.sinhgadonline.in']
 
@@ -50,7 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,11 +87,11 @@ WSGI_APPLICATION = 'cet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cet_portal',
-        'USER': 'root',
-        'PASSWORD': 'Pavan@2409',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'PORT': PORT,
         'OPTIONS': {
             # 'read_default_file': '/etc/mysql/my.cnf',
         },

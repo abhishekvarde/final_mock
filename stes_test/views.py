@@ -14,10 +14,6 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-import os
-import pandas as pd
-from cet.settings import BASE_DIR
-
 import urllib.parse
 
 # Create your views here.
@@ -673,8 +669,8 @@ def calculate_result(request):
 def sendOtp(phone_no, random_str):
     conn = http.client.HTTPSConnection("www.hellotext.live")
 
-    message_content = "Your OTP for STES online exam is : {#" + \
-        random_str + "#} All the best, Prof. Prasad Teli SInhgad Institutes"
+    message_content = "Your OTP for STES online exam is : {" + \
+        random_str + "} All the best, Prof. Prasad Teli SInhgad Institutes"
 
     url = {
         "apikey": "aKwZDUfdL4ID7rgi",
@@ -684,6 +680,7 @@ def sendOtp(phone_no, random_str):
         "message": message_content
     }
 
+    print(message_content)
     print(urllib.parse.urlencode(url))
     url = urllib.parse.urlencode(url)
     conn.request("POST", "/vb/apikey.php?" + url)
