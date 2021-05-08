@@ -11,21 +11,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .secrets import *
+import cet.secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 
-# f = open('secret_key.txt', 'r')
-# print(f)
-
-
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = cet.secrets.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -87,14 +80,11 @@ WSGI_APPLICATION = 'cet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': NAME,
-        'USER': USER,
-        'PASSWORD': PASSWORD,
-        'HOST': HOST,
-        'PORT': PORT,
-        'OPTIONS': {
-            # 'read_default_file': '/etc/mysql/my.cnf',
-        },
+        'NAME': cet.secrets.NAME,
+        'USER': cet.secrets.USER,
+        'PASSWORD': cet.secrets.PASSWORD,
+        'HOST': cet.secrets.HOST,
+        'PORT': cet.secrets.PORT,
     }
 }
 
@@ -130,13 +120,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
