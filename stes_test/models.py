@@ -73,11 +73,12 @@ class student(models.Model):
     college = models.CharField(max_length=40, default='')
     address_line_1 = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    taluka = models.CharField(max_length=100)
     district = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     email = models.EmailField()
     phone_no = models.CharField(max_length=10)
-    alt_phone_no = models.CharField(max_length=10)
+    alt_phone_no = models.CharField(max_length=10, default='')
     random_no = models.IntegerField()
 
     def __str__(self):

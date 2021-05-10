@@ -31,6 +31,7 @@ def register(request):
         college = request.POST.get('college')
         address_line_1 = request.POST.get('address_line_1')
         city = request.POST.get('city')
+        taluka = request.POST.get('taluka')
         district = request.POST.get('district')
         state = request.POST.get('state')
         email = request.POST.get('email')
@@ -47,9 +48,7 @@ def register(request):
             random_str += str(rand)
 
         flag = 0
-        if len(first_name) == 0 or len(last_name) == 0 or len(college) == 0 or len(address_line_1) == 0 or len(
-            email) == 0 or len(
-                phone_no) == 0:
+        if len(first_name) == 0 or len(last_name) == 0 or len(college) == 0 or len(address_line_1) == 0 or len(email) == 0 or len(phone_no) == 0 or len(city) == 0 or len(taluka) == 0:
             messages.warning(request, 'All fields are mandatory')
             flag = 1
         if len(phone_no) != 10:
@@ -63,17 +62,19 @@ def register(request):
                 flag = 1
                 break
 
-        if len(alt_phone_no) != 10:
-            messages.warning(
-                request, 'Alternate Mobile Number should have 10 digits')
-            flag = 1
+        if len(alt_phone_no) != 0:
 
-        for no in alt_phone_no:
-            if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
+            if len(alt_phone_no) != 10:
                 messages.warning(
-                    request, 'Alternate Mobile Number should have only have numeric character')
+                    request, 'Alternate Mobile Number should have 10 digits')
                 flag = 1
-                break
+
+            for no in alt_phone_no:
+                if no not in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
+                    messages.warning(
+                        request, 'Alternate Mobile Number should have only have numeric character')
+                    flag = 1
+                    break
 
         if len(address_line_1) < 5:
             messages.warning(request, 'Address_line_1 is too short')
@@ -90,13 +91,13 @@ def register(request):
         if flag == 1:
             return render(request, 'register.html',
                           {"first_name": first_name, "last_name": last_name, "college": college,
-                           "address_line_1": address_line_1, "city": city,
+                           "address_line_1": address_line_1, "city": city, "taluka": taluka,
                            "district": district, "state": state,
                            "email": email, "phone_no": phone_no,
                            "alt_phone_no": alt_phone_no})
         else:
             student_details = student(first_name=first_name, last_name=last_name, college=college,
-                                      address_line_1=address_line_1, city=city, district=district,
+                                      address_line_1=address_line_1, city=city, taluka=taluka, district=district,
                                       state=state, email=email, phone_no=phone_no,
                                       alt_phone_no=alt_phone_no, random_no=int(random_str))
             student_details.save()
@@ -396,22 +397,21 @@ def main_test(request):
         )
 
         cursor.execute(
-            "select question_id, answer answer from stes_test_physics order by rand limit 50;")
+            "select question_id, answer from stes_test_physics where is_valid = True order by rand limit 50;")
         qset1 = cursor.fetchall()
-
         cursor.execute(
-            "select question_id, answer from stes_test_chemistry order by rand limit 50;")
+            "select question_id, answer from stes_test_chemistry where is_valid = True order by rand limit 50;")
         qset2 = cursor.fetchall()
 
         if exam_type == "PCM" or exam_type == "PCMB":
             cursor.execute(
-                "select question_id, answer from stes_test_math order by rand limit 50;")
+                "select question_id, answer from stes_test_math where is_valid = True order by rand limit 50;")
             qset3 = cursor.fetchall()
 
         if exam_type == "PCB" or exam_type == "PCMB":
             print("Questions fetched in qset4")
             cursor.execute(
-                "select question_id, answer from stes_test_biology order by rand limit 50;")
+                "select question_id, answer from stes_test_biology where is_valid = True order by rand limit 50;")
             qset4 = cursor.fetchall()
 
         physicsQ = []
